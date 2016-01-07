@@ -1,9 +1,9 @@
 # waptrunner
 
-This tool and GIT project are under construction. The idea is to help me run through web app pen testing engagements by running through
-my various tests and log issues quickly and easily. 
+This tool and GIT project are under construction. The idea is to help me run through web app pen testing engagements by stepping through various tests and log issues easily without taking too much screen estate. 
 
 TODO List:
 * Reporting
 * Export to CSV and SSVL for Threadfix import
+* Add custom tests (e.g. for specific CVEs)
 * Import Burp Scanner XML?
