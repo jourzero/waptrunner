@@ -15,6 +15,7 @@ body {
     padding: 0;
     margin: 0;
     font-size: 14px;
+    width: 100%;
 }
 
 .container {
@@ -24,7 +25,6 @@ body {
     min-height: 100%;
     /* background: white; EP */
     background: #EEEEEE;  /*EP*/
-
 }
 
 header {
@@ -59,11 +59,11 @@ input {
     vertical-align: top;
 }
 
-.testKbIn{
+.testKbIn, .prjIn{
     width: 95%;
 }
 .testKbInShort{
-    width: 45%;
+    width: 85%;
 } 
 button .kbBtn{
   alignment-adjust:   auto; 
@@ -89,9 +89,14 @@ option {
     width: 55px;
 }
 
+
+#cwename, #testNameTA{
+    width: 500px;
+}
+
 .testSelector, .prioSelector, .sevSelector{    
     font-size: 12px;
-    width: 120px;
+    width: 130px;
 }
 
 .issueTA, .testKbTA {
@@ -105,6 +110,11 @@ option {
     vertical-align: top;
 }
 
+.issueVals{
+    padding: 3px 1px;
+    border: 0px;
+}
+
 .tinyTH{
     text-align: right;
     vertical-align: middle;
@@ -114,7 +124,7 @@ option {
     font-size: 12px;
     margin: 0px;
     padding: 0px;
-    vertical-align: middle;
+    vertical-align: top;
 }
 
 .issueTab {
@@ -137,11 +147,12 @@ option {
 }
 
 summary{
-    padding-top: 10px;    
-    padding-bottom: 5px;
+    padding-top: 7px;    
+    padding-bottom: 4px;
     font-style: italic;
     font-weight: bold;
-    background-color: #ccc;
+    background-color: #ddd;
+    font-size: 12px;
 }
 
 .issueSummaryTab {
@@ -161,7 +172,7 @@ table {
     width: 100%; 
     /*border-collapse: separate; */
     border-spacing: 0; 
-    margin-left: 15px;
+    margin-left: 0px;
 }
 
 td, th { 
@@ -209,7 +220,8 @@ tr td:hover { background: #FFF; } /* Hover cell effect! */
 }
 
 .button.black {
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#7d828c),color-stop(0.5, #303749), color-stop(0.5, #121a2e), to(#121a2e));
+    /* background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#7d828c),color-stop(0.5, #303749), color-stop(0.5, #121a2e), to(#121a2e)); */
+    background-color: #444;
     border: solid 1px rgba(79, 79, 79, 0.75);
     width: 55px;
 }

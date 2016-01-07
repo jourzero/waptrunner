@@ -3,10 +3,10 @@
 .typeahead,
 .tt-query,
 .tt-hint {
-  width: 600px;
-  line-height: 10px;
-  padding: 4px 10px;
-  border: 2px solid #ccc;
+  width: 100%;
+  line-height: 13px;
+  padding: 2px 2px 2px 2px;
+  border: 2px solid #bbb;
   -webkit-border-radius: 8px;
      -moz-border-radius: 8px;
           border-radius: 8px;

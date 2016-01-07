@@ -5,34 +5,46 @@
 <body>
     <!-- PROJECT SUMMARY -->
     <div class="container">
-    <details>
+    <details id="prjDetails" open="open">
         <summary>Project Summary</summary>
         <table class="issueTab">
+            <tr><th class="issueTH">Name</th>
+                <td class="issueVals">
+                    <!-- <input id="PrjName" class="prjIn" type="text" placeholder="APP-ENV-YYYYMMDD" /> -->
+                    <input list="prjs" id="PrjName" class="prjIn" placeholder="APP-ENV-YYYYMMDD" />
+                    <datalist id="prjs">
+                        {{#each projects}}
+                            {{> projectTmpl}}
+                        {{/each}}                        
+                   </datalist>
+                </td>
+            </tr>
             <tr><th class="issueTH">Scope</th><td class="issueVals">
-                    <select id="ScopeSel" title="Scope" class="scopeSelector" >
+                    <select id="ScopeSel" title="Scope" class="scopeSelector">
                         <option disabled selected>Scope</option>
-                        <option class="scopeOpt" value=""                      >All Tests</option>
-                        <option class="scopeOpt" value="TSource  : 'WAHH2'"    >WAHH v2</option>
-                        <option class="scopeOpt" value="TSource  : 'OWASP-TG4'">OWASP TG4</option>
-                        <option class="scopeOpt" value="TTop10   : true"       >Top10</option>
-                        <option class="scopeOpt" value="TTop25   : true"       >Top25</option>
-                        <option class="scopeOpt" value="TStdTest : true"       >Custom Std</option>
-                        <option class="scopeOpt" value="TPCI     : true"       >PCI</option>
+                        <option class="scopeOpt" title="All" value="">All Tests</option>
+                        <option class="scopeOpt" title="Std" value="TStdTest: true">My Standard</option>
+                        <option class="scopeOpt" title="TG4" value="TSource: 'OWASP-TG4'">OWASP TG4</option>
+                        <option class="scopeOpt" title="PCI" value="TPCI: true">PCI</option>
+                        <option class="scopeOpt" title="T10" value="TTop10: true">Top 10</option>
+                        <option class="scopeOpt" title="T25" value="TTop25: true">Top 25</option>
+                        <option class="scopeOpt" title="WAH" value="TSource: 'WAHH2'"       >WAHH v2</option>
+                        <option class="scopeOpt" title="WSV" value="TSource: 'WebSvc'"      >Web Services</option>
                     </select>
                 </td></tr>
         </table>
     <!-- ISSUE TABLE -->
         <table class="issueTab">
-            <tr><th class="issueTH"></th><td class="issueVals">
+            <tr><th class="issueTH">Findings</th><td class="issueVals">
                     <table class="issueSummaryTab">
                         <tr class="issueSummaryTR">
-                            <th class="isTH"></th>
-                            <th class="isTH">Prio</th>
+                            <th class="isTH" width="25px"></th>
+                            <th class="isTH">Priority</th>
                             <th class="isTH">Issue</th>
                             <th class="isTH">CWE</th>
                             <th class="isTH">TID</th>
                             <th class="isTH">Count</th>
-                            <th class="isTH">Sev.</th>
+                            <th class="isTH">Severity</th>
                         </tr>
                                 {{#each myIssues}}
                                     {{> myIssueTmpl}}
@@ -49,8 +61,8 @@
                                 <button id="btnBack" class="button black">&lt; Back</button>
                             </td>
                             <td class="tselTD">
-                                <select id="testSel" title="Test ID" class="testSelector">
-                                    <option disabled selected>Test ID</option>
+                                <select id="testSel" title="Choose Test" class="testSelector">
+                                    <option disabled>Choose Test</option>
                                     {{#each myTests}}
                                     {{> myTestTmpl}}
                                     {{/each}}
@@ -62,67 +74,82 @@
                             <td  id="TSection" class="tinyTD"></td>
                         </tr>
                     </table></td></tr>
-            <!-- <tr><th class="issueTH"></th><td class="issueVals">
-            <input id="testNameTA" class="form-control typeahead" name="testnameTA" type="text" placeholder="Search by Test Name" autocomplete="off" spellcheck="false" data-source="testNames" data-open="open" data-close="close" data-select="select" data-autocomplete="autocomplete" data-limit="20" /></td></tr> -->
+            <tr>
+                <th class="issueTH"></th>
+                <td class="issueVals">
+                    <input id="testNameTA" class="form-control typeahead" name="testNameTA" type="text" placeholder="Search by Test Name" autocomplete="off" spellcheck="false" data-source="myTests" data-open="openTN" data-close="closeTN" data-select="selectTN" data-autocomplete="autocompleteTN" data-limit="20" />
+                </td>
+            </tr> 
+            
         </table>
 
     <!-- CWE SEARCH -->
-    <details open="open">
+    <details open="open" id="cweDetails">
         <summary>Common Weakness Information (CWE)</summary>
         <table class="issueTab">
-            <tr class="iTR"><th class="issueTH">CWE Name</th>       <td class="issueVals"><input id="cwename" class="form-control typeahead" name="cwename" type="text" placeholder="Search by CWE Name" autocomplete="off" spellcheck="false" data-source="cwes" data-open="open" data-close="close" data-select="select" data-autocomplete="autocomplete" data-limit="20" /></td></tr>
-            <tr class="iTR"><th class="issueTH">CWE ID</th>            <td class="issueVals"><a class="issueA" target="cweTab" id="cweref" href="https://cwe.mitre.org/" title="Ref URI" ></a></td></tr>
+            <tr class="iTR"><th class="issueTH">Name</th> <td class="issueVals"><input id="cwename" class="form-control typeahead" name="cwename" type="text" placeholder="Search by CWE Name" autocomplete="off" spellcheck="false" data-source="cwes" data-open="open" data-close="close" data-select="select" data-autocomplete="autocomplete" data-limit="20" /></td></tr>
+            <tr class="iTR"><th class="issueTH">ID</th>   <td class="issueVals"><a class="issueA" target="cweTab" id="cweref" href="https://cwe.mitre.org/" title="Ref URI" ></a></td></tr>
         </table>
     </details>
 
     <!-- TEST SELECTOR -->
-    <details open="open">
+    <details open="open" id="testingDetails">
         <summary>Testing Information (KB)</summary>
         <table class="issueTab">
-            <tr class="iTR"><th class="issueTH">Test Name</th>   <td class="issueVals"><input id="TTestName" class="testKbIn" type="text" placeholder="Test Name" /><!-- <button id="kbBtnNew" class="kbBtn" disabled>New Test</button> --></td></tr>
+            <tr class="iTR"><th class="issueTH">Test Name</th>   <td class="issueVals"><input id="TTestName" class="testKbIn" type="text" placeholder="Test Name" />
+                    <!-- <button id="kbBtnNew" class="kbBtn" disabled>New Test</button> --></td></tr>
             <tr class="iTR"><th class="issueTH">Test Type</th>  <td class="issueVals"><input id="TType" class="testKbIn" type="text" placeholder="Test Type" /></td></tr> 
-            <!-- <tr class="iTH"><th class="issueTH">Test Descr.</th><td class="issueVals"><input id="TDescr" class="testKbIn" type="text" placeholder="Test Description" /></td></tr> -->
             <tr class="iTR"><th class="issueTH">Tester Help</th><td class="issueVals"><textarea id="TTesterSupport" class="testKbTA" rows="2" placeholder="Tester Support"></textarea></td></tr>
-            <tr class="iTR"><th class="issueTH">Test Ref</th>   <td class="issueVals"><a href="#" id="TTRefA" target="TRWin">&gt;&gt;&gt;</a> <input id="TTRef" class="testKbIn" type="text" placeholder="Tester Reference URI" /></td></tr> 
+            <tr class="iTR"><th class="issueTH">Test Ref</th>   <td class="issueVals"><a href="#" id="TTRefA" target="TRWin">&gt;</a> <input id="TTRef" class="testKbIn" type="text" placeholder="Tester Reference URI" /></td></tr> 
         </table>
     </details>
 
     <!-- GENERIC ISSUE DATA -->
-    <details open="open">
+    <details open="open" id="genericDetails">
         <summary>Generic Issue Data (KB)</summary>
         <table class="issueTab">
-            <tr hidden><th class="issueTH">OID</th> <td class="issueVals"><input id="OID" class="testKbIn" type="text" placeholder="OID" /></td></tr>             
-            <tr class="iTR"><th class="issueTH">Issue Name</th>  <td class="issueVals"><input id="TIssueName" class="testKbIn" type="text" placeholder="Issue Name" /></td>
-                    <th class="issueTH">Issue Type</th>  <td class="issueVals"><input id="TIssueType" class="testKbIn" type="text" placeholder="Issue Type" /></td></tr> 
-            <tr class="iTR"><th class="issueTH">Severity</th>   <td class="issueVals">
-                <!-- <input id="TSeverity" class="testKbIn" type="text" placeholder="Severity" /> -->
-                <select id="TSeverity" title="Priority" class="sevSelector" >
-                    <option disabled selected  value="">Severity</option>
-                    <option class="selOpt" value="0">Info</option>
-                    <option class="selOpt" value="1">Low</option>
-                    <option class="selOpt" value="2">Medium</option>
-                    <option class="selOpt" value="3">High</option>
-                </select></td>
+            <tr hidden>
+                <th class="issueTH">OID</th>
+                <td class="issueVals"><input id="OID" class="testKbIn" type="text" placeholder="OID" /></td>
+            </tr>             
+            <tr class="iTR">
+                <th class="issueTH">Issue Name</th>  
+                <td class="issueVals"><input id="TIssueName" class="testKbIn" type="text" placeholder="Issue Name (short)" /></td>                
+                <th class="issueTH">Severity</th>   
+                <td class="issueVals">
+                    <select id="TSeverity" title="Priority" class="sevSelector" >
+                        <option disabled selected  value="">Severity</option>
+                        <option class="selOpt" value="0">Info</option>
+                        <option class="selOpt" value="1">Low</option>
+                        <option class="selOpt" value="2">Medium</option>
+                        <option class="selOpt" value="3">High</option>
+                    </select></td>
+            </tr> 
+            <tr class="iTR">
+                <th class="issueTH">Issue Type</th>  
+                <td class="issueVals"><input id="TIssueType" class="testKbIn" type="text" placeholder="Issue Type" /></td>                
+                <th class="issueTH">Issue Ref1</th> <td class="issueVals"><a href="#" id="TRef1A" target="TRWin">&gt;</a> <input id="TRef1" class="testKbInShort" type="text" placeholder="Ref 1" /></td>
+            </tr> 
+            <tr class="iTR">
                 <th class="issueTH">Standards</th>
                 <td class="issueVals"> 
-                    <input type="checkbox" id="TPCI"     class="testKbCB" value="PCI">PCI
-                    <input type="checkbox" id="TTop10"   class="testKbCB" value="Top10">Top 10
-                    <input type="checkbox" id="TTop25"   class="testKbCB" value="Top25">Top 25
-                    <input type="checkbox" id="TStdTest" class="testKbCB" value="StdTest">Custom Std</td></tr> 
-            <tr class="iTR"><th class="issueTH">Issue Ref1</th> <td class="issueVals"><a href="#" id="TRef1A" target="TRWin">&gt;&gt;&gt;</a> <input id="TRef1" class="testKbInShort" type="text" placeholder="Ref 1" /></td>
-                            <th class="issueTH">Issue Ref2</th> <td class="issueVals"><a href="#" id="TRef2A" target="TRWin">&gt;&gt;&gt;</a> <input id="TRef2" class="testKbInShort" type="text" placeholder="Ref 2" /></td></tr> 
+                    <input type="checkbox" id="TPCI"     class="testKbCB" value="PCI" title="PCI-DSS Compliance Test">PCI
+                    <input type="checkbox" id="TTop10"   class="testKbCB" value="Top10" title="OWASP Top 10 Test">T10
+                    <input type="checkbox" id="TTop25"   class="testKbCB" value="Top25" title="SANS Top 25 Most Dangerous Software Errors Tests">T25
+                    <input type="checkbox" id="TStdTest" class="testKbCB" value="StdTest" title="My own list of Standard Tests">Std</td>
+                <th class="issueTH">Issue Ref2</th> <td class="issueVals"><a href="#" id="TRef2A" target="TRWin">&gt;</a> <input id="TRef2" class="testKbInShort" type="text" placeholder="Ref 2" /></td>
+            </tr> 
         </table>
     </details>    
     
     <!-- SPECIFIC ISSUE DATA -->
-    <details open="open">
+    <details open="open" id="specificDetails">
         <summary>Specific Issue Data</summary>
         <table class="issueTab">        
             <tr class="iTR"><th class="issueTH">URIs</th>       <td class="issueDetails"><textarea id="IURIs"      class="issueTA" rows="3" placeholder="URI List"></textarea></td></tr>
             <tr class="iTR"><th class="issueTH">Evidence</th>   <td class="issueDetails"><textarea id="IEvidence"  class="issueTA" rows="3" placeholder="Evidence"></textarea></td></tr>
             <tr class="iTR"><th class="issueTH">Notes</th>      <td class="issueDetails"><textarea id="INotes"     class="issueTA" rows="3" placeholder="Notes"></textarea></td></tr>
             <tr class="iTR"><th class="issueTH">Priority</th>   <td class="issueDetails">
-                <!--<input id="IPriority"     class="testKbInShort" type="text" placeholder="Priority" />-->
                 <select id="IPriority" title="Priority" class="prioSelector" >
                     <option disabled selected value="">Priority</option>
                     <option class="prioOpt" value="0">Info</option>
@@ -131,7 +158,6 @@
                     <option class="prioOpt" value="3">High</option>
                 </select>
             </td></tr> 
-
         </table>
     </details>
         
@@ -140,12 +166,16 @@
         
 
 <template name="myTestTmpl">
-    <option class="testOpt" value="{{TID}}" oid="{{OID}}" tSource="{{TSource}}">{{TID}}</option>
+    <option class="testOpt" value="{{TID}}" oid="{{OID}}" tSource="{{TSource}}">{{TID}} {{TTestName}}</option>
+</template>
+
+<template name="myTestTmpl2">
+    <option class="testOpt2">{{TTestName}} ({{TStep}})</option>
 </template>
 
 <template name="myIssueTmpl">
     <tr class="{{IPriorityText}}Priority">
-        <td class="isTD"><button class="delete">&times;</button></td>
+        <td class="isTD" width="20px"><button class="delete" title="Delete this entry">&times;</button></td>
         <td class="isTD">{{IPriority}}-{{IPriorityText}}</td>
         <td class="isTD">{{TIssueName}}</td>
         <td class="isTD">{{CweId}}</td>
@@ -155,3 +185,6 @@
     </tr>
 </template>
 
+<template name="projectTmpl">
+    <option value="{{name}}"></option>
+</template>
