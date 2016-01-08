@@ -60,10 +60,10 @@ input {
 }
 
 .testKbIn, .prjIn{
-    width: 95%;
+    width: 98%;
 }
 .testKbInShort{
-    width: 85%;
+    width: 89%;
 } 
 button .kbBtn{
   alignment-adjust:   auto; 

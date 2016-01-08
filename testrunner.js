@@ -1,12 +1,9 @@
 // Globals
 tPhase       = ""; gTest = {}; gCWE = {}; gEventData = {}; gTmpObj = {}; prj = {};
-prjName      = "MyApp_QA_20160104"; 
 prjName      = ""; 
-cweUriBase   = "https://cwe.mitre.org/data/definitions/";
 defaultScope = "";                  
-defaultScope = "TSource: 'OWASP-TG4'";
-defaultScope = "TSource: 'WAHH2'";
 sesScope     = defaultScope;
+cweUriBase   = "https://cwe.mitre.org/data/definitions/";
 
 // Open Mongo collections
 prjColl    = new Mongo.Collection("project");
@@ -20,6 +17,8 @@ if (Meteor.isClient) {
             
     //Template.testRunner.helpers({
     Template.body.helpers({
+        
+        // Get CWEs from cwe collection
         cwes: function () {
             return cweColl.find().fetch().map(function (it) {
                 var exploitability = new String(it.Likelihood_of_Exploit);
@@ -30,18 +29,23 @@ if (Meteor.isClient) {
                 return gCWE;
             });
         },
+        
+        // Get Projects from project collection
         projects: function () {
             return prjColl.find();
         },
         
+        // Get Project Scope from Session
         projectScope: function () {
             return Session.get("projectScope");
         },
         
+        // Get Project Name from Session
         projectName: function () {
             return Session.get("projectName");
         },
         
+        // Get list of tests from testkb collection
         myTests: function () {
             //sesScope = $("#ScopeSel").val();
             sesScope = Session.get("projectScope");
@@ -50,8 +54,10 @@ if (Meteor.isClient) {
             }
             scopeQry = eval("Object({" + sesScope + "})");            
             //console.log("Getting list of tests from scopeQry '" + sesScope + "'");
-            return testkbColl.find(scopeQry).fetch().map(function (it) {
-                gTest = {value: it.TTestName + " (" + it.TSource + ":" + it.TStep + ")", TID: it.TID, OID: it._id.valueOf(), TSource: it.TSource, TTestName: it.TTestName, TType: it.TType,
+            return testkbColl.find(scopeQry,{sort: {TID: 1}}).fetch().map(function (it) {
+                gTest = {value: it.TTestName + " (" + it.TSource + ":" + it.TStep + ")", 
+                    TID: it.TID, OID: it._id.valueOf(), TSource: it.TSource, 
+                    TTestName: it.TTestName, TType: it.TType,
                     TDescr: it.TDescription, TIssueName: it.TIssueName, TIssueType: it.TIssueType,
                     TImpact: it.TImpact,
                     TSeverity: it.TSeverity, TSeverityText: it.TSeverityText,
@@ -66,6 +72,8 @@ if (Meteor.isClient) {
                 return gTest;
             })
         },
+        
+        // Get list of issues from issues collection
         myIssues: function () {
             prj["PrjName"] = Session.get("projectName");
             console.log("Getting issue list for project " + prj.PrjName);
@@ -88,11 +96,15 @@ if (Meteor.isClient) {
             console.log("Autocompleted: CWE-" + suggestion.cweId);
         },
         */
+       
+        // Call this when selecting a CWE after typeahead
         select: function (e, suggestion, dataset) {
             console.log("Selected: CWE-" + suggestion.cweId);
             updateCweUI(suggestion.cweId, suggestion.value, suggestion.cweDescr);
             updateTestKBFromUI("TCweID", suggestion.cweId);
         },
+        
+        // Call this when selecting a Test Name after typeahead
         selectTN: function (e, suggestion, dataset) {
             console.log("Selected: Test " + suggestion.value);
             //updateCweUI(suggestion.cweId, suggestion.value, suggestion.cweDescr);
@@ -104,12 +116,17 @@ if (Meteor.isClient) {
     });
 
 
+    // Event handlers for the issue list
     Template.myIssueTmpl.events({
+        
+        // Delete Issue
         "click .delete": function (event) {
             gTmpObj=this;
             console.log('Delete clicked from myIssueTmpl! ID=' + this._id);
             issueColl.remove(this._id);
         },
+        
+        // Show the issue details when clicking in the list
         "click .isTD": function (event) {
             gTmpObj=this;
             console.log('Clicked in myIssueTmpl ID=' + this._id + ". TID=" + this.TID);
@@ -126,33 +143,35 @@ if (Meteor.isClient) {
             saveProjectDataFromUI();
         },
         'change .testKbIn, change .testKbInShort, change .testKbTA, click .testKbCB, change #cweid, select #cweid, change #cweid, change .sevSelector': function (event) {
-            gEventData = event;
             updateTestKBFromUI(event.target.id, event.target.value);
         },
         'change #testSel': function () {
             updateUIFromTestKB();
         },
         'change .prioSelector, change .issueTA': function (event) {
-            gEventData = event;
             saveIssueDataFromUI(event.target.id, event.target.value);
         },
         'change #PrjName': function () {
             // Get the project name and get its previously saved scope value 
             Session.set("projectName", event.target.value);
             updateUIFromPrjColl();
+            clearUI();
         },
-
+        'click #PrjName': function () {
+            // Clear the field so that a new project can be selected
+            console.log("PrjName clicked, clearing the PrjName to select another one");
+            $("#PrjName").val("");
+            Session.set("projectName", "");
+            clearUI();
+        },
         'change #TTestName': function () {
             console.log('TTestName changed (' + $('#TTestName').val() + "). Enabled New button.");
             $('#kbBtnNew').prop('disabled', false);
         },
-        
-        /*
         'click #kbBtnNew': function () {
-            console.log('Creating new test (NOT IMPLEMENTED): ' + $('#TTestName').val());
-        },
-        */
-       
+            console.log('Creating new test: ' + $('#TTestName').val());
+            addToTestKB();
+        },       
         'click #btnBack': function () {
             selected = $("#testSel").prop("selectedIndex") - 1;
             if (selected <= 0) selected = 1;
@@ -170,13 +189,6 @@ if (Meteor.isClient) {
             updateUIFromTestKB();
             $('#testNameTA').val("");
         }
-        /*
-        'click summary': function (event) {
-            console.log('Clicked summary: ' + event.target.parentElement.id);      
-            console.log('Open state: ' + event.target.parentElement.open); 
-            gTmpObj = event;
-        },
-        */
     }),
 
 
@@ -237,27 +249,36 @@ if (Meteor.isClient) {
 
         // Disable the New button
         $('#kbBtnNew').prop('disabled', true);
+        $('#testNameTA').val("");
     }
 
     
     // Update all UI fields from the Issue Collection
     function updateUIFromIssueColl() {
 
+        // Get Test ID as search criteria
+        tid = $( "#testSel option:selected" ).val();
+        if ((tid === undefined) || (tid === "")){
+            console.log("Empty Test ID");
+            return;
+        }
+        
+        /*
         // Get CWE ID as search criteria
-        //tid = $( "#testSel option:selected" ).text();
-        //issueName = $('#TIssueName').val();
         cid = $('#cweref').html();
         if ((cid === undefined) || (cid === "")){
             console.log("Empty CWE ID");
             return;
         }
+        */
 
         // Build search criteria
         var issue={}; var mod={}; var crit={};
-        crit.CweId  = cid;
+        //crit.CweId  = cid;
+        crit.TID  = tid;
         i = issueColl.findOne(crit);
         if ((i === undefined) || (i._id <= 0)){
-            console.log("No issue data found for this CWE ID.");
+            console.log("No issue data found for this Test ID: " + tid);
             return;
         }
 
@@ -266,8 +287,23 @@ if (Meteor.isClient) {
         $("#IEvidence").val(i.IEvidence);
         $("#INotes").val(i.INotes);
         $("#IPriority").val(i.IPriority);       
-    }
+    }    
+    
+    // Add new entry to TestKB
+    function addToTestKB() {
 
+        console.log("Inserting new entry in TestKB");
+        kvp = {};
+        tid = new Date().toISOString().split(".")[0].replace(/[-:]/g, '');
+        kvp._id       = new Mongo.ObjectID();
+        kvp.TID       = "EXT-" + tid;
+        kvp.TSource   = "Extras";
+        kvp.TTestName = $("#TTestName").val();
+        kvp.TPhase    = "Extras";
+        mod["$set"] = kvp;
+        id = testkbColl.insert(kvp);
+        console.log("Record ID: " + id);
+    }
 
     // Update Test KB upon changes in the UI
     function updateTestKBFromUI(tgtId, tgtVal) {
@@ -343,7 +379,6 @@ if (Meteor.isClient) {
         // Check if issue already exists
         console.log("Saving issue data for TID " +tid + ": " + tgtId + "=" + tgtVal);
         var issue={}; var mod={}; var oid={};
-        //issue[tgtId]= tgtVal;
         oid.TID     = tid;
         issue.CweId = cid;
         issue.TID   = tid;
@@ -375,6 +410,7 @@ if (Meteor.isClient) {
         }    
     }
     
+    // Save the project data (scope and scopeQry)
     function saveProjectDataFromUI() {
         //var prjName = $('#PrjName').val();
         var prjName = Session.get("projectName");
@@ -406,7 +442,7 @@ if (Meteor.isClient) {
         }
     }
     
-    // Update all UI fields from the Project Collection
+    // Update scope when changing the project 
     function updateUIFromPrjColl() {
 
         // Get project name from UI and make sure it's not empty
@@ -436,5 +472,42 @@ if (Meteor.isClient) {
         console.log("Updating scope to " + scopeQry);
         $("#ScopeSel").val(scopeQry);
     }    
-};
+    
+    
+    // Clear all UI values when changing project
+    function clearUI() {
+        $("#testSel").prop("selectedIndex", 0);
+        $("#TPhase").html("");
+        $("#TSection").html("");
+        $('#testNameTA').typeahead('val', "");
+        $('#cwename').typeahead('val', "");
+        $('#cweref').attr('href', "");
+        $('#cweref').html("");
+        $("#TTestName").val("");
+        $("#TType").val("");
+        $("#TTesterSupport").val("");
+        $("#TDescr").val("");
+        $("#TTRef").val("");
+        $("#TTRefA").attr('href', "");
+        $("#TIssueName").val("");
+        $("#TIssueType").val("");
+        $("#TSeverity").prop("selectedIndex", 0);
+        $("#TRef1").val("");
+        $("#TRef1A").attr('href', "");
+        $("#TRef2").val("");
+        $("#TRef2A").attr('href', "");
+        $("#TPCI").prop('checked', false);
+        $("#TTop10").prop('checked', false);
+        $("#TTop25").prop('checked', false);
+        $("#TStdTest").prop('checked', false);
+        $("#IURIs").val("");
+        $("#IEvidence").val("");
+        $("#INotes").val("");
+        $("#IPriority").prop("selectedIndex", 0);
+        
+        // Disable the New button
+        $('#kbBtnNew').prop('disabled', true);
+    }
 
+
+};
