@@ -5,5 +5,3 @@ This tool and GIT project are under construction. The idea is to help me run thr
 TODO List:
 * Reporting
 * Export to CSV and SSVL for Threadfix import
-* Add custom tests (e.g. for specific CVEs)
-* Import Burp Scanner XML?
