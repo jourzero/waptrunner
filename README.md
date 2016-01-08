@@ -1,6 +1,9 @@
 # waptrunner
 
-This tool and GIT project are under construction. The idea is to help me run through web app pen testing gigs by run through
-my various tests and log issues quickly and easily. I haven't included my mongoDB content here but I might do that later... 
+This tool and GIT project are under construction. The idea is to help me run through web app pen testing engagements by stepping through various tests and log issues easily without taking too much screen estate. 
 
-I'll be working on reporting soon...
+TODO List:
+* Reporting
+* Export to CSV and SSVL for Threadfix import
+* Add custom tests (e.g. for specific CVEs)
+* Import Burp Scanner XML?
