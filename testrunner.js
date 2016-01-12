@@ -25,14 +25,16 @@ if (Meteor.isClient) {
                 var descr = it.Name + ": " + it.Description_Summary;
                 if (exploitability.length > 0)
                     descr += " [Exploitability: " + exploitability + "]";
-                gCWE = {value: it.Name, id: it._id, cweId: it.ID, cweDescr: descr, cweStatus: it.Status, cweExpl: it.Likelihood_of_Exploit};
+                gCWE = {value: it.Name, id: it._id, cweId: it.ID, 
+                        cweDescr: descr, cweStatus: it.Status, 
+                        cweExpl: it.Likelihood_of_Exploit};
                 return gCWE;
             });
         },
         
         // Get Projects from project collection
         projects: function () {
-            return prjColl.find();
+            return prjColl.find({},{sort: {name: -1}})
         },
         
         // Get Project Scope from Session
@@ -85,7 +87,6 @@ if (Meteor.isClient) {
                 return {_id: it._id,TIssueName: it.TIssueName,CweId: it.CweId,TID: it.TID,ICount: count,TSeverity: it.TSeverity,TSeverityText: it.TSeverityText,IPriority: it.IPriority, IPriorityText: it.IPriorityText, IEvidence: it.IEvidence, INotes: it.INotes};
             });
         },
-        /*
         open: function (e) {
             console.log("Dropdown " + e.target.id + " is opened");
         },
@@ -95,8 +96,6 @@ if (Meteor.isClient) {
         autocomplete: function (e, suggestion, dataset) {
             console.log("Autocompleted: CWE-" + suggestion.cweId);
         },
-        */
-       
         // Call this when selecting a CWE after typeahead
         select: function (e, suggestion, dataset) {
             console.log("Selected: CWE-" + suggestion.cweId);
@@ -138,40 +137,26 @@ if (Meteor.isClient) {
             
     // Handle events in body
     Template.body.events({
-        "change #ScopeSel": function (event) {
-            Session.set("projectScope", event.target.value);
-            saveProjectDataFromUI();
-        },
-        'change .testKbIn, change .testKbInShort, change .testKbTA, click .testKbCB, change #cweid, select #cweid, change #cweid, change .sevSelector': function (event) {
-            updateTestKBFromUI(event.target.id, event.target.value);
-        },
-        'change #testSel': function () {
-            updateUIFromTestKB();
-        },
-        'change .prioSelector, change .issueTA': function (event) {
-            saveIssueDataFromUI(event.target.id, event.target.value);
-        },
         'change #PrjName': function () {
             // Get the project name and get its previously saved scope value 
             Session.set("projectName", event.target.value);
-            updateUIFromPrjColl();
             clearUI();
+            updateUIFromPrj();
         },
         'click #PrjName': function () {
-            // Clear the field so that a new project can be selected
-            console.log("PrjName clicked, clearing the PrjName to select another one");
+            // Clear the input so that a new project can be selected
+            console.log("PrjName clicked, clearing Project Name so that the pulldown shows all projects");
             $("#PrjName").val("");
             Session.set("projectName", "");
             clearUI();
         },
-        'change #TTestName': function () {
-            console.log('TTestName changed (' + $('#TTestName').val() + "). Enabled New button.");
-            $('#kbBtnNew').prop('disabled', false);
+        'change #ScopeSel': function (event) {
+            Session.set("projectScope", event.target.value);
+            saveProjectDataFromUI();
         },
-        'click #kbBtnNew': function () {
-            console.log('Creating new test: ' + $('#TTestName').val());
-            addToTestKB();
-        },       
+        'change #testSel': function () {
+            updateUIFromTestKB();
+        },
         'click #btnBack': function () {
             selected = $("#testSel").prop("selectedIndex") - 1;
             if (selected <= 0) selected = 1;
@@ -188,7 +173,21 @@ if (Meteor.isClient) {
             $("#testSel").prop("selectedIndex", selected);
             updateUIFromTestKB();
             $('#testNameTA').val("");
-        }
+        },
+        'change #TTestName': function () {
+            console.log('TTestName changed (' + $('#TTestName').val() + "). Enabled New button.");
+            $('#kbBtnNew').prop('disabled', false);
+        },
+        'click #kbBtnNew': function () {
+            console.log('Creating new test: ' + $('#TTestName').val());
+            addToTestKB();
+        },       
+        'change .testKbIn, change .testKbInShort, change .testKbTA, click .testKbCB, change #cweid, select #cweid, change #cweid, change .sevSelector': function (event) {
+            updateTestKBFromUI(event.target.id, event.target.value);
+        },
+        'change .prioSelector, change .issueTA': function (event) {
+            saveIssueDataFromUI(event.target.id, event.target.value);
+        },
     }),
 
 
@@ -443,7 +442,7 @@ if (Meteor.isClient) {
     }
     
     // Update scope when changing the project 
-    function updateUIFromPrjColl() {
+    function updateUIFromPrj() {
 
         // Get project name from UI and make sure it's not empty
         //var prjName = $('#PrjName').val();
@@ -471,12 +470,14 @@ if (Meteor.isClient) {
         scopeQry = p.scopeQry;
         console.log("Updating scope to " + scopeQry);
         $("#ScopeSel").val(scopeQry);
+        Session.set("projectScope", scopeQry);        
     }    
     
     
     // Clear all UI values when changing project
     function clearUI() {
         $("#testSel").prop("selectedIndex", 0);
+        $("#ScopeSel").prop("selectedIndex", 0);
         $("#TPhase").html("");
         $("#TSection").html("");
         $('#testNameTA').typeahead('val', "");
