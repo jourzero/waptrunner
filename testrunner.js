@@ -4,6 +4,7 @@ prjName      = "";
 defaultScope = "";                  
 sesScope     = defaultScope;
 cweUriBase   = "https://cwe.mitre.org/data/definitions/";
+gLastTID     = "";
 
 // Open Mongo collections
 prjColl    = new Mongo.Collection("project");
@@ -37,6 +38,7 @@ if (Meteor.isClient) {
             return prjColl.find({},{sort: {name: -1}})
         },
         
+        /*
         // Get Project Scope from Session
         projectScope: function () {
             return Session.get("projectScope");
@@ -47,9 +49,18 @@ if (Meteor.isClient) {
             return Session.get("projectName");
         },
         
+        // Set TID to last TID
+        lastTID: function(){
+           var lastTID = Session.get("lastTID");
+           console.log("Setting TID to lastTID: " + lastTID);
+           $("#testSel").val(lastTID);
+           updateUIFromTestKB();
+           return lastTID;
+        },
+        */
+        
         // Get list of tests from testkb collection
         myTests: function () {
-            //sesScope = $("#ScopeSel").val();
             sesScope = Session.get("projectScope");
             if (sesScope === undefined) {
                 sesScope = defaultScope;
@@ -140,7 +151,7 @@ if (Meteor.isClient) {
         'change #PrjName': function () {
             // Get the project name and get its previously saved scope value 
             Session.set("projectName", event.target.value);
-            clearUI();
+            //clearUI();
             updateUIFromPrj();
         },
         'click #PrjName': function () {
@@ -156,6 +167,7 @@ if (Meteor.isClient) {
         },
         'change #testSel': function () {
             updateUIFromTestKB();
+            saveProjectDataFromUI();
         },
         'click #btnBack': function () {
             selected = $("#testSel").prop("selectedIndex") - 1;
@@ -424,6 +436,7 @@ if (Meteor.isClient) {
         prj.name = prjName;
         prj.scope = $("#ScopeSel option:selected" ).attr('title');
         prj.scopeQry = $("#ScopeSel").val();
+        prj.lastTID = $("#testSel").val();
         console.log("Scope set to " + prj.scope + " (" + prj.scopeQry + ")");
 
         mod["$set"] = prj;
@@ -451,6 +464,7 @@ if (Meteor.isClient) {
             console.log("Empty Project Name");
             return;
         }
+        console.log("Updating UI for project " + prjName);
 
         // Build search criteria
         var prj = {}, pid = {}, mod={};
@@ -466,11 +480,20 @@ if (Meteor.isClient) {
             return;
         }        
  
-        // Update UI values
+        // Update UI values using reactivity
         scopeQry = p.scopeQry;
         console.log("Updating scope to " + scopeQry);
         $("#ScopeSel").val(scopeQry);
-        Session.set("projectScope", scopeQry);        
+        Session.set("projectScope", scopeQry);
+        
+        /*
+        // Update test ID (position of test runner) when possible
+        gLastTID = p.lastTID;
+        if ((gLastTID !== undefined) && (lastTID.length > 0)){
+           console.log("Last TID: " + gLastTID);
+           Session.set("lastTID", gLastTID);
+        }
+        */
     }    
     
     
@@ -509,6 +532,4 @@ if (Meteor.isClient) {
         // Disable the New button
         $('#kbBtnNew').prop('disabled', true);
     }
-
-
 };
