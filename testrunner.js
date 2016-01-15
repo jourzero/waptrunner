@@ -5,6 +5,7 @@ defaultScope = "";
 sesScope     = defaultScope;
 cweUriBase   = "https://cwe.mitre.org/data/definitions/";
 gLastTID     = "";
+testRefBase  = "http://localhost/WAPT/"
 
 // Open Mongo collections
 prjColl    = new Mongo.Collection("project");
@@ -188,11 +189,12 @@ if (Meteor.isClient) {
         },
         'change #TTestName': function () {
             console.log('TTestName changed (' + $('#TTestName').val() + "). Enabled New button.");
-            $('#kbBtnNew').prop('disabled', false);
+            $('#kbBtnNew').prop('fd', false);
         },
         'click #kbBtnNew': function () {
             console.log('Creating new test: ' + $('#TTestName').val());
-            addToTestKB();
+            clearUI
+            newTest();
         },       
         'change .testKbIn, change .testKbInShort, change .testKbTA, click .testKbCB, change #cweid, select #cweid, change #cweid, change .sevSelector': function (event) {
             updateTestKBFromUI(event.target.id, event.target.value);
@@ -239,7 +241,10 @@ if (Meteor.isClient) {
         $("#TTesterSupport").val(rec.TTesterSupport);
         $("#TTesterSupport").attr('title', rec.TTesterSupport);
         $("#TTRef").val(rec.TTRef);
-        $("#TTRefA").attr('href', rec.TTRef);
+        testRef = rec.TTRef;
+        if (!testRef.startsWith("http"))
+            testRef = testRefBase + testRef;
+        $("#TTRefA").attr('href', testRef);
         $("#TRef1").val(rec.TRef1);
         $("#TRef1A").attr('href', rec.TRef1);
         $("#TRef2").val(rec.TRef2);
@@ -259,7 +264,7 @@ if (Meteor.isClient) {
         updateUIFromIssueColl();
 
         // Disable the New button
-        $('#kbBtnNew').prop('disabled', true);
+        //$('#kbBtnNew').prop('disabled', true);
         $('#testNameTA').val("");
     }
 
@@ -301,19 +306,19 @@ if (Meteor.isClient) {
     }    
     
     // Add new entry to TestKB
-    function addToTestKB() {
+    function newTest() {
 
-        console.log("Inserting new entry in TestKB");
-        kvp = {};
+        kvp = {}; mod = {};
         tid = new Date().toISOString().split(".")[0].replace(/[-:]/g, '');
         kvp._id       = new Mongo.ObjectID();
         kvp.TID       = "EXT-" + tid;
         kvp.TSource   = "Extras";
-        kvp.TTestName = $("#TTestName").val();
+        kvp.TTestName = ""; 
+        $("#TTestName").val("");
         kvp.TPhase    = "Extras";
         mod["$set"] = kvp;
         id = testkbColl.insert(kvp);
-        console.log("Record ID: " + id);
+        alert("Inserted new test EXT-" + tid + " (" + id + "). Pls fill other fields.");
     }
 
     // Update Test KB upon changes in the UI
@@ -530,6 +535,6 @@ if (Meteor.isClient) {
         $("#IPriority").prop("selectedIndex", 0);
         
         // Disable the New button
-        $('#kbBtnNew').prop('disabled', true);
+        //$('#kbBtnNew').prop('disabled', true);
     }
 };
