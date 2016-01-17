@@ -1,4 +1,4 @@
-a, a #TTRefA {
+a {
     size: 20px;
 }
 
@@ -50,7 +50,7 @@ input {
     font-size: 1em;
     color: black;
     border: 2px;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .prjIn{
@@ -65,6 +65,10 @@ input {
     -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
        -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
             box-shadow: 0 5px 10px rgba(0,0,0,.2);    
+}
+
+#lastTIDTxt{
+    vertical-align: middle;
 }
 
 .testKbIn{
@@ -104,7 +108,7 @@ option {
 
 .testSelector, .prioSelector, .sevSelector{    
     font-size: 12px;
-    width: 130px;
+    width: 168px;
 }
 
 .issueTA, .testKbTA {
@@ -185,7 +189,7 @@ td, th {
     border: 5px solid transparent; /* No more visible border */
     height: 30px; 
     transition: all 0.3s;  /* Simple transition for hover effect */
-    vertical-align: top;
+    vertical-align: middle;
     height: 15px;
     text-align: left;
 }

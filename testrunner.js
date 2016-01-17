@@ -1,11 +1,8 @@
 // Globals
 tPhase       = ""; gTest = {}; gCWE = {}; gEventData = {}; gTmpObj = {}; prj = {};
-prjName      = ""; 
-defaultScope = "";                  
-sesScope     = defaultScope;
-cweUriBase   = "https://cwe.mitre.org/data/definitions/";
-gLastTID     = "";
-testRefBase  = "http://localhost/WAPT/"
+gDefaultScope = "";                  
+gCweUriBase   = "https://cwe.mitre.org/data/definitions/";
+gTestRefBase  = "http://localhost/"
 
 // Open Mongo collections
 prjColl    = new Mongo.Collection("project");
@@ -54,8 +51,7 @@ if (Meteor.isClient) {
         lastTID: function(){
            var lastTID = Session.get("lastTID");
            console.log("Setting TID to lastTID: " + lastTID);
-           $("#testSel").val(lastTID);
-           updateUIFromTestKB();
+           $("#lastTIDTxt").html("Jump back to Test " + lastTID);
            return lastTID;
         },
         */
@@ -64,10 +60,10 @@ if (Meteor.isClient) {
         myTests: function () {
             sesScope = Session.get("projectScope");
             if (sesScope === undefined) {
-                sesScope = defaultScope;
+                sesScope = gDefaultScope;
+                return;
             }
-            scopeQry = eval("Object({" + sesScope + "})");            
-            //console.log("Getting list of tests from scopeQry '" + sesScope + "'");
+            scopeQry = eval("Object({" + sesScope + "})");
             return testkbColl.find(scopeQry,{sort: {TID: 1}}).fetch().map(function (it) {
                 gTest = {value: it.TTestName + " (" + it.TSource + ":" + it.TStep + ")", 
                     TID: it.TID, OID: it._id.valueOf(), TSource: it.TSource, 
@@ -81,6 +77,7 @@ if (Meteor.isClient) {
                     TStep: it.TStep,
                     TStdTest: it.TStdTest, TRef1: it.TRef1, TRef2: it.TRef2,
                     TTRef: it.TTRef,
+                    TTRef2: it.TTRef2,
                     TCweID: it.TCweID, TPCI: it.TPCI, TTop10: it.TTop10, TTop25: it.TTop25
                 };
                 return gTest;
@@ -89,8 +86,12 @@ if (Meteor.isClient) {
         
         // Get list of issues from issues collection
         myIssues: function () {
-            prj["PrjName"] = Session.get("projectName");
-            console.log("Getting issue list for project " + prj.PrjName);
+            prj = {};
+            var prjName = Session.get("projectName");
+            if ((prjName === undefined) || (prjName=="")) 
+                return;
+            prj["PrjName"] = prjName;
+            console.log("Getting issue list for project " + prjName);
             return issueColl.find(prj,{sort: {CweId: 1}}).fetch().map(function (it) {
                 URIs = it.IURIs;
                 count=0;
@@ -111,7 +112,8 @@ if (Meteor.isClient) {
         // Call this when selecting a CWE after typeahead
         select: function (e, suggestion, dataset) {
             console.log("Selected: CWE-" + suggestion.cweId);
-            updateCweUI(suggestion.cweId, suggestion.value, suggestion.cweDescr);
+            //updateCweUI(suggestion.cweId, suggestion.value, suggestion.cweDescr);
+            updateCweUI(suggestion.cweId);
             updateTestKBFromUI("TCweID", suggestion.cweId);
         },
         
@@ -150,10 +152,10 @@ if (Meteor.isClient) {
     // Handle events in body
     Template.body.events({
         'change #PrjName': function () {
-            // Get the project name and get its previously saved scope value 
+            // Get the project name and update UI
             Session.set("projectName", event.target.value);
-            //clearUI();
             updateUIFromPrj();
+            refreshUI();
         },
         'click #PrjName': function () {
             // Clear the input so that a new project can be selected
@@ -162,21 +164,34 @@ if (Meteor.isClient) {
             Session.set("projectName", "");
             clearUI();
         },
+        'click #lastTIDTxt': function(){
+            var lastTID = Session.get("lastTID");
+            console.log("Continuing at lastTID " + lastTID)
+            prj.lastTID = $("#testSel").val(lastTID);
+            updateUIFromTestKB();
+            refreshUI();
+        },
         'change #ScopeSel': function (event) {
             Session.set("projectScope", event.target.value);
             saveProjectDataFromUI();
+            refreshUI();
         },
         'change #testSel': function () {
+            Session.set("lastTID", $("#testSel").val());
             updateUIFromTestKB();
             saveProjectDataFromUI();
+            refreshUI();
         },
         'click #btnBack': function () {
             selected = $("#testSel").prop("selectedIndex") - 1;
             if (selected <= 0) selected = 1;
             console.log("Selected: " + selected);
             $("#testSel").prop("selectedIndex", selected);
+            Session.set("lastTID", $("#testSel").val());
             updateUIFromTestKB();
             $('#testNameTA').val("");
+            saveProjectDataFromUI()
+            refreshUI();
         },
         'click #btnNext': function () {
             selected = $("#testSel").prop("selectedIndex") + 1;
@@ -184,23 +199,28 @@ if (Meteor.isClient) {
                 selected = $('#testSel > option').length - 1;
             console.log("Selected: " + selected);
             $("#testSel").prop("selectedIndex", selected);
+            Session.set("lastTID", $("#testSel").val());
             updateUIFromTestKB();
             $('#testNameTA').val("");
+            saveProjectDataFromUI()
+            refreshUI();
         },
         'change #TTestName': function () {
-            console.log('TTestName changed (' + $('#TTestName').val() + "). Enabled New button.");
-            $('#kbBtnNew').prop('fd', false);
+            console.log('TTestName changed (' + $('#TTestName').val() + ")");
         },
         'click #kbBtnNew': function () {
             console.log('Creating new test: ' + $('#TTestName').val());
             clearUI
             newTest();
+            refreshUI();
         },       
         'change .testKbIn, change .testKbInShort, change .testKbTA, click .testKbCB, change #cweid, select #cweid, change #cweid, change .sevSelector': function (event) {
             updateTestKBFromUI(event.target.id, event.target.value);
+            refreshUI();
         },
         'change .prioSelector, change .issueTA': function (event) {
             saveIssueDataFromUI(event.target.id, event.target.value);
+            refreshUI();
         },
     }),
 
@@ -210,16 +230,15 @@ if (Meteor.isClient) {
         // Initializes all typeahead instances
         Meteor.typeahead.inject();
          
+        /*
         // Restore session values
         sesScope = Session.get("projectScope");
         if (sesScope === undefined) {
-            sesScope = defaultScope;
+            sesScope = gDefaultScope;
         }
         $("#ScopeSel").val(sesScope);        
         console.log("Scope restored to " + sesScope);
-        
-        // Pre-fill project name
-        $("#PrjName").val(prjName);
+        */
     });
 
 
@@ -241,10 +260,15 @@ if (Meteor.isClient) {
         $("#TTesterSupport").val(rec.TTesterSupport);
         $("#TTesterSupport").attr('title', rec.TTesterSupport);
         $("#TTRef").val(rec.TTRef);
+        $("#TTRef2").val(rec.TTRef2);
         testRef = rec.TTRef;
         if (!testRef.startsWith("http"))
-            testRef = testRefBase + testRef;
+            testRef = gTestRefBase + testRef;
+        testRef2 = rec.TTRef2;
+        if ((testRef2 !== undefined)&&(!testRef2.startsWith("http")))
+            testRef2 = gTestRefBase + testRef2;
         $("#TTRefA").attr('href', testRef);
+        $("#TTRef2A").attr('href', testRef2);
         $("#TRef1").val(rec.TRef1);
         $("#TRef1A").attr('href', rec.TRef1);
         $("#TRef2").val(rec.TRef2);
@@ -259,12 +283,12 @@ if (Meteor.isClient) {
         $("#IPriority").val("");
         $('#cwename').typeahead('val', "");
         //$('#testNameTA').typeahead('val', "");
-        
+
+        // Update UI to ensure consistency
         updateCweUI(rec.TCweID);
         updateUIFromIssueColl();
+        refreshUI();
 
-        // Disable the New button
-        //$('#kbBtnNew').prop('disabled', true);
         $('#testNameTA').val("");
     }
 
@@ -338,15 +362,42 @@ if (Meteor.isClient) {
         console.log("Number of updated records: " + n);
     }
 
+    // Refresh UI for consistency
+    function refreshUI() {
+        // Update lastTID text in UI
+        var lastTID = Session.get("lastTID");
+        console.log("Updating lastTID text to " + lastTID);
+        $("#lastTIDTxt").html("Continue from " + lastTID);
+    }
+
 
     // Update UI with CWE data
-    function updateCweUI(cweId, cweName, cweDescr) {
-        if (cweId !== undefined){
+    //function updateCweUI(cweId, cweName, cweDescr) {
+    function updateCweUI(cweId) {
+        var cwe = {};
+        if ((cweId !== undefined)&&(cweId != "")){
             console.log("Updating UI for CWE-" + cweId);
             $('#cweid').val(cweId);
-            $('#cweref').attr('href', cweUriBase + cweId + ".html");
+            $('#cweref').attr('href', gCweUriBase + cweId + ".html");
             $('#cweref').html(cweId);
-            //$('#cwename').typeahead('title', cweId);
+            cwe.ID = cweId;
+            var rec = cweColl.findOne(cwe);
+            
+            // Update the description in the title (visible via hovering)
+            var descr = rec.Name + ": " + rec.Description_Summary;
+            console.log("Updating Description for CWE-" + cweId);
+            $('#cweref').attr('title', descr);
+            
+            // Update the CWE name in the typehead field
+            var name  = rec.Name;
+            console.log("Updating CWE Name to " + name);
+            $('#cwename').typeahead('val', name);
+            
+            // If the issue name is empty, use the CWE name.
+            issueName = $("#TIssueName").val();
+            if (issueName.length <= 0) {
+                $("#TIssueName").val(name);
+            }
         }
         else {
             console.log("Clearing CWE values");
@@ -355,20 +406,6 @@ if (Meteor.isClient) {
             $('#cweref').html("");
             $('#cweref').attr('title', "");
             $('#cwename').typeahead('val', "");
-        }
-
-        if (cweDescr !== undefined) {
-            console.log("Updating Description for CWE-" + cweId);
-            $('#cweref').attr('title', cweDescr);
-        }
-
-        if (cweName !== undefined) {
-            console.log("Updating Name for CWE-" + cweId);
-            $('#cwename').typeahead('val', cweName);
-            issueName = $("#TIssueName").val();
-            if (issueName.length <= 0) {
-                $("#TIssueName").val(cweName);
-            }
         }
     }
     
@@ -428,33 +465,28 @@ if (Meteor.isClient) {
     
     // Save the project data (scope and scopeQry)
     function saveProjectDataFromUI() {
-        //var prjName = $('#PrjName').val();
         var prjName = Session.get("projectName");
         if ((prjName === undefined) || (prjName === "")){
             console.log("Empty Project Name");
             return;
-        }
-        
-        console.log('Project Name changed to ' + prjName);
+        }        
         var prj = {}, pid = {}, mod={};
         pid.name = prjName;
         prj.name = prjName;
         prj.scope = $("#ScopeSel option:selected" ).attr('title');
         prj.scopeQry = $("#ScopeSel").val();
         prj.lastTID = $("#testSel").val();
-        console.log("Scope set to " + prj.scope + " (" + prj.scopeQry + ")");
 
         mod["$set"] = prj;
-        console.log("Checking if entry exists for project " + prjName);
         i = prjColl.findOne(pid);
 
         // If the issue doesn't exist, insert a new record. If not, use upsert.
         if ((i === undefined) || (i._id <= 0)){
-            console.log("Inserting a new project");
+            console.log("Inserting a new project " + prjName);
             mid = prjColl.insert(prj);
         }
         else{
-            console.log("Updating project data for object " + i._id);
+            console.log("Updating project data for project " + prjName + ". ID: " + i._id);
             mid = prjColl.upsert(i._id, mod);
         }
     }
@@ -463,7 +495,6 @@ if (Meteor.isClient) {
     function updateUIFromPrj() {
 
         // Get project name from UI and make sure it's not empty
-        //var prjName = $('#PrjName').val();
         var prjName = Session.get("projectName");        
         if ((prjName === undefined) || (prjName === "")){
             console.log("Empty Project Name");
@@ -491,14 +522,13 @@ if (Meteor.isClient) {
         $("#ScopeSel").val(scopeQry);
         Session.set("projectScope", scopeQry);
         
-        /*
         // Update test ID (position of test runner) when possible
-        gLastTID = p.lastTID;
-        if ((gLastTID !== undefined) && (lastTID.length > 0)){
-           console.log("Last TID: " + gLastTID);
-           Session.set("lastTID", gLastTID);
-        }
-        */
+        var lastTID = p.lastTID;
+        if (lastTID !== undefined){
+           console.log("Last TID: " + lastTID);
+           Session.set("lastTID", lastTID);
+           $("#lastTIDTxt").html("Continue from " + lastTID);
+       }
     }    
     
     
@@ -518,6 +548,8 @@ if (Meteor.isClient) {
         $("#TDescr").val("");
         $("#TTRef").val("");
         $("#TTRefA").attr('href', "");
+        $("#TTRef2").val("");
+        $("#TTRef2A").attr('href', "");
         $("#TIssueName").val("");
         $("#TIssueType").val("");
         $("#TSeverity").prop("selectedIndex", 0);

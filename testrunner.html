@@ -16,6 +16,7 @@
                             {{> projectTmpl}}
                         {{/each}}                        
                    </datalist>
+                   <a  id="lastTIDTxt"   class="tinyTD" title="Last Test ID" href="#"></a>
                 </td>
             </tr>
             <tr><th class="issueTH">Scope</th><td class="issueVals">
@@ -27,7 +28,7 @@
                         <option class="scopeOpt" title="PCI" value="TPCI: true"             >PCI</option>
                         <option class="scopeOpt" title="STD" value="TStdTest: true"         >Standard</option>
                         <option class="scopeOpt" title="T10" value="TTop10: true"           >Top 10</option>
-                        <option class="scopeOpt" title="T25" value="TTop25: true"           >Top 25</option>
+                        <!-- EP/removed: Top25 is too developer-oriented. <option class="scopeOpt" title="T25" value="TTop25: true">Top 25</option> -->
                         <option class="scopeOpt" title="542" value="TSource: 'SEC542'"      >SEC542</option>
                         <option class="scopeOpt" title="642" value="TSource: 'SEC642'"      >SEC642</option>
                         <option class="scopeOpt" title="WAH" value="TSource: 'WAHH2'"       >WAHH v2</option>
@@ -103,6 +104,7 @@
             <tr class="iTR"><th class="issueTH">Test Type</th>  <td class="issueVals"><input id="TType" class="testKbIn" type="text" placeholder="Test Type" /></td></tr> 
             <tr class="iTR"><th class="issueTH">Tester Help</th><td class="issueVals"><textarea id="TTesterSupport" class="testKbTA" rows="2" placeholder="Tester Support"></textarea></td></tr>
             <tr class="iTR"><th class="issueTH">Test Ref</th>   <td class="issueVals"><a href="#" id="TTRefA" target="TRWin">&gt;</a> <input id="TTRef" class="testKbIn" type="text" placeholder="Tester Reference URI" /></td></tr> 
+            <tr class="iTR"><th class="issueTH">Test Ref 2</th> <td class="issueVals"><a href="#" id="TTRef2A" target="TRWin">&gt;</a> <input id="TTRef2" class="testKbIn" type="text" placeholder="Tester Reference URI #2" /></td></tr> 
         </table>
     </details>
 
