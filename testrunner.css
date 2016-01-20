@@ -103,7 +103,7 @@ option {
 
 
 #cwename, #testNameTA{
-    width: 500px;
+    width: 600px;
 }
 
 .testSelector, .prioSelector, .sevSelector{    
@@ -118,7 +118,7 @@ option {
     border: 2px;
     width: 98%;
     padding-right: 20px;
-    font-size: 1em;
+    font-size: 12px;
     vertical-align: top;
 }
 
