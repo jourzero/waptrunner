@@ -1,8 +1,16 @@
 // Globals
-tPhase       = ""; gTest = {}; gCWE = {}; gEventData = {}; gTmpObj = {}; prj = {};
-gDefaultScope = "";                  
+tPhase       = ""; gTest = {}; gCWE = {}; gEventData = {}; gTmpObj = {};
+gDefaultScope = ""; 
+gCveRptBase   = "http://localhost:9080/cverpt.php?software=";
 gCweUriBase   = "https://cwe.mitre.org/data/definitions/";
-gTestRefBase  = "http://localhost/"
+gCveUriBase   = "http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=";
+gTestRefBase  = "http://localhost:9080/";""
+gPrjSubset    = ".*";
+gPrjSubset    = "2015.*";
+gPrjSubset    = "2016.*";
+gPrjSubset    = ".*Dev.*";
+gPrjSubset    = ".*Prod.*";
+gPrjSubset    = ".*";
 
 // Open Mongo collections
 prjColl    = new Mongo.Collection("project");
@@ -33,7 +41,7 @@ if (Meteor.isClient) {
         
         // Get Projects from project collection
         projects: function () {
-            return prjColl.find({},{sort: {name: -1}})
+            return prjColl.find({"name" : {$regex : gPrjSubset}},{sort: {name: -1}});
         },
         
         /*
@@ -151,7 +159,7 @@ if (Meteor.isClient) {
             
     // Handle events in body
     Template.body.events({
-        'change #PrjName': function () {
+        'change #PrjName': function (event) {
             // Get the project name and update UI
             Session.set("projectName", event.target.value);
             updateUIFromPrj();
@@ -164,10 +172,13 @@ if (Meteor.isClient) {
             Session.set("projectName", "");
             clearUI();
         },
+        'change #PrjNotes, change #PrjSoftware': function (event) {
+            saveProjectDataFromUI();
+            refreshUI();
+        },
         'click #lastTIDTxt': function(){
             var lastTID = Session.get("lastTID");
             console.log("Continuing at lastTID " + lastTID)
-            prj.lastTID = $("#testSel").val(lastTID);
             updateUIFromTestKB();
             refreshUI();
         },
@@ -368,6 +379,7 @@ if (Meteor.isClient) {
         var lastTID = Session.get("lastTID");
         console.log("Updating lastTID text to " + lastTID);
         $("#lastTIDTxt").html("Continue from " + lastTID);
+        updateUIFromPrj();
     }
 
 
@@ -473,6 +485,8 @@ if (Meteor.isClient) {
         var prj = {}, pid = {}, mod={};
         pid.name = prjName;
         prj.name = prjName;
+        prj.notes= $("#PrjNotes").val();
+        prj.software= $("#PrjSoftware").val();
         prj.scope = $("#ScopeSel option:selected" ).attr('title');
         prj.scopeQry = $("#ScopeSel").val();
         prj.lastTID = $("#testSel").val();
@@ -516,7 +530,19 @@ if (Meteor.isClient) {
             return;
         }        
  
-        // Update UI values using reactivity
+        // Update UI values
+        $("#PrjNotes").val(p.notes);
+        $("#PrjNotes").attr('title', p.notes);
+        if (p.software !== undefined){
+            $("#PrjSoftware").val(p.software);
+            var swList = p.software.split(",");
+            var swLinksHtml="";
+            for (i=0; i<swList.length; i++){
+                swLinksHtml += "<a href='" + gCveRptBase + swList[i] + "' target='cveRptUI'>" + swList[i] + "</a> ";
+            }
+            $("#CveRptLinks").html(swLinksHtml);
+        }
+ 
         scopeQry = p.scopeQry;
         console.log("Updating scope to " + scopeQry);
         $("#ScopeSel").val(scopeQry);
@@ -534,6 +560,10 @@ if (Meteor.isClient) {
     
     // Clear all UI values when changing project
     function clearUI() {
+        $("#PrjNotes").val("");
+        $("#PrjNotes").attr('title', "");
+        $("#PrjSoftware").val("");
+        $("#CveRptLinks").html("");        
         $("#testSel").prop("selectedIndex", 0);
         $("#ScopeSel").prop("selectedIndex", 0);
         $("#TPhase").html("");
@@ -544,7 +574,8 @@ if (Meteor.isClient) {
         $('#cweref').html("");
         $("#TTestName").val("");
         $("#TType").val("");
-        $("#TTesterSupport").val("");
+        $("#TTesterSupport").val("");""
+        $("#TTesterSupport").attr('title', "");
         $("#TDescr").val("");
         $("#TTRef").val("");
         $("#TTRefA").attr('href', "");

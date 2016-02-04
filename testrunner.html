@@ -8,7 +8,7 @@
     <details id="prjDetails" open="open">
         <summary>Project Summary</summary>
         <table class="issueTab">
-            <tr><th class="issueTH">Name</th>
+            <tr class="iTR"><th class="issueTH">Project</th>
                 <td class="issueVals">
                     <input list="prjs" id="PrjName" class="prjIn" placeholder="YYYYMMDD-ENV-APP" />
                     <datalist id="prjs">
@@ -19,9 +19,20 @@
                    <a  id="lastTIDTxt"   class="tinyTD" title="Last Test ID" href="#"></a>
                 </td>
             </tr>
-            <tr><th class="issueTH">Scope</th><td class="issueVals">
+            <tr class="iTR">
+                <th class="issueTH">Software</th>
+                <td class="issueVals"><input id="PrjSoftware" class="testKbIn" type="text" placeholder="Software List (comma-separated)" /></td>
+            </tr>
+            <tr class="iTR">
+                <th class="issueTH">CVEs</th>
+                <td class="issueVals" id="CveRptLinks"> </td>
+            </tr>
+            <tr class="iTR"><th class="issueTH">Scope</th>
+                <td class="issueVals"><textarea id="PrjNotes" class="testKbTA" rows="2" placeholder="Scope Details"></textarea></td></tr>
+
+            <tr class="iTR"><th class="issueTH">Method.</th><td class="issueVals">
                     <select id="ScopeSel" title="Scope" class="scopeSelector">
-                        <option disabled selected>Scope</option>
+                        <option disabled selected>Test Subset</option>
                         <option class="scopeOpt" title="ALL" value=""                       >All Tests</option>
                         <option class="scopeOpt" title="EXT" value="TPhase: 'Extras'"       >Extras</option>
                         <option class="scopeOpt" title="TG4" value="TSource: 'OWASP-TG4'"   >OWASP TG4</option>
@@ -56,7 +67,10 @@
                 </td></tr>
         </table>
     </details>
+
     <!-- TEST SELECTOR -->
+    <details open="open" id="testingDetails">
+        <summary>Testing Information (KB)</summary>
         <table class="issueTab">
             <tr><th class="issueTH">Test</th><td class="issueVals">
                     <table>
@@ -85,19 +99,8 @@
             </tr> 
             
         </table>
-
-    <!-- CWE SEARCH -->
-    <details open="open" id="cweDetails">
-        <summary>Common Weakness Information (CWE)</summary>
-        <table class="issueTab">
-            <tr class="iTR"><th class="issueTH">Name</th> <td class="issueVals"><input id="cwename" class="form-control typeahead" name="cwename" type="text" placeholder="Search by CWE Name" autocomplete="off" spellcheck="false" data-source="cwes" data-open="open" data-close="close" data-select="select" data-autocomplete="autocomplete" data-limit="20" /></td></tr>
-            <tr class="iTR"><th class="issueTH">ID</th>   <td class="issueVals"><a class="issueA" target="cweTab" id="cweref" href="https://cwe.mitre.org/" title="Ref URI" ></a></td></tr>
-        </table>
-    </details>
-
-    <!-- TEST SELECTOR -->
-    <details open="open" id="testingDetails">
-        <summary>Testing Information (KB)</summary>
+        
+        
         <table class="issueTab">
             <tr class="iTR"><th class="issueTH">Test Name</th>   <td class="issueVals"><input id="TTestName" class="testKbInShort" type="text" placeholder="Test Name" />
             <button id="kbBtnNew" class="kbBtn">New</button></td></tr>
@@ -107,6 +110,16 @@
             <tr class="iTR"><th class="issueTH">Test Ref 2</th> <td class="issueVals"><a href="#" id="TTRef2A" target="TRWin">&gt;</a> <input id="TTRef2" class="testKbIn" type="text" placeholder="Tester Reference URI #2" /></td></tr> 
         </table>
     </details>
+
+        <!-- CWE SEARCH -->
+    <details open="open" id="cweDetails">
+        <summary>Common Weakness Information (CWE)</summary>
+        <table class="issueTab">
+            <tr class="iTR"><th class="issueTH">Name</th> <td class="issueVals"><input id="cwename" class="form-control typeahead" name="cwename" type="text" placeholder="Search by CWE Name" autocomplete="off" spellcheck="false" data-source="cwes" data-open="open" data-close="close" data-select="select" data-autocomplete="autocomplete" data-limit="20" /></td></tr>
+            <tr class="iTR"><th class="issueTH">ID</th>   <td class="issueVals"><a class="issueA" target="cweTab" id="cweref" href="https://cwe.mitre.org/" title="Ref URI" ></a></td></tr>
+        </table>
+    </details>
+
 
     <!-- GENERIC ISSUE DATA -->
     <details open="open" id="genericDetails">
