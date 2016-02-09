@@ -5,10 +5,7 @@ gCveRptBase   = "http://localhost:9080/cverpt.php?software=";
 gCweUriBase   = "https://cwe.mitre.org/data/definitions/";
 gCveUriBase   = "http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=";
 gTestRefBase  = "http://localhost:9080/";""
-gPrjSubset    = ".*";
-gPrjSubset    = "2015.*";
 gPrjSubset    = "2016.*";
-gPrjSubset    = ".*Dev.*";
 gPrjSubset    = ".*Prod.*";
 gPrjSubset    = ".*";
 
@@ -43,27 +40,7 @@ if (Meteor.isClient) {
         projects: function () {
             return prjColl.find({"name" : {$regex : gPrjSubset}},{sort: {name: -1}});
         },
-        
-        /*
-        // Get Project Scope from Session
-        projectScope: function () {
-            return Session.get("projectScope");
-        },
-        
-        // Get Project Name from Session
-        projectName: function () {
-            return Session.get("projectName");
-        },
-        
-        // Set TID to last TID
-        lastTID: function(){
-           var lastTID = Session.get("lastTID");
-           console.log("Setting TID to lastTID: " + lastTID);
-           $("#lastTIDTxt").html("Jump back to Test " + lastTID);
-           return lastTID;
-        },
-        */
-        
+               
         // Get list of tests from testkb collection
         myTests: function () {
             sesScope = Session.get("projectScope");
@@ -216,6 +193,11 @@ if (Meteor.isClient) {
             saveProjectDataFromUI()
             refreshUI();
         },
+        'click #testNameTA': function () {
+            // Clear the input so that a new test name can be selected
+            console.log("Test name text area clicked, clearing field so that another test can be chosen");
+            $("#testNameTA").val("");
+        },        
         'change #TTestName': function () {
             console.log('TTestName changed (' + $('#TTestName').val() + ")");
         },
@@ -314,15 +296,6 @@ if (Meteor.isClient) {
             return;
         }
         
-        /*
-        // Get CWE ID as search criteria
-        cid = $('#cweref').html();
-        if ((cid === undefined) || (cid === "")){
-            console.log("Empty CWE ID");
-            return;
-        }
-        */
-
         // Build search criteria
         var issue={}; var mod={}; var crit={};
         //crit.CweId  = cid;

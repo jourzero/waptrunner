@@ -12,6 +12,7 @@
           border-radius: 8px;
   outline: none;
   margin-left: 0px;
+  font-size: 12px;
 }
 
 .typeahead {
@@ -50,8 +51,8 @@
 
 .tt-suggestion {
   padding: 1px 5px;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 15px;
 }
 
 .tt-suggestion:hover {
