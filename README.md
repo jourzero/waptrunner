@@ -13,7 +13,7 @@ This is a tool that helps me run through web app pen tests by stepping through v
 * CVE search on cvedetails.com
 * Update app using Update button that triggers download of updated code on github (from the server side).
 
-## TODO List
+## TODOs
 * Split testrunner.js into multiple files
 * Forms-based auth.
 * Add prep scripts to GIT repo
