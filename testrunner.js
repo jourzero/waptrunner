@@ -218,8 +218,10 @@ if (Meteor.isClient) {
         },
         'click #btnUpdate': function () {
             Meteor.call('runCode', function (err, response) {
-              console.log("Response: " + response);
-              console.log("Error: " + err);
+                if (response!==undefined)
+                    console.log(response);
+                if (error !== undefined)
+                    console.log(err);
             });
         },
     }),
