@@ -2,7 +2,7 @@
 
 This is a tool that helps me run through web app pen tests by stepping through various tests and log issues easily without taking too much screen space. 
 
-## Current Feature Set
+## Current Features
 * Multi-project
 * Multi-methodology
 * Test stepping
@@ -13,10 +13,11 @@ This is a tool that helps me run through web app pen tests by stepping through v
 * CVE search on cvedetails.com
 * Update app using Update button that triggers download of updated code on github (from the server side).
 
-## TODO
+## Next Features
 * Forms-based auth.
 * Add prep scripts to GIT repo
 * Multi-user support
 * Push sanitized subset of my MongoDB to GIT or Meteor cloud
 * Export to CSV from UI
-* Maybe export as SSVL for Threadfix import
+* SSVL export to Threadfix
+* UI clean-up: remove unused fields, better usability
