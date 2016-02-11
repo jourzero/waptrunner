@@ -45,6 +45,7 @@ $ meteor create waptrunner
 * Add Meteor packages
 ```
 $ meteor add sergeyt:typeahead
+$ meteor add accounts-ui accounts-password
 ```
 
 * Setup the environment for Meteor
