@@ -12,7 +12,7 @@ Meteor.startup(function () {
       // to queue other method calls (see Meteor docs)
       this.unblock();
       var future=new Future();
-      var command="date";
+      var command="/opt/git-update.sh";
       exec(command,function(error,stdout,stderr){
         if(error){
           console.log(error);
