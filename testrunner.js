@@ -5,6 +5,7 @@ gCveRptBase   = "http://localhost:9080/cverpt.php?software=";
 gCweUriBase   = "https://cwe.mitre.org/data/definitions/";
 gCveUriBase   = "http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=";
 gTestRefBase  = "http://localhost:9080/";""
+gTestRefBase  = "/WAPT/";
 gPrjSubset    = "2016.*";
 gPrjSubset    = ".*Prod.*";
 gPrjSubset    = ".*";
