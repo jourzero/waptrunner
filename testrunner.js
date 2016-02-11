@@ -1,15 +1,15 @@
 // Globals
 tPhase       = ""; gTest = {}; gCWE = {}; gEventData = {}; gTmpObj = {};
 gDefaultScope = ""; 
-gCveRptBase   = "http://localhost:9080/cverpt.php?software=";
+//gCveRptBase   = "http://localhost:9080/cverpt.php?software=";
 gCveRptBase   = "https://web.nvd.nist.gov/view/cpe/search/results?keyword=";
-cCveRptSuffix = "&status=FINAL&orderBy=CPEURI&namingFormat=2.3";
+gCveRptSuffix = "&status=FINAL&orderBy=CPEURI&namingFormat=2.3";
 gCweUriBase   = "https://cwe.mitre.org/data/definitions/";
 gCveUriBase   = "http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=";
-gTestRefBase  = "http://localhost:9080/";""
+//gTestRefBase  = "http://localhost:9080/";""
 gTestRefBase  = "/WAPT/";
-gPrjSubset    = "2016.*";
-gPrjSubset    = ".*";
+//gPrjSubset    = "2016.*";
+//gPrjSubset    = ".*";
 gPrjSubset    = ".*Prod.*";
 
 // Open Mongo collections
