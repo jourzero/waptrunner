@@ -216,6 +216,12 @@ if (Meteor.isClient) {
             saveIssueDataFromUI(event.target.id, event.target.value);
             refreshUI();
         },
+        'click #btnUpdate': function () {
+            Meteor.call('runCode', function (err, response) {
+              console.log("Response: " + response);
+              console.log("Error: " + err);
+            });
+        },
     }),
 
 
