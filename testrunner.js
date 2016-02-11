@@ -2,6 +2,8 @@
 tPhase       = ""; gTest = {}; gCWE = {}; gEventData = {}; gTmpObj = {};
 gDefaultScope = ""; 
 gCveRptBase   = "http://localhost:9080/cverpt.php?software=";
+gCveRptBase   = "https://web.nvd.nist.gov/view/cpe/search/results?keyword=";
+cCveRptSuffix = "&status=FINAL&orderBy=CPEURI&namingFormat=2.3";
 gCweUriBase   = "https://cwe.mitre.org/data/definitions/";
 gCveUriBase   = "http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=";
 gTestRefBase  = "http://localhost:9080/";""
@@ -512,7 +514,7 @@ if (Meteor.isClient) {
             var swList = p.software.split(",");
             var swLinksHtml="";
             for (i=0; i<swList.length; i++){
-                swLinksHtml += "<a href='" + gCveRptBase + swList[i] + "' target='cveRptUI'>" + swList[i] + "</a> ";
+                swLinksHtml += "<a href='" + gCveRptBase + swList[i] + gCveRptSuffix +"' target='cveRptUI'>" + swList[i] + "</a> ";
             }
             $("#CveRptLinks").html(swLinksHtml);
         }
