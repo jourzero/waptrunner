@@ -11,6 +11,7 @@ Current Feature Set:
 * Auto-type test names and CWEs 
 * Ability to add new tests based on new CVEs or other
 * CVE search on cvedetails.com
+* Update app using Update button that triggers download of updated code on github (from the server side).
 
 TODO:
 * Add prep scripts to GIT repo
