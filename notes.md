@@ -26,7 +26,7 @@ $ mv mongodb... /opt/mongo
 
 * Install Meteor
 ```
-# curl https://install.meteor.com/ | sh
+$ curl https://install.meteor.com/ | sh
 [...]
 Meteor 1.2.1 has been installed in your home directory (~/.meteor).
 Writing a launcher script to /usr/local/bin/meteor for your convenience.
@@ -44,7 +44,7 @@ $ meteor create waptrunner
 
 * Add Meteor packages
 ```
-# meteor add sergeyt:typeahead
+$ meteor add sergeyt:typeahead
 ```
 
 * Setup the environment for Meteor
