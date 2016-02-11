@@ -1,14 +1,18 @@
-# Base Config
+# General Notes
 
-## OS
+The below notes are not usable directly by anyone else but the author.
+
+## Base Config
+
+### OS
 * Install some packages to bare VM: `# yum install net-tools bind-utils mlocate`
 
-## Choose deployment mode
+### Choose deployment mode
 * Consider http://guide.meteor.com/deployment.html#custom-deployment
 
 > For now, I'm using a normal dev environment and pushing code directly (DevOps mode).
 
-## MongoDB
+### MongoDB
 
 * Install MongoDB to have the server-side executables.
 
@@ -18,7 +22,7 @@ $ tar xvfz mongodb-linux-x86_64-amazon-3.2.1.tgz
 $ mv mongodb... /opt/mongo
 ```
 
-## Meteor
+### Meteor
 
 * Install Meteor
 ```
@@ -28,7 +32,7 @@ Meteor 1.2.1 has been installed in your home directory (~/.meteor).
 Writing a launcher script to /usr/local/bin/meteor for your convenience.
 ```
 
-# Setup DevOps Environment
+## Setup DevOps Environment
 
 * Create Meteor project
 ```
@@ -57,5 +61,5 @@ $ cd ...
 $ ./restorePR.sh  meteor.backup.20160204
 ```
 
-# Notes:
+## Misc Notes
 * Markdown Ref.: https://help.github.com/articles/basic-writing-and-formatting-syntax/
