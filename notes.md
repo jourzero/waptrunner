@@ -45,7 +45,7 @@ $ meteor create waptrunner
 * Add Meteor packages
 ```
 $ meteor add sergeyt:typeahead              # Typeahead for CWE Name and Test Name lookups
-$ meteor add accounts-ui accounts-password  # Authentication
+$ meteor add accounts-ui accounts-google    # Google OAuth
 $ meteor add jaredmartin:future             # For remote exec of git-update.sh
 $ meteor add dburles:eslint                 # Javascript static analysis
 ```
