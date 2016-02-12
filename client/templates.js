@@ -171,7 +171,7 @@ Template.body.events({
         refreshUI();
     },
     'click #btnUpdate': function () {
-        console.log("Updating code...");
+        console.log("Trying to update the WAPT Runner code from GIT...");
         Meteor.call('runCode', function (err, response) {
             if (response !== undefined)
                 console.log(response);
