@@ -171,6 +171,7 @@ Template.body.events({
         refreshUI();
     },
     'click #btnUpdate': function () {
+        console.log("Updating code...");
         Meteor.call('runCode', function (err, response) {
             if (response !== undefined)
                 console.log(response);
