@@ -1,0 +1,23 @@
+<template name="myTestTmpl">
+    <option class="testOpt" value="{{TID}}" oid="{{OID}}" tSource="{{TSource}}">{{TID}} {{TTestName}}</option>
+</template>
+
+<template name="myTestTmpl2">
+    <option class="testOpt2">{{TTestName}} ({{TStep}})</option>
+</template>
+
+<template name="myIssueTmpl">
+    <tr class="{{IPriorityText}}Priority">
+        <td class="isTD" width="20px"><button class="delete" title="Delete this entry">&times;</button></td>
+        <td class="isTD">{{IPriority}}-{{IPriorityText}}</td>
+        <td class="isTD">{{TIssueName}}</td>
+        <td class="isTD">{{CweId}}</td>
+        <td class="isTD">{{TID}}</td>
+        <td class="isTD">{{ICount}}</td>
+        <td class="isTD">{{TSeverity}}-{{TSeverityText}}</td>
+    </tr>
+</template>
+
+<template name="projectTmpl">
+    <option value="{{name}}"></option>
+</template>
