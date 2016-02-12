@@ -12,10 +12,9 @@ This is a tool that helps me run through web app pen tests by stepping through v
 * Ability to add new tests based on new CVEs or other
 * CVE search on cvedetails.com
 * Update app using Update button that triggers download of updated code on github (from the server side).
+* Forms-based auth.
 
 ## TODOs
-* Split testrunner.js into multiple files
-* Forms-based auth.
 * Add prep scripts to GIT repo
 * Multi-user support
 * Push sanitized subset of my MongoDB to GIT or Meteor cloud
