@@ -71,6 +71,10 @@ input {
     vertical-align: middle;
 }
 
+p {
+    margin:3px;
+}
+
 .testKbIn{
     width: 98%;
 }

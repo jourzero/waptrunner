@@ -1,5 +1,4 @@
-
-Template.body.helpers({
+Template.home.helpers({
 
     // Get CWEs from cwe collection
     cwes: function () {
@@ -90,7 +89,7 @@ Template.body.helpers({
 
 
 // Handle events in body
-Template.body.events({
+Template.home.events({
     'change #PrjName': function (event) {
         // Get the project name and update UI
         Session.set("projectName", event.target.value);
@@ -201,17 +200,6 @@ Template.myIssueTmpl.events({
         updateUIFromTestKB();
    }
 });
-
-
-
-
-// Initialize typeahead
-Meteor.startup(function () {
-    // Initializes all typeahead instances
-    Meteor.typeahead.inject();
-});
-
-
 
 
 
@@ -554,3 +542,4 @@ function clearUI() {
     //$('#kbBtnNew').prop('disabled', true);
 }
 
+//}

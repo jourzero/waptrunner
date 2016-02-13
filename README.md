@@ -15,9 +15,9 @@ This is a tool that helps me run through web app pen tests by stepping through v
 * Forms-based auth.
 
 ## TODOs
+* Export to CSV from UI
 * Add prep scripts to GIT repo
 * Multi-user support
 * Push sanitized subset of my MongoDB to GIT or Meteor cloud
-* Export to CSV from UI
 * SSVL export to Threadfix
 * UI clean-up: remove unused fields, better usability
