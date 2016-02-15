@@ -1,0 +1,11 @@
+<template name="home">
+    <p>{{> loginButtons}}</p>
+    {{#if currentUser}}
+        <div class="container">
+            {{> projectsTmpl}}
+            {{> findingsTmpl}}
+            {{> testingTmpl}}
+        </div>
+    <button id="btnUpdate" class="button black">Update</button>    
+    {{/if}}
+</template>

@@ -1,0 +1,49 @@
+<template name="projectsTmpl">
+    <!-- PROJECT SUMMARY -->
+    <details id="prjDetails" open="open">
+        <summary>Project Summary</summary>
+        <table class="issueTab">
+            <tr class="iTR"><th class="issueTH">Project</th>
+                <td class="issueVals">
+                    <input list="prjs" id="PrjName" class="prjIn" placeholder="YYYYMMDD-ENV-APP" />
+                    <datalist id="prjs">
+                        {{#each projects}}
+                            {{> projectTmpl}}
+                        {{/each}}  
+                   </datalist>
+                   <a id="lastTIDTxt"   class="tinyTD" title="Last Test ID" href="#"></a></td></tr>
+
+            <tr class="iTR">
+                <th class="issueTH">Components</th>
+                <td class="issueVals"><input id="PrjSoftware" class="testKbIn" type="text" placeholder="List of software components used by app (comma-separated)" /></td></tr>
+
+            <tr class="iTR">
+                <th class="issueTH">CVE Search</th>
+                <td class="issueVals" id="CveRptLinks"> </td></tr>
+
+            <tr class="iTR"><th class="issueTH">Scope</th>
+                <td class="issueVals"><textarea id="PrjNotes" class="testKbTA" rows="2" placeholder="Scope Details"></textarea></td></tr>
+
+            <tr class="iTR"><th class="issueTH">Method.</th><td class="issueVals">
+                    <select id="ScopeSel" title="Scope" class="scopeSelector">
+                        <option disabled selected>Test Subset</option>
+                        <option class="scopeOpt" title="ALL" value=""                       >All Tests</option>
+                        <option class="scopeOpt" title="EXT" value="TPhase: 'Extras'"       >Extras</option>
+                        <option class="scopeOpt" title="TG4" value="TSource: 'OWASP-TG4'"   >OWASP TG4</option>
+                        <option class="scopeOpt" title="PCI" value="TPCI: true"             >PCI</option>
+                        <option class="scopeOpt" title="STD" value="TStdTest: true"         >Standard</option>
+                        <option class="scopeOpt" title="T10" value="TTop10: true"           >Top 10</option>
+                        <!-- EP/removed: Top25 is too developer-oriented. <option class="scopeOpt" title="T25" value="TTop25: true">Top 25</option> -->
+                        <option class="scopeOpt" title="542" value="TSource: 'SEC542'"      >SEC542</option>
+                        <option class="scopeOpt" title="642" value="TSource: 'SEC642'"      >SEC642</option>
+                        <option class="scopeOpt" title="WAH" value="TSource: 'WAHH2'"       >WAHH v2</option>
+                        <option class="scopeOpt" title="WSV" value="TSource: 'WebSvc'"      >Web Services</option>
+                    </select></td></tr></table>
+    </details>
+</template>
+        
+        
+<template name="projectTmpl">
+    <option value="{{name}}"></option>
+</template>
+

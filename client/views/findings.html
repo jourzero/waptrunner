@@ -1,0 +1,46 @@
+
+<template name="findingsTmpl">
+    <details open="open" id="findingsDetails">
+    
+        <summary>Findings</summary>
+    
+        <!-- ISSUE TABLE -->
+        <table class="issueTab">
+            <tr>
+                <!--
+                <th class="issueTH">Findings</th>
+                -->
+                <td class="issueVals">
+                    <table class="issueSummaryTab">
+                        <tr class="issueSummaryTR">
+                            <th class="isTH" width="25px"></th>
+                            <th class="isTH">Priority</th>
+                            <th class="isTH">Issue</th>
+                            <th class="isTH">CWE</th>
+                            <th class="isTH">TID</th>
+                            <th class="isTH">Count</th>
+                            <th class="isTH">Severity</th>
+                        </tr>
+                                {{#each myIssues}}
+                                    {{> myIssueTmpl}}
+                                {{/each}}
+                    </table>
+                </td></tr>
+        </table>
+    </details>
+</template>
+
+
+
+<template name="myIssueTmpl">
+    <tr class="{{IPriorityText}}Priority">
+        <td class="isTD" width="20px">
+            <button class="delete" title="Delete this issue">&times;</button></td>
+        <td class="isTD">{{IPriority}}-{{IPriorityText}}</td>
+        <td class="isTD">{{TIssueName}}</td>
+        <td class="isTD">{{CweId}}</td>
+        <td class="isTD">{{TID}}</td>
+        <td class="isTD">{{ICount}}</td>
+        <td class="isTD">{{TSeverity}}-{{TSeverityText}}</td>
+    </tr>
+</template>
