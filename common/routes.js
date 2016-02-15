@@ -1,27 +1,50 @@
+// Generate same page layout for all routes
 Router.configure({layoutTemplate: 'layout'});
+
+// Route / to home.html
 Router.route('/', {template: 'home'});
+
+// Route /about to about.html
 Router.route('/about');
 
-Router.route('/download/:file', function () {
-  // NodeJS request object
-  var request = this.request;
+// Test Node.js HTTP request/response processing
+Router.route('/test/print/:val', httpTest, {where: 'server'});
 
-  // NodeJS  response object
-  var response = this.response;
+// Test route for executing server-side javascript code
+Router.route('/test/hello', serverHello, {where: 'server'});
 
-  this.response.end('file download content for ' + this.id);
-}, {where: 'server'});
+// Route for CSV export of issues
+Router.route('issues.csv', exportIssuesCSV, {where: 'server'});
+
+// Route for CSV export of issues. 
+Router.route('/report/csv/:prjName', genPrjIssueReportCSV, {where: 'server'});
 
 
-Router.route('/hello', function () {
-  os = Npm.require('os');
-  var req = this.request;
-  var res = this.response;
-  res.end('Hello from the '+os.hostname()+" server.");
-}, {where: 'server'});
+/***  Functions used in above routes  ***/
 
-Router.route('/issues.csv', function () {
-    var filename = 'issues.csv';
+// Generate issue report for a specific project in CSV format
+function genPrjIssueReportCSV() {
+    var prjName  = this.params.prjName;
+    var filename = prjName + '-issues.csv';
+    var fileData = "";
+    var records = issueColl.find({PrjName: prjName}).fetch();
+    
+    // Build a CSV string. Oversimplified. You'd have to escape quotes and commas.
+    console.log("Got " + records.length + " issue records for project " + prjName);
+    fileData += toCsv(records);
+
+    var headers = {
+      'Content-type': 'text/csv',
+      'Content-Disposition': "attachment; filename=" + filename,
+      'Content-Length': fileData.length
+    };
+    this.response.writeHead(200, headers);
+    this.response.end(fileData);
+}
+
+// Export all Issue data to CSV format
+function exportIssuesCSV() {
+    var filename = 'all-issues.csv';
     var fileData = "";
     var records = issueColl.find().fetch();
     
@@ -38,33 +61,10 @@ Router.route('/issues.csv', function () {
     };
     this.response.writeHead(200, headers);
     this.response.end(fileData);
-}, {where: 'server'});
-
-
-// Returns a csv from an array of objects with
-// values separated by tabs and rows separated by newlines
-function toCSVold(array) {
-    // Use first element to choose the keys and the order
-    var keys = Object.keys(array[0]);
-
-    // Build header
-    var result = keys.join("|") + "\n";
-
-    // Add the rows
-    array.forEach(function(obj){
-        keys.forEach(function(k, ix){
-            if (ix) result += "|";
-            result += obj[k];
-        });
-        result += "\n";
-    });
-
-    return result;
 }
-
         
 /**
-* Converts a value to a string appropriate for entry into a CSV table.  E.g., a string value will be surrounded by quotes.
+* Converts a value to a string appropriate for entry into a CSV table (surrounded by quotes).
 * @param {string|number|object} theValue
 * @param {string} sDelimiter The string delimiter.  Defaults to a double quote (") if omitted.
 */
@@ -139,3 +139,23 @@ function toCsv(objArray, sDelimiter, cDelimiter) {
 
 	return output;
 }        
+
+// Run a simple HTTP test with parameter
+function httpTest() {
+  // NodeJS request object
+  var request = this.request;
+
+  // NodeJS  response object
+  var response = this.response;
+
+  this.response.end('Parameter passed to httpTest(): ' + this.params.val);
+}
+
+
+// Run a simple test for node.js API (using os module)
+function serverHello(){
+  os = Npm.require('os');
+  var req = this.request;
+  var res = this.response;
+  res.end('Hello from '+os.hostname());
+}

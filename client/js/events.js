@@ -95,13 +95,11 @@ Template.home.events({
                 console.log(err);
         });
     },
-    /*
-    'click #btnCsvExport': function () {
-        console.log("Exporting to CSV");
-        window.open("http://www.jourzero.com", "ExportWin");
-        //{{pathFor 'csv'}}
+    'click #btnCsvReport': function () {
+        var prjName = $("#PrjName").val();
+        console.log("Generating CSV report for project " + prjName);
+        window.open("/report/csv/"+prjName, "DownloadWin");
     },
-    */
 });
 
 
