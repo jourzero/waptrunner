@@ -69,22 +69,25 @@ function toCSVold(array) {
 * @param {string} sDelimiter The string delimiter.  Defaults to a double quote (") if omitted.
 */
 function toCsvValue(theValue, sDelimiter) {
-	var t = typeof (theValue), output;
-        theValue.replace(/"/g, '""');
+    var t = typeof (theValue), output;
+    if (theValue === null)
+        theValue = "";
 
-	if (typeof (sDelimiter) === "undefined" || sDelimiter === null) {
-		sDelimiter = '"';
-	}
+    theValue.replace(/"/g, '""');
 
-	if (t === "undefined" || t === null) {
-		output = "";
-	} else if (t === "string") {
-		output = sDelimiter + theValue + sDelimiter;
-	} else {
-		output = String(theValue);
-	}
+    if (typeof (sDelimiter) === "undefined" || sDelimiter === null) {
+            sDelimiter = '"';
+    }
 
-	return output;
+    if (t === "undefined" || t === null) {
+            output = "";
+    } else if (t === "string") {
+            output = sDelimiter + theValue + sDelimiter;
+    } else {
+            output = String(theValue);
+    }
+
+    return output;
 }
 
 /**
