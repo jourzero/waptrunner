@@ -95,6 +95,13 @@ Template.home.events({
                 console.log(err);
         });
     },
+    /*
+    'click #btnCsvExport': function () {
+        console.log("Exporting to CSV");
+        window.open("http://www.jourzero.com", "ExportWin");
+        //{{pathFor 'csv'}}
+    },
+    */
 });
 
 

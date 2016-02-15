@@ -6,6 +6,7 @@
             {{> findingsTmpl}}
             {{> testingTmpl}}
         </div>
-    <button id="btnUpdate" class="button black">Update</button>    
+        <button id="btnUpdate"    class="button black">Update</button>
+        <button id="btnCsvExport" class="button black" onclick="window.open('/issues.csv', 'csvWin')">To CSV</button>
     {{/if}}
 </template>

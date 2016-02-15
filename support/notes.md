@@ -41,6 +41,7 @@ $ meteor add accounts-ui accounts-password  # Plain password
 $ meteor add jaredmartin:future             # For remote exec of git-update.sh
 $ meteor add dburles:eslint                 # Javascript static analysis
 $ meteor add iron:router                    # Enable routing to server different pages (registration, CSV output...)
+$ meteor add meteorhacks:npm                # Enable use of NPM from within Meteor (to use Node.js APIs)
 ```
 
 * Restore BD from Dev
