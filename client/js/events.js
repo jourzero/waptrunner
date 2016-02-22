@@ -22,6 +22,7 @@ Template.home.events({
     'click #lastTIDTxt': function(){        
         var lastTID = Session.get("lastTID");
         console.log("Continuing at lastTID " + lastTID)
+        $("#testSel").val(lastTID);
         updateUIFromTestKB();
         refreshUI();
     },   

@@ -4,4 +4,3 @@ cweColl    = new Mongo.Collection("cwe");
 testkbColl = new Mongo.Collection("testkb");
 issueColl  = new Mongo.Collection("issues");
 
-
