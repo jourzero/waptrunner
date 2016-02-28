@@ -120,14 +120,14 @@ option {
     width: 168px;
 }
 
-.issueTA, .testKbTA {
+textarea, .issueTA, .testKbTA {
     box-sizing: border-box;
     padding: 4px 0;
     background: transparent;
     border: 2px;
     width: 98%;
     padding-right: 20px;
-    font-size: 12px;
+    /* font-size: 12px; */
     vertical-align: top;
 }
 

@@ -4,7 +4,10 @@ function updateUIFromTestKB() {
     var oid = $("#testSel option:selected" ).attr('oid');
     console.log("Updating UI from TestKB doc " + oid);
     rec = testkbColl.findOne(new Mongo.ObjectID(oid));
-    $("#OID").val(rec._id.valueOf());
+    if (rec === undefined){
+        console.log("WARNING: Cannot update UI from TestKB. Could not find record for oid", oid);
+        return;
+    }
     $("#TPhase").html(rec.TPhase);
     $("#TSection").html(rec.TSection);
     $("#TTestName").val(rec.TTestName);
@@ -19,7 +22,7 @@ function updateUIFromTestKB() {
     $("#TTRef").val(rec.TTRef);
     $("#TTRef2").val(rec.TTRef2);
     testRef = rec.TTRef;
-    if (!testRef.startsWith("http"))
+    if ((testRef !== undefined)&&(!testRef.startsWith("http")))
         testRef = gTestRefBase + testRef;
     testRef2 = rec.TTRef2;
     if ((testRef2 !== undefined)&&(!testRef2.startsWith("http")))
