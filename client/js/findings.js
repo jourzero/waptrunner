@@ -9,7 +9,7 @@ Template.findingsTmpl.helpers({
             return;
         prj["PrjName"] = prjName;
         console.log("Getting issue list for project " + prjName);
-        return issueColl.find(prj,{sort: {CweId: 1}}).fetch().map(function (it) {
+        return issueColl.find(prj,{sort: {IPriority: -1}}).fetch().map(function (it) {
             URIs = it.IURIs;
             count=0;
             if (URIs !== undefined)
