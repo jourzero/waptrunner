@@ -1,12 +1,12 @@
 a {
-    size: 20px;
-    font-size: 12px;
+    /* size: 20px; */
+    /* font-size: 12px; */
     font-family: sans-serif;
 }
 
 p {
     margin:3px;
-    font-size: 12px;
+    /* font-size: 12px; */
     font-family: sans-serif;
     color: #444444;
 }
@@ -56,7 +56,7 @@ input {
     padding: 4px 0;
     background: transparent;
     padding-right: 4px;
-    font-size: 1em;
+    /* font-size: 1em; */
     color: black;
     border: 2px;
     vertical-align: middle;
@@ -97,7 +97,7 @@ button .kbBtn{
 #cwedescr, #cweexploit {
     padding-top: 0px;
     padding-bottom: 0px;
-    font-size: 11px;
+    /* font-size: 11px; */
     line-height: 12px;
 }
 
@@ -116,7 +116,7 @@ option {
 }
 
 .testSelector, .prioSelector, .sevSelector{    
-    font-size: 12px;
+    /* font-size: 12px; */
     width: 168px;
 }
 
@@ -142,7 +142,7 @@ textarea, .issueTA, .testKbTA {
 }
 
 .tinyTD, .tinyTH{
-    font-size: 12px;
+    /* font-size: 12px; */
     margin: 0px;
     padding: 0px;
     vertical-align: top;
@@ -170,7 +170,7 @@ summary{
     font-style: italic;
     font-weight: bold;
     background-color: #ddd;
-    font-size: 12px;
+    /* font-size: 12px; */
     color: mediumblue;
 }
 
@@ -186,7 +186,7 @@ summary{
 
 table { 
     color: #333;
-    font-family: Helvetica, Arial, sans-serif;
+    /* font-family: Helvetica, Arial, sans-serif; */
     /*width: 500px; */
     width: 100%; 
     /*border-collapse: separate; */
@@ -255,7 +255,7 @@ a {
     text-decoration: none;
     font-weight: bold;
     color: blue;
-    size: 18px;
+    /* size: 18px; */
     vertical-align: middle;
 }
 
