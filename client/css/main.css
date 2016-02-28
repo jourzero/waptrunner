@@ -28,6 +28,7 @@ body {
     font-family: sans-serif;
     font-size: 14px;
     width: 100%;
+    max-height:1000000px
 }
 
 .container {
@@ -125,7 +126,8 @@ option {
     width: 168px;
 }
 
-textarea, .issueTA, .testKbTA {
+/* textarea, .issueTA, .testKbTA { */
+textarea {
     box-sizing: border-box;
     padding: 4px 0;
     background: transparent;
