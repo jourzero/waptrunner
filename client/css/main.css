@@ -1,18 +1,21 @@
 a {
-    /* size: 20px; */
-    /* font-size: 12px; */
     font-family: sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    color: blue;
 }
+
 
 p {
     margin:3px;
     /* font-size: 12px; */
     font-family: sans-serif;
+    font-size: 14px;
     color: #444444;
 }
 
 body {
-    font-family: sans-serif;
     background-color: #aaaaaa;
     /* background-image: linear-gradient(to bottom, #315481, #918e82 100%); */
     background-attachment: fixed;
@@ -23,6 +26,7 @@ body {
     right: 0;
     padding: 0;
     margin: 0;
+    font-family: sans-serif;
     font-size: 14px;
     width: 100%;
 }
@@ -49,6 +53,7 @@ h1 {
     margin-bottom: 10px;
     display: inline-block;
     margin-right: 1em;
+    font-family: sans-serif;
 }
 
 input {
@@ -56,10 +61,11 @@ input {
     padding: 4px 0;
     background: transparent;
     padding-right: 4px;
-    /* font-size: 1em; */
     color: black;
     border: 2px;
     vertical-align: middle;
+    font-family: sans-serif;
+    font-size: 14px;
 }
 
 .prjIn{
@@ -201,11 +207,15 @@ td, th {
     vertical-align: middle;
     height: 15px;
     text-align: left;
+    font-family: sans-serif;
+    font-size: 14px;
 }
 
 th {
     /*background: #DFDFDF;  Darken header a bit */
     font-weight: bold;
+    font-family: sans-serif;
+    font-size: 14px;
 }
 
 tr .HighPriority{
@@ -249,13 +259,5 @@ tr td:hover { background: #FFF; } /* Hover cell effect! */
     position: relative;
     padding-left: 5px;
     margin-left: 0px;
-}
-
-a {
-    text-decoration: none;
-    font-weight: bold;
-    color: blue;
-    /* size: 18px; */
-    vertical-align: middle;
 }
 
