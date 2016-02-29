@@ -200,7 +200,7 @@ function toHtml(objArray) {
 	var obj = {};
         var output = "<html><head>\n";
         var priority = "N/A", prevPrio = "";
-        output += "<style>\ntd, th { vertical-align: top; }\n</style>\n";
+        output += "<style>\ntd{vertical-align:top;}\nth{text-align:right}\n</style>\n";
         output += "</head>\n<body>\n";
 	for (var i = 0; i < objArray.length; i++) {
             // Get the names of the properties.
@@ -213,13 +213,18 @@ function toHtml(objArray) {
             output += "<h3>" + obj.TIssueName + "</h3>\n";
             output += "<table>\n";
             output += "<tr><th>Issue</th><td>" + obj.TIssueName + "</td></tr>\n";
-            output += "<tr><th>CWE ID</th><td>" + obj.CweId + "</td></tr>\n";
-            output += "<tr><th>Test ID</th><td>" + htmlEncode(obj.TID, true, 4) + "</td></tr>\n";
-            output += "<tr><th>URI(s)</th><td>" + obj.IURIs + "</td></tr>\n";
-            output += "<tr><th>Severity</th><td>" + obj.TSeverityText + "</td></tr>\n";
-            output += "<tr><th>Priority</th><td>" + priority + "</td></tr>\n";
-            output += "<tr><th>Evidence</th><td>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
-            output += "<tr><th>Notes</th><td>" + htmlEncode(obj.INote, true, 4) + "</td></tr>\n";
+            if ((obj.CweId !== undefined)&&(obj.CweId !== ""))
+                output += "<tr><th>CWE ID</th><td>" + obj.CweId + "</td></tr>\n";
+            if ((obj.IURIs !== undefined)&&(obj.IURIs !== ""))
+                output += "<tr><th>URI(s)</th><td>" + obj.IURIs + "</td></tr>\n";
+            if ((obj.TSeverityText !== undefined)&&(obj.TSeverityText !== ""))
+                output += "<tr><th>Severity</th><td>" + obj.TSeverityText + "</td></tr>\n";
+            if ((obj.IPriorityText !== undefined)&&(obj.IPriorityText !== ""))
+                output += "<tr><th>Priority</th><td>" + obj.IPriorityText + "</td></tr>\n";
+            if ((obj.CweId !== IEvidence)&&(obj.IEvidence !== ""))
+                output += "<tr><th>Evidence</th><td>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
+            if ((obj.INote !== undefined)&&(obj.INote !== ""))
+                output += "<tr><th>Notes</th><td>" + htmlEncode(obj.INote, true, 4) + "</td></tr>\n";
             output += "</table>\n";
 	}
         output += "</body>\n</html>\n";
