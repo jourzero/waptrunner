@@ -201,7 +201,7 @@ function toHtml(objArray) {
         var output = "<html><head>\n";
         var priority = "N/A", prevPrio = "";
         var cweUriBase   = "https://cwe.mitre.org/data/definitions/";
-        output += "<style>\nbody{width:1200px;}\ntd{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\nth{text-align:right;vertical-align:top;width:80px;}\ntr:nth-child(even){background:#FAFAFA;}\ntr:nth-child(odd){background:#FDFDFD;}\n</style>\n";
+        output += "<style>\nbody{width:1200px;}\ntd{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\nth{text-align:right;vertical-align:top;width:80px;}\ntr:nth-child(even){background:#FAFAFA;}\ntr:nth-child(odd){background:#FDFDFD;}\nol{padding-left:25px;}\n</style>\n";
         // Traverse the array of issue objects
         output += "</head>\n<body>\n";
 	for (var i = 0; i < objArray.length; i++) {
