@@ -29,7 +29,7 @@ function genPrjIssueReportCSV() {
     var fileData = "";
     var records = issueColl.find({PrjName: prjName}).fetch();
     
-    // Build a CSV string. Oversimplified. You'd have to escape quotes and commas.
+    // Build a CSV string. .
     console.log("Got " + records.length + " issue records for project " + prjName);
     fileData += toCsv(records);
 
@@ -109,32 +109,36 @@ function toCsv(objArray, sDelimiter, cDelimiter) {
 	}
 
 	for (i = 0, l = objArray.length; i < l; i += 1) {
-		// Get the names of the properties.
-		obj = objArray[i];
-		row = "";
-		if (i === 0) {
-			// Loop through the names
-			for (name in obj) {
-				if (obj.hasOwnProperty(name)) {
-					names.push(name);
-					row += [sDelimiter, name, sDelimiter, cDelimiter].join("");
-				}
-			}
-			row = row.substring(0, row.length - 1);
-			output += row;
-		}
+            // Get the names of the properties.
+            obj = objArray[i];
+            row = "";
+            if (i === 0) {
+                // Loop through the names
+                for (name in obj) {
+                    if (obj.hasOwnProperty(name)) {
+                        if ((name !== 'IEvidence') && (name !== 'INotes')){
+                            names.push(name);
+                            row += [sDelimiter, name, sDelimiter, cDelimiter].join("");
+                        }
+                    }
+                }
+                row = row.substring(0, row.length - 1);
+                output += row;
+            }
 
-		output += "\n";
-		row = "";
-		for (n = 0, nl = names.length; n < nl; n += 1) {
-			name = names[n];
-			value = obj[name];
-			if (n > 0) {
-				row += cDelimiter;
-			}
-			row += toCsvValue(value, '"');
-		}
-		output += row;
+            output += "\n";
+            row = "";
+            for (n = 0, nl = names.length; n < nl; n += 1) {
+                name = names[n];
+                if ((name !== 'IEvidence') && (name !== 'INotes')){
+                    value = obj[name];
+                    if (n > 0) {
+                        row += cDelimiter;
+                    }
+                    row += toCsvValue(value, '"');
+                }
+            }
+            output += row;
 	}
 
 	return output;
