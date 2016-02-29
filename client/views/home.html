@@ -7,7 +7,10 @@
             {{> testingTmpl}}
         </div>
         <button id="btnUpdate"    class="button black" title="Üpdate code from GIT">Update</button>
-        <button id="btnCsvReport" class="button black" title="Generate an issue report for this project in CSV and download it.">Project Report</button>
-        <button id="btnCsvExport" class="button black" title="Export all issue data as CSV and download." onclick="window.open('/issues.csv', 'DownloadWin')">Issue Export</button>
+        <p>This Project: </p>
+        <button id="btnCsvReport"  class="button black" title="Generate an issue report for this project in CSV and download it.">Save as CSV</button>
+        <button id="btnHtmlReport" class="button black" title="Generate an issue report for this project in HTML and download it.">Save as HTML</button>
+        <p>All Projects: </p>
+        <button id="btnCsvExport" class="button black" title="Export all issue data as CSV and download." onclick="window.open('/issues.csv', 'DownloadWin')">Export as CSV</button>
     {{/if}}
 </template>
