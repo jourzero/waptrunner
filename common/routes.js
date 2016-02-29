@@ -49,7 +49,7 @@ function genPrjIssueReportHtml() {
     var prjName  = this.params.prjName;
     var filename = prjName + '-issues.html';
     var fileData = "";
-    var records = issueColl.find({PrjName: prjName}).fetch();
+    var records = issueColl.find({PrjName: prjName},{sort: {IPriority: -1, TIssueName: 1}}).fetch();
     
     // Build a CSV string. .
     console.log("Got " + records.length + " issue records for project " + prjName);
@@ -198,24 +198,31 @@ function serverHello(){
 */
 function toHtml(objArray) {
 	var obj = {};
-        var output = "";
-
+        var output = "<html><head>\n";
+        var priority = "N/A", prevPriority = "";
+        output += "<style>\ntd,th{vertical-align: top;}\n</style>\n";
+        output += "</head>\n<body>\n";
 	for (var i = 0; i < objArray.length; i++) {
             // Get the names of the properties.
             obj = objArray[i];
-            //if (obj.hasOwnProperty(name)) {
-            output += "<h2>" + obj.TIssueName + "</h2>\n";
+            prevPrio = priority;
+            priority = obj.IPriorityText;
+            if (priority !== prevPrio)
+                output += "<h2>" + priority + " Priority Issues</h2>\n";
+
+            output += "<h3>" + obj.TIssueName + "</h3>\n";
             output += "<table>\n";
             output += "<tr><th>Issue</th><td>" + obj.TIssueName + "</td></tr>\n";
             output += "<tr><th>CWE ID</th><td>" + obj.CweId + "</td></tr>\n";
             output += "<tr><th>Test ID</th><td>" + htmlEncode(obj.TID, true, 4) + "</td></tr>\n";
             output += "<tr><th>URI(s)</th><td>" + obj.IURIs + "</td></tr>\n";
             output += "<tr><th>Severity</th><td>" + obj.TSeverityText + "</td></tr>\n";
-            output += "<tr><th>Priority</th><td>" + obj.IPriorityText + "</td></tr>\n";
+            output += "<tr><th>Priority</th><td>" + priority + "</td></tr>\n";
             output += "<tr><th>Evidence</th><td>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
             output += "<tr><th>Notes</th><td>" + htmlEncode(obj.INote, true, 4) + "</td></tr>\n";
             output += "</table>\n";
 	}
+        var output += "</body>\n</html>\n";
 	return output;
 }        
 
