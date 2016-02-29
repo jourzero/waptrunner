@@ -201,8 +201,7 @@ function toHtml(objArray) {
         var output = "<html><head>\n";
         var priority = "N/A", prevPrio = "";
         var cweUriBase   = "https://cwe.mitre.org/data/definitions/";
-        output += "<style>\ntd{vertical-align:top;width:2000px}\nth{text-align:right;vertical-align:top;width:70px;}\ntr:nth-child(even){background:#FAFAFA;}\ntr:nth-child(odd){background:#FDFDFD;}\n</style>\n";
-
+        output += "<style>\nbody{width:1200px;}\ntd{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\nth{text-align:right;vertical-align:top;width:80px;}\ntr:nth-child(even){background:#FAFAFA;}\ntr:nth-child(odd){background:#FDFDFD;}\n</style>\n";
         // Traverse the array of issue objects
         output += "</head>\n<body>\n";
 	for (var i = 0; i < objArray.length; i++) {
@@ -225,8 +224,13 @@ function toHtml(objArray) {
             output += "<tr><th>Issue</th><td>" + obj.TIssueName + "</td></tr>\n";
             if ((obj.CweId !== undefined)&&(obj.CweId !== ""))
                 output += "<tr><th>CWE ID</th><td><a href='" + cweUriBase + obj.CweId + ".html'>" + obj.CweId + "</td></tr>\n";
-            if ((obj.IURIs !== undefined)&&(obj.IURIs !== ""))
-                output += "<tr><th>URI(s)</th><td>" + htmlEncode(obj.IURIs, true, 4) + "</td></tr>\n";
+            if ((obj.IURIs !== undefined)&&(obj.IURIs !== "")){
+                output += "<tr><th>URI(s)</th><td><ol>";
+                var uri = obj.IURIs.split("\n");
+                for (var j=0; j<uri.length; j++)
+                    output += "<li>" + htmlEncode(uri[j], true, 4) + "</li>\n";
+                output += "</ol></td></tr>\n";
+            }
             if ((obj.TSeverityText !== undefined)&&(obj.TSeverityText !== ""))
                 output += "<tr><th>Severity</th><td>" + obj.TSeverityText + "</td></tr>\n";
             if ((obj.IPriorityText !== undefined)&&(obj.IPriorityText !== ""))
