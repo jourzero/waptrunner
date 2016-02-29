@@ -199,8 +199,8 @@ function serverHello(){
 function toHtml(objArray) {
 	var obj = {};
         var output = "<html><head>\n";
-        var priority = "N/A", prevPriority = "";
-        output += "<style>\ntd,th{vertical-align: top;}\n</style>\n";
+        var priority = "N/A", prevPrio = "";
+        output += "<style>\ntd, th { vertical-align: top; }\n</style>\n";
         output += "</head>\n<body>\n";
 	for (var i = 0; i < objArray.length; i++) {
             // Get the names of the properties.
