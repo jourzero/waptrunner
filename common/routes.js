@@ -218,7 +218,7 @@ function toHtml(objArray) {
             if ((obj.CweId !== undefined)&&(obj.CweId !== ""))
                 output += "<tr><th>CWE ID</th><td><a href='" + cweUriBase + obj.CweId + ".html'>" + obj.CweId + "</td></tr>\n";
             if ((obj.IURIs !== undefined)&&(obj.IURIs !== ""))
-                output += "<tr><th>URI(s)</th><td>" + obj.IURIs + "</td></tr>\n";
+                output += "<tr><th>URI(s)</th><td>" + htmlEncode(obj.IURIs, true, 4) + "</td></tr>\n";
             if ((obj.TSeverityText !== undefined)&&(obj.TSeverityText !== ""))
                 output += "<tr><th>Severity</th><td>" + obj.TSeverityText + "</td></tr>\n";
             if ((obj.IPriorityText !== undefined)&&(obj.IPriorityText !== ""))
