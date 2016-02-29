@@ -213,7 +213,7 @@ function toHtml(objArray) {
             
             // Don't print the informational findings (for the tester)
             if (priority === 'Info')
-                return;
+                continue;
             
             // Issues are printed in order or priority. When priority changes, print a header.
             if (priority !== prevPrio)
