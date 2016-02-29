@@ -202,16 +202,24 @@ function toHtml(objArray) {
         var priority = "N/A", prevPrio = "";
         var cweUriBase   = "https://cwe.mitre.org/data/definitions/";
         output += "<style>\ntd{vertical-align:top;width:2000px}\nth{text-align:right;vertical-align:top;}\ntr:nth-child(even){background:#FAFAFA;}\ntr:nth-child(odd){background:#FDFDFD;}\n</style>\n";
-          
+
+        // Traverse the array of issue objects
         output += "</head>\n<body>\n";
 	for (var i = 0; i < objArray.length; i++) {
             // Get the names of the properties.
             obj = objArray[i];
             prevPrio = priority;
             priority = obj.IPriorityText;
+            
+            // Don't print the informational findings (for the tester)
+            if (priority === 'Info')
+                return;
+            
+            // Issues are printed in order or priority. When priority changes, print a header.
             if (priority !== prevPrio)
                 output += "<h2>" + priority + " Priority Issues</h2>\n";
 
+            // Print each issue with the issue as the header and the details as part of a table.
             output += "<h3>" + obj.TIssueName + "</h3>\n";
             output += "<table>\n";
             output += "<tr><th>Issue</th><td>" + obj.TIssueName + "</td></tr>\n";
