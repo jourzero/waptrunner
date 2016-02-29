@@ -201,7 +201,7 @@ function toHtml(objArray) {
         var output = "<html><head>\n";
         var priority = "N/A", prevPrio = "";
         var cweUriBase   = "https://cwe.mitre.org/data/definitions/";
-        output += "<style>\ntable{width:800px};\ntd{vertical-align:top;}\nth{text-align:right}\ntr:nth-child(even){background:#F0F0F0;}\ntr:nth-child(odd){background:#FAFAFA;}</style>\n";
+        output += "<style>\ntable{width:700px;}\ntr{width=100%;}\ntd{vertical-align:top;}\nth{text-align:right;}\ntr:nth-child(even){background:#FAFAFA;}\ntr:nth-child(odd){background:#FDFDFD;}\n</style>\n";
           
         output += "</head>\n<body>\n";
 	for (var i = 0; i < objArray.length; i++) {
