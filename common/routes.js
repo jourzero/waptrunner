@@ -206,15 +206,14 @@ function toHtml(objArray) {
             //if (obj.hasOwnProperty(name)) {
             output += "<h2>" + obj.TIssueName + "</h2>\n";
             output += "<table>\n";
-            output += "<tr><td>" + obj.CweId + "</td></tr>\n";
-            output += "<tr><td>" + htmlEncode(obj.TID, true, 4) + "</td></tr>\n";
-            output += "<tr><td>" + obj.ICount + "</td></tr>\n";
-            output += "<tr><td>" + obj.TSeverity + "</td></tr>\n";
-            output += "<tr><td>" + obj.TSeverityText + "</td></tr>\n";
-            output += "<tr><td>" + obj.IPriority + "</td></tr>\n";
-            output += "<tr><td>" + obj.IPriorityText + "</td></tr>\n";
-            output += "<tr><td>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
-            output += "<tr><td>" + htmlEncode(obj.INote, true, 4) + "</td></tr>\n";
+            output += "<tr><th>Issue</th><td>" + obj.TIssueName + "</td></tr>\n";
+            output += "<tr><th>CWE ID</th><td>" + obj.CweId + "</td></tr>\n";
+            output += "<tr><th>Test ID</th><td>" + htmlEncode(obj.TID, true, 4) + "</td></tr>\n";
+            output += "<tr><th>URI(s)</th><td>" + obj.IURIs + "</td></tr>\n";
+            output += "<tr><th>Severity</th><td>" + obj.TSeverityText + "</td></tr>\n";
+            output += "<tr><th>Priority</th><td>" + obj.IPriorityText + "</td></tr>\n";
+            output += "<tr><th>Evidence</th><td>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
+            output += "<tr><th>Notes</th><td>" + htmlEncode(obj.INote, true, 4) + "</td></tr>\n";
             output += "</table>\n";
 	}
 	return output;
