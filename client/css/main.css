@@ -127,7 +127,7 @@ option {
 
 /* textarea, .issueTA, .testKbTA { */
 textarea {
-    max-height:1000000px /* Disable font boosting in Chrome for Android */
+    max-height:1000000px; /* Disable font boosting in Chrome for Android */
     box-sizing: border-box;
     padding: 4px 0;
     background: transparent;
