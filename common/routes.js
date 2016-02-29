@@ -201,9 +201,14 @@ function toHtml(objArray) {
         var output = "<html><head>\n";
         var priority = "N/A", prevPrio = "";
         var cweUriBase   = "https://cwe.mitre.org/data/definitions/";
-        output += "<style>\nbody{width:1200px;}\ntd{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\nth{text-align:right;vertical-align:top;width:80px;}\ntr:nth-child(even){background:#FAFAFA;}\ntr:nth-child(odd){background:#FDFDFD;}\nol{padding-left:25px;}\n</style>\n";
+        output += "<style>\nbody{width:1200px;}\ntd{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\n.thID{text-align:right;vertical-align:top;width:80px;}\nth{vertical-align:top;}\ntr:nth-child(even){background:#FAFAFA;}\ntr:nth-child(odd){background:#FDFDFD;}\nol{padding-left:25px;}\n.IH{background:#EEEEEE;}</style>\n";
         // Traverse the array of issue objects
         output += "</head>\n<body>\n";
+        
+        // Generate issue summary
+        output += "<h2>Issue Summary</h2>"
+        output += "<table>\n";
+        output += "<tr><th>Priority</th><th>Issue</th><th>Severity</th></tr>";
 	for (var i = 0; i < objArray.length; i++) {
             // Get the names of the properties.
             obj = objArray[i];
@@ -215,32 +220,60 @@ function toHtml(objArray) {
                 continue;
             
             // Issues are printed in order or priority. When priority changes, print a header.
-            if (priority !== prevPrio)
-                output += "<h2>" + priority + " Priority Issues</h2>\n";
+            //if (priority !== prevPrio)
+            //    output += "<h2>" + priority + " Priority Issues</h2>\n";
 
             // Print each issue with the issue as the header and the details as part of a table.
-            output += "<h3>" + obj.TIssueName + "</h3>\n";
-            output += "<table>\n";
-            output += "<tr><th>Issue</th><td>" + obj.TIssueName + "</td></tr>\n";
+            //output += "<h3>" + obj.TIssueName + "</h3>\n";
+            if ((obj.IPriorityText !== undefined)&&(obj.IPriorityText !== ""))
+                output += "<tr><td>" + obj.IPriorityText + "</td>";
+            output += "<td><a href='#" + htmlEncode(obj.TID, true, 4) + "'>" + obj.TIssueName + "</a></td>";
+            if ((obj.TSeverityText !== undefined)&&(obj.TSeverityText !== ""))
+                output += "<td>" + obj.TSeverityText + "</td>";
+            output += "</tr>\n";
+	}
+        output += "</table>\n";        
+        
+        // Generate detailed issue report
+        output += "<h2>Issue Details</h2>"
+        output += "<table>\n"
+	for (var i = 0; i < objArray.length; i++) {
+            // Get the names of the properties.
+            obj = objArray[i];
+            prevPrio = priority;
+            priority = obj.IPriorityText;
+            
+            // Don't print the informational findings (for the tester)
+            if (priority === 'Info')
+                continue;
+            
+            // Issues are printed in order or priority. When priority changes, print a header.
+            //if (priority !== prevPrio)
+            //    output += "<h2>" + priority + " Priority Issues</h2>\n";
+
+            // Print each issue with the issue as the header and the details as part of a table.
+            //output += "<h3>" + obj.TIssueName + "</h3>\n";
+            output += "<tr><th class='IH'>Issue</th><th class='IH' id='" + htmlEncode(obj.TID, true, 4) + "'>" + obj.TIssueName + "</th></tr>\n";
             if ((obj.CweId !== undefined)&&(obj.CweId !== ""))
-                output += "<tr><th>CWE ID</th><td><a href='" + cweUriBase + obj.CweId + ".html'>" + obj.CweId + "</td></tr>\n";
+                output += "<tr><th class='thID'>CWE ID</th><td><a href='" + cweUriBase + obj.CweId + ".html'>" + obj.CweId + "</td></tr>\n";
             if ((obj.IURIs !== undefined)&&(obj.IURIs !== "")){
-                output += "<tr><th>URI(s)</th><td><ol>";
+                output += "<tr><th class='thID'>URI(s)</th><td><ol>";
                 var uri = obj.IURIs.split("\n");
                 for (var j=0; j<uri.length; j++)
                     output += "<li>" + htmlEncode(uri[j], true, 4) + "</li>\n";
                 output += "</ol></td></tr>\n";
             }
             if ((obj.TSeverityText !== undefined)&&(obj.TSeverityText !== ""))
-                output += "<tr><th>Severity</th><td>" + obj.TSeverityText + "</td></tr>\n";
+                output += "<tr><th class='thID'>Severity</th><td>" + obj.TSeverityText + "</td></tr>\n";
             if ((obj.IPriorityText !== undefined)&&(obj.IPriorityText !== ""))
-                output += "<tr><th>Priority</th><td>" + obj.IPriorityText + "</td></tr>\n";
+                output += "<tr><th class='thID'>Priority</th><td>" + obj.IPriorityText + "</td></tr>\n";
             if ((obj.INotes !== undefined)&&(obj.INotes !== ""))
-                output += "<tr><th>Notes</th><td>" + htmlEncode(obj.INotes, true, 4) + "</td></tr>\n";
+                output += "<tr><th class='thID'>Notes</th><td>" + htmlEncode(obj.INotes, true, 4) + "</td></tr>\n";
             if ((obj.IEvidence !== undefined)&&(obj.IEvidence !== ""))
-                output += "<tr><th>Evidence</th><td>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
-            output += "</table>\n";
+                output += "<tr><th class='thID'>Evidence</th><td>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
+            output += "<tr><th> </th><td> </td></tr>\n";
 	}
+        output += "</table>\n";
         output += "</body>\n</html>\n";
 	return output;
 }        
