@@ -101,6 +101,11 @@ Template.home.events({
         console.log("Generating CSV report for project " + prjName);
         window.open("/report/csv/"+prjName, "DownloadWin");
     },
+    'click #btnHtmlReport': function () {
+        var prjName = $("#PrjName").val();
+        console.log("Generating HTML report for project " + prjName);
+        window.open("/report/html/"+prjName, "DownloadWin");
+    },
 });
 
 
