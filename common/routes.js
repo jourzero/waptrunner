@@ -200,7 +200,9 @@ function toHtml(objArray) {
 	var obj = {};
         var output = "<html><head>\n";
         var priority = "N/A", prevPrio = "";
-        output += "<style>\ntd{vertical-align:top;}\nth{text-align:right}\n</style>\n";
+        var cweUriBase   = "https://cwe.mitre.org/data/definitions/";
+        output += "<style>\ntd{vertical-align:top;}\nth{text-align:right}\ntr:nth-child(even){background:#F0F0F0;}\ntr:nth-child(odd){background:#FAFAFA;}</style>\n";
+          
         output += "</head>\n<body>\n";
 	for (var i = 0; i < objArray.length; i++) {
             // Get the names of the properties.
@@ -214,7 +216,7 @@ function toHtml(objArray) {
             output += "<table>\n";
             output += "<tr><th>Issue</th><td>" + obj.TIssueName + "</td></tr>\n";
             if ((obj.CweId !== undefined)&&(obj.CweId !== ""))
-                output += "<tr><th>CWE ID</th><td>" + obj.CweId + "</td></tr>\n";
+                output += "<tr><th>CWE ID</th><td><a href='" + cweUriBase + obj.CweId + ".html'>" + obj.CweId + "</td></tr>\n";
             if ((obj.IURIs !== undefined)&&(obj.IURIs !== ""))
                 output += "<tr><th>URI(s)</th><td>" + obj.IURIs + "</td></tr>\n";
             if ((obj.TSeverityText !== undefined)&&(obj.TSeverityText !== ""))
