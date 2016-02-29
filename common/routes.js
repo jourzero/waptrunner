@@ -222,7 +222,7 @@ function toHtml(objArray) {
             output += "<tr><th>Notes</th><td>" + htmlEncode(obj.INote, true, 4) + "</td></tr>\n";
             output += "</table>\n";
 	}
-        var output += "</body>\n</html>\n";
+        output += "</body>\n</html>\n";
 	return output;
 }        
 
