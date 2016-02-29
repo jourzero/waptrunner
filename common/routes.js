@@ -221,7 +221,7 @@ function toHtml(objArray) {
                 output += "<tr><th>Severity</th><td>" + obj.TSeverityText + "</td></tr>\n";
             if ((obj.IPriorityText !== undefined)&&(obj.IPriorityText !== ""))
                 output += "<tr><th>Priority</th><td>" + obj.IPriorityText + "</td></tr>\n";
-            if ((obj.CweId !== IEvidence)&&(obj.IEvidence !== ""))
+            if ((obj.IEvidence !== undefined)&&(obj.IEvidence !== ""))
                 output += "<tr><th>Evidence</th><td>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
             if ((obj.INote !== undefined)&&(obj.INote !== ""))
                 output += "<tr><th>Notes</th><td>" + htmlEncode(obj.INote, true, 4) + "</td></tr>\n";
