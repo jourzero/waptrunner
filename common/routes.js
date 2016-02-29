@@ -259,8 +259,9 @@ var htmlEncode = function (source, display, tabs) {
 	var i, s, ch, peek, line, result,
 		next, endline, push,
 		spaces;
-        
-        return source;
+
+        if (source === undefined)
+            return "";
 	
 	// Stash the next character and advance the pointer
 	next = function () {
