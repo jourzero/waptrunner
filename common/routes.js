@@ -201,14 +201,15 @@ function toHtml(objArray) {
         var output = "<html><head>\n";
         var priority = "N/A", prevPrio = "";
         var cweUriBase   = "https://cwe.mitre.org/data/definitions/";
-        output += "<style>\nbody{width:1200px;}\n.tdID{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\n.thID{text-align:right;vertical-align:top;width:80px;}\nth{vertical-align:top;}\ntr:nth-child(even){background:#EAEAEA;}\ntr:nth-child(odd){background:#F0F0F0;}\nol{padding-left:25px;}\n}</style>\n";
+        output += "<style>\nbody{width:1200px;}\na{text-decoration:none;}\n.tdID{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\n.thID{text-align:right;vertical-align:top;width:80px;}\nth{vertical-align:top;}\ntr:nth-child(even){background:#EAEAEA;}\ntr:nth-child(odd){background:#F0F0F0;}\nol{padding-left:25px;}\n.HighP{background-color:red;}\n.MediumP{background-color:orange;}\n.LowP{background-color:cyan;}\n</style>\n";
+        
         // Traverse the array of issue objects
         output += "</head>\n<body>\n";
         
         // Generate issue summary
         output += "<h2>Issue Summary</h2>"
         output += "<table>\n";
-        output += "<tr><th>Priority</th><th>Issue</th></tr>";
+        output += "<tr><th>Priority</th><th>Issue</th><th>Count</th></tr>";
 	for (var i = 0; i < objArray.length; i++) {
             obj = objArray[i];
             prevPrio = priority;
@@ -218,12 +219,18 @@ function toHtml(objArray) {
             if (priority === 'Info')
                 continue;
             
+            // Count the number of URIs
+            var count=0;
+            if (obj.IURIs !== undefined)
+                count = obj.IURIs.split("\n").length;
+            
             // Print each issue with the issue as the header and the details as part of a table.
             if ((priority !== undefined)&&(priority !== "")&&(priority !== prevPrio))
-                output += "<tr><th>" + priority + "</th>";
+                output += "<tr><th class='" + priority + "P'>" + priority + "</th>";
             else
-                output += "<tr><th></th>";
+                output += "<tr><th class='" + priority + "P'></th>";
             output += "<td><a href='#" + htmlEncode(obj.TID, true, 4) + "'>" + obj.TIssueName + "</a></td>";
+            output += "<td>" + count + "</td>";
             output += "</tr>\n";
 	}
         output += "</table>\n";        
@@ -240,12 +247,8 @@ function toHtml(objArray) {
             if (priority === 'Info')
                 continue;
             
-            // Issues are printed in order or priority. When priority changes, print a header.
-            //if (priority !== prevPrio)
-            //    output += "<h2>" + priority + " Priority Issues</h2>\n";
-
             // Print each issue with the issue as the header and the details as part of a table.
-            output += "<tr><th class='IH'>Issue Name: </th><th class='IH' id='" + htmlEncode(obj.TID, true, 4) + "'>" + obj.TIssueName + "</th></tr>\n";
+            output += "<tr><th class='" + priority + "P'></th><th class='" + priority + "P' id='" + htmlEncode(obj.TID, true, 4) + "'>" + obj.TIssueName + "</th></tr>\n";
             if ((obj.CweId !== undefined)&&(obj.CweId !== ""))
                 output += "<tr><th class='thID'>CWE ID: </th><td class='tdID'><a href='" + cweUriBase + obj.CweId + ".html'>" + obj.CweId + "</td></tr>\n";
             if ((obj.IURIs !== undefined)&&(obj.IURIs !== "")){
@@ -263,7 +266,7 @@ function toHtml(objArray) {
                 output += "<tr><th class='thID'>Notes: </th><td class='tdID'>" + htmlEncode(obj.INotes, true, 4) + "</td></tr>\n";
             if ((obj.IEvidence !== undefined)&&(obj.IEvidence !== ""))
                 output += "<tr><th class='thID'>Evidence: </th><td class='tdID'>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
-            output += "<tr><th> </th><td> </td></tr>\n";
+            output += "<tr><td>&nbsp; </td></tr>\n";
 	}
         output += "</table>\n";
         output += "</body>\n</html>\n";
