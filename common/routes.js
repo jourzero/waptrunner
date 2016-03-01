@@ -53,7 +53,7 @@ function genPrjIssueReportHtml() {
     
     // Build a CSV string. .
     console.log("Got " + records.length + " issue records for project " + prjName);
-    fileData += toHtml(records);
+    fileData += toHtml(records, prjName);
 
     var headers = {
       'Content-type': 'text/html',
@@ -196,7 +196,7 @@ function serverHello(){
 * @param {Array} objArray An array of objects.  Each object in the array must have the same property list.
 * @return {string} The CSV equivalent of objArray.
 */
-function toHtml(objArray) {
+function toHtml(objArray, prjName) {
 	var obj = {};
         var output = "<html><head>\n";
         var priority = "N/A", prevPrio = "";
@@ -206,8 +206,11 @@ function toHtml(objArray) {
         // Traverse the array of issue objects
         output += "</head>\n<body>\n";
         
+        
         // Generate issue summary
         output += "<h2>Issue Summary</h2>"
+        output += "<p>Project ID: " + prjName + "</p>\n";
+        output += "<p>The below table contains a summary of issues. You may click the links in the Issue column to jump to the specific issue details.</p>"
         output += "<table>\n";
         output += "<tr><th>Priority</th><th>Issue</th><th>Count</th></tr>";
 	for (var i = 0; i < objArray.length; i++) {
