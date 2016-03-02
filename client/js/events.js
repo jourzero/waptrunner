@@ -25,10 +25,12 @@ Template.home.events({
         $("#testSel").val(lastTID);
         updateUIFromTestKB();
         refreshUI();
-    },   
+    },  
+    /*
     'click': function (event){
         console.log("Clicked " + event.target.id);
     },
+    */
     'change #ScopeSel': function (event) {
         console.log("Changed scope selection")
         Session.set("projectScope", event.target.value);
