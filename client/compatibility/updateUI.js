@@ -36,7 +36,7 @@ function updateUIFromTestKB() {
     $("#TTop10").prop('checked', rec.TTop10);
     $("#TTop25").prop('checked', rec.TTop25);
     $("#TStdTest").prop('checked', rec.TStdTest);
-    
+    updateCweUI(rec.TCweID);
     $('#testNameTA').val("");
 }
 
@@ -83,7 +83,8 @@ function updateUIFromIssueColl() {
     $("#IEvidence").attr("title", i.IEvidence);
     $("#INotes").val(i.INotes);
     $("#INotes").attr("title", i.INotes);
-    $("#IPriority").val(i.IPriority);       
+    $("#IPriority").val(i.IPriority);  
+    updateCweUI(i.CweID);
 }    
 
 
