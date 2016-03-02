@@ -15,7 +15,7 @@ function newTest() {
 
     // Do the same thing as if an existing test is selected
     Session.set("lastTID", tid);
-    $( "#testSel option:selected" ).val(tid);
+    $("#testSel").val(tid);
     updateUIFromTestKB();
     $('#testNameTA').val("");
     refreshLastTIDLink();
