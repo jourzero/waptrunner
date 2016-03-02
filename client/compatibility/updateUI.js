@@ -166,7 +166,7 @@ function updateUIFromPrj() {
     }
 
     scopeQry = p.scopeQry;
-    console.log("Updating scope to " + scopeQry);
+    console.log("Updating scope to '" + scopeQry + "'");
     $("#ScopeSel").val(scopeQry);
     Session.set("projectScope", scopeQry);
 
