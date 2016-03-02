@@ -84,7 +84,7 @@ function updateUIFromIssueColl() {
     $("#INotes").val(i.INotes);
     $("#INotes").attr("title", i.INotes);
     $("#IPriority").val(i.IPriority);  
-    updateCweUI(i.CweID);
+    updateCweUI(i.CweId);
 }    
 
 
