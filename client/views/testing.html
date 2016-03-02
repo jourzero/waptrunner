@@ -27,7 +27,7 @@
         <!-- TEST KB DATA -->
         <table class="issueTab">
             <tr class="iTR"><th class="issueTH">Test Name</th>   <td class="issueVals">
-                    <input id="TTestName" class="testKbInShort" type="text" placeholder="Test Name" />                    
+                    <input id="TTestName" class="testKbInShort" type="text" placeholder="Short name for test" />                    
                     <button id="kbBtnNew" class="kbBtn">New</button></td></tr>
             
             <!--
@@ -36,10 +36,10 @@
             -->
             
             <tr class="iTR"><th class="issueTH">Tester Help</th><td class="issueVals">
-                    <textarea id="TTesterSupport" class="testKbTA" rows="2" placeholder="Tester Support Text"></textarea></td></tr>
+                    <textarea id="TTesterSupport" class="testKbTA" rows="2" placeholder="Support text for tester"></textarea></td></tr>
             
             <tr class="iTR"><th class="issueTH">Test Ref</th>   <td class="issueVals">
-                    <a href="#" id="TTRefA" target="TRWin">&gt;</a> <input id="TTRef" class="testKbIn" type="text" placeholder="Tester Reference URI" /></td></tr> 
+                    <a href="#" id="TTRefA" target="TRWin">&gt;</a> <input id="TTRef" class="testKbIn" type="text" placeholder="URI reference for tester" /></td></tr> 
             
             <!--
             <tr class="iTR"><th class="issueTH">Test Ref 2</th> <td class="issueVals">
@@ -68,8 +68,8 @@
         <!-- Issue Name -->
         <table class="issueTab">
             <tr class="iTR">
-                <th class="issueTH">Short Issue Name (used in Findings).</th>  
-                <td class="issueVals"><input id="TIssueName" class="testKbIn" type="text" placeholder="Issue Name (short)" /></td></tr>
+                <th class="issueTH">Issue Name</th>  
+                <td class="issueVals"><input id="TIssueName" class="testKbIn" type="text" placeholder="Short issue name" /></td></tr>
         </table>
 
         <!-- Issue attributes: Severity, Refs... -->
@@ -109,8 +109,8 @@
     <details open="open" id="specificDetails">
         <summary>Specific Issue Data</summary>
         <table class="issueTab">        
-            <tr class="iTR"><th class="issueTH">URIs</th>       <td class="issueDetails"><textarea id="IURIs"      class="issueTA" rows="3" placeholder="URI List. One per line."></textarea></td></tr>
-            <tr class="iTR"><th class="issueTH">Evidence</th>   <td class="issueDetails"><textarea id="IEvidence"  class="issueTA" rows="3" placeholder="Add output from commands or HTTP payloads here. Screenshots can be added to the report later by using an HTML5 WISIWYG editor (e.g. SeaMonkey) after clicking 'HTML Report'."></textarea></td></tr>
+            <tr class="iTR"><th class="issueTH">URIs</th>       <td class="issueDetails"><textarea id="IURIs"      class="issueTA" rows="3" placeholder="URI list, one per line"></textarea></td></tr>
+            <tr class="iTR"><th class="issueTH">Evidence</th>   <td class="issueDetails"><textarea id="IEvidence"  class="issueTA" rows="3" placeholder="Output from commands or HTTP payloads.\nScreenshots can be added later by using an HTML5 editor after clicking 'HTML Report'."></textarea></td></tr>
             <tr class="iTR"><th class="issueTH">Notes</th>      <td class="issueDetails"><textarea id="INotes"     class="issueTA" rows="3" placeholder="Notes explaining the issue or testing done."></textarea></td></tr>
             <tr class="iTR"><th class="issueTH">Priority</th>   <td class="issueDetails">
                 <select id="IPriority" title="Priority" class="prioSelector" >
