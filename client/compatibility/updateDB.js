@@ -13,6 +13,14 @@ function newTest() {
     mod["$set"] = kvp;
     id = testkbColl.insert(kvp);
     alert("Inserted new test EXT-" + tid + " (" + id + "). Pls fill other fields.");
+
+    // Do the same thing as if an existing test is selected
+    Session.set("lastTID", tid);
+    $( "#testSel option:selected" ).val(tid);
+    updateUIFromTestKB();
+    $('#testNameTA').val("");
+    refreshLastTIDLink();
+    saveProjectDataFromUI(); // save last TID    
 }
 
 // Update Test KB upon changes in the UI
