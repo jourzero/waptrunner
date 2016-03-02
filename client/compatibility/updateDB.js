@@ -18,17 +18,30 @@ function newTest() {
 // Update Test KB upon changes in the UI
 function updateTestKBFromUI(tgtId, tgtVal) {
 
-    oid = $("#OID").val();
-    newVal = tgtVal;
+    // Get the test's Mongo Object ID and Test ID from the test selector
+    var oid = $( "#testSel option:selected" ).attr("oid");
+    //var tid = $( "#testSel option:selected" ).val();
+    
+    // Check the validity of the Mongo OID
+    if ((oid===undefined)||(oid==="")){
+        console.log("WARNING: Cannot update TestKB from UI. Value for OID is empty or undefined!");
+        return;
+    }
+    
+    // Tweak the new value if it comes from one of the checkboxes
+    var newVal = tgtVal;
     if ((tgtId === 'TPCI') || (tgtId === 'TTop10') || (tgtId === 'TTop25') || (tgtId === 'TStdTest'))
         newVal = $("#" + tgtId).prop("checked");
 
+    // Configure the Mongo DB search/update criteria
     console.log("Updating TestKB for OID " + oid + ": " + tgtId + "=" + newVal);
-    kvp = {};
-    mod = {};
+    var kvp = {};
+    var mod = {};
     kvp[tgtId] = newVal;
     mod["$set"] = kvp;
-    n = testkbColl.update(new Mongo.ObjectID(oid), mod);
+    
+    // Update the Mongo DB doc.
+    var n = testkbColl.update(new Mongo.ObjectID(oid), mod);
     console.log("Number of updated records: " + n);
 }
 
