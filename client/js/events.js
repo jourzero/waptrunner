@@ -83,22 +83,27 @@ Template.home.events({
         clearUI();
         newTest();
     },       
+    // When the test fields values change, update the Test KB
     'change #TTestName, change #TTesterSupport, change #TTRef, change #cwename, change #cweid, change #TIssueName, change .testKbCB, change #TSeverity, change #TRef1, change #TRef2': function (event) {
         updateTestKBFromUI(event.target.id, event.target.value);
     },
+    // When the Specific Issue Data changes, save it to the Issue collection
     'change #IURIs, change #IEvidence, change #INotes, change #IPriority': function (event) {
         saveIssueDataFromUI(event.target.id, event.target.value);
     },
+    // Generate an HTML report when the 'HTML Report' button is pressed
     'click #btnHtmlReport': function () {
         var prjName = $("#PrjName").val();
         console.log("Generating HTML report for project " + prjName);
         window.open("/report/html/"+prjName, "DownloadWin");
     },
+    // Generate a CSV report when the 'CSV Report' button is pressed
     'click #btnCsvReport': function () {
         var prjName = $("#PrjName").val();
         console.log("Generating CSV report for project " + prjName);
         window.open("/report/csv/"+prjName, "DownloadWin");
     },
+    // Update this app when the 'Update App' button is pressed
     'click #btnUpdate': function () {
         console.log("Trying to update the WAPT Runner code from GIT...");
         Meteor.call('runCode', function (err, response) {
@@ -124,6 +129,11 @@ Template.myIssueTmpl.events({
     "click .isTD": function (event) {
         console.log('Clicked in myIssueTmpl ID=' + this._id + ". TID=" + this.TID);
         $("#testSel").val(this.TID);
+        Session.set("lastTID", $("#testSel").val());
         updateUIFromTestKB();
+        $('#testNameTA').val("");
+        refreshLastTIDLink();
+        saveProjectDataFromUI(); // save last TID
+        updateUIFromIssueColl()
    }
 });
