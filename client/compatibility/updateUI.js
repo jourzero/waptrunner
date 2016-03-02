@@ -101,24 +101,26 @@ function refreshLastTIDLink() {
 // Update UI with CWE data
 //function updateCweUI(cweId, cweName, cweDescr) {
 function updateCweUI(cweId) {
-    var cwe = {};
+    var cwe = {}; var rec={};
     if ((cweId !== undefined)&&(cweId != "")){
         console.log("Updating UI for CWE-" + cweId);
         $('#cweid').val(cweId);
         $('#cweref').attr('href', gCweUriBase + cweId + ".html");
         $('#cweref').html(cweId);
         cwe.ID = cweId;
-        var rec = cweColl.findOne(cwe);
+        rec = cweColl.findOne(cwe);
+        if (rec !== undefined){
+            
+            // Update the description in the title (visible via hovering)
+            var descr = rec.Name + ": " + rec.Description_Summary;
+            console.log("Updating Description for CWE-" + cweId);
+            $('#cweref').attr('title', descr);
 
-        // Update the description in the title (visible via hovering)
-        var descr = rec.Name + ": " + rec.Description_Summary;
-        console.log("Updating Description for CWE-" + cweId);
-        $('#cweref').attr('title', descr);
-
-        // Update the CWE name in the typehead field
-        var name  = rec.Name;
-        console.log("Updating CWE Name to " + name);
-        $('#cwename').typeahead('val', name);
+            // Update the CWE name in the typehead field
+            var name  = rec.Name;
+            console.log("Updating CWE Name to " + name);
+            $('#cwename').typeahead('val', name);
+        }
 
         // If the issue name is empty, use the CWE name.
         issueName = $("#TIssueName").val();
