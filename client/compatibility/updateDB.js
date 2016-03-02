@@ -10,7 +10,6 @@ function newTest() {
     kvp.TTestName = ""; 
     $("#TTestName").val("");
     kvp.TPhase    = "Extras";
-    mod["$set"] = kvp;
     id = testkbColl.insert(kvp);
     alert("Inserted new test EXT-" + tid + " (" + id + "). Pls fill other fields.");
 

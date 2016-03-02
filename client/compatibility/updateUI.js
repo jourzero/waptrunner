@@ -61,12 +61,17 @@ function updateUIFromIssueColl() {
         console.log("Empty Test ID");
         return;
     }
+    
+    // Get the project name
+    var prjName = Session.get("projectName");
 
     // Build search criteria
-    var issue={}; var mod={}; var crit={};
-    //crit.CweId  = cid;
-    crit.TID  = tid;
-    i = issueColl.findOne(crit);
+    db.issues.find({$and: [{ "TID" : "OTG4-4.08.01"},{ "PrjName" : "20160222-TelusChat-PT" }]})
+    var crit={}; var kvp1 = {}; var kvp2 = {};
+    kvp1.TID = tid;
+    kvp2.PrjName = prjName;
+    crit["$and"] = [kvp1, kvp2];
+    var i = issueColl.findOne(crit);
     if ((i === undefined) || (i._id <= 0)){
         console.log("No issue data found for this Test ID: " + tid);
         return;
