@@ -1,12 +1,13 @@
 // Handle events in body
 Template.home.events({
+    // When the project name changes, update the Project Summary section of the UI
     'change #PrjName': function (event) {
         console.log("Project changed to " + event.target.value);
         // Get the project name and update UI
         Session.set("projectName", event.target.value);
         updateUIFromPrj();
-        refreshUI();
     },    
+    // When the project name is clicked, clear-up the UI
     'click #PrjName': function () {
         // Clear the input so that a new project can be selected
         console.log("PrjName clicked, clearing Project Name so that the pulldown shows all projects");
@@ -14,36 +15,36 @@ Template.home.events({
         Session.set("projectName", "");
         clearUI();
     },
-    'change #PrjNotes, change #PrjSoftware': function (event) {
-        console.log("Changed " + event.target.id);
-        saveProjectDataFromUI();
-        refreshUI();
-    },
+    // When LastTID link was clicked, move the test selector and refresh the UI from Test KB
     'click #lastTIDTxt': function(){        
         var lastTID = Session.get("lastTID");
         console.log("Continuing at lastTID " + lastTID)
         $("#testSel").val(lastTID);
         updateUIFromTestKB();
-        refreshUI();
+        updateUIFromIssueColl()
     },  
-    /*
-    'click': function (event){
-        console.log("Clicked " + event.target.id);
+    // When the project parameters are changed, persist them
+    'change #PrjNotes, change #PrjSoftware': function (event) {
+        console.log("Changed " + event.target.id);
+        saveProjectDataFromUI();
     },
-    */
+    // When the scope/methodology selector is changed, persist the value
     'change #ScopeSel': function (event) {
-        console.log("Changed scope selection")
+        console.log("Changed scope/methodology selector")
         Session.set("projectScope", event.target.value);
         saveProjectDataFromUI();
-        refreshUI();
     },
+    // When the test selector is changed, update the Testing and Generic Issue sections
     'change #testSel': function () {
         console.log("Changed test selection")
         Session.set("lastTID", $("#testSel").val());
         updateUIFromTestKB();
-        saveProjectDataFromUI();
-        refreshUI();
+        $('#testNameTA').val("");
+        refreshLastTIDLink();
+        saveProjectDataFromUI(); // save last TID
+        updateUIFromIssueColl()
     },
+    // When a test player button is changed, update the Testing and Generic Issue sections
     'click #btnBack': function () {
         selected = $("#testSel").prop("selectedIndex") - 1;
         if (selected <= 0) selected = 1;
@@ -52,9 +53,11 @@ Template.home.events({
         Session.set("lastTID", $("#testSel").val());
         updateUIFromTestKB();
         $('#testNameTA').val("");
-        saveProjectDataFromUI()
-        refreshUI();
+        refreshLastTIDLink();
+        saveProjectDataFromUI();
+        updateUIFromIssueColl()
     },
+    // When a test player button is changed, update the Testing and Generic Issue sections
     'click #btnNext': function () {
         selected = $("#testSel").prop("selectedIndex") + 1;
         if (selected >= $('#testSel > option').length)
@@ -64,30 +67,37 @@ Template.home.events({
         Session.set("lastTID", $("#testSel").val());
         updateUIFromTestKB();
         $('#testNameTA').val("");
-        saveProjectDataFromUI()
-        refreshUI();
+        refreshLastTIDLink();
+        saveProjectDataFromUI();
+        updateUIFromIssueColl()
     },
+    // When the test name type-ahead is clicked, clear the previous value to help with the search
     'click #testNameTA': function () {
         // Clear the input so that a new test name can be selected
         console.log("Test name text area clicked, clearing field so that another test can be chosen");
         $("#testNameTA").val("");
     },        
-    'change #TTestName': function () {
-        console.log('TTestName changed (' + $('#TTestName').val() + ")");
-    },
+    // When the New Test button is pressed, clear the UI and create another test
     'click #kbBtnNew': function () {
         console.log('Creating new test: ' + $('#TTestName').val());
-        clearUI
+        clearUI();
         newTest();
-        refreshUI();
     },       
-    'change .testKbIn, change .testKbInShort, change .testKbTA, click .testKbCB, change #cweid, select #cweid, change #cweid, change .sevSelector': function (event) {
+    'change #TTestName, change #TTesterSupport, change #TTRef, change #cwename, change #cweid, change #TIssueName, change .testKbCB, change #TSeverity, change #TRef1, change #TRef2': function (event) {
         updateTestKBFromUI(event.target.id, event.target.value);
-        refreshUI();
     },
-    'change .prioSelector, change .issueTA': function (event) {
+    'change #IURIs, change #IEvidence, change #INotes, change #IPriority': function (event) {
         saveIssueDataFromUI(event.target.id, event.target.value);
-        refreshUI();
+    },
+    'click #btnHtmlReport': function () {
+        var prjName = $("#PrjName").val();
+        console.log("Generating HTML report for project " + prjName);
+        window.open("/report/html/"+prjName, "DownloadWin");
+    },
+    'click #btnCsvReport': function () {
+        var prjName = $("#PrjName").val();
+        console.log("Generating CSV report for project " + prjName);
+        window.open("/report/csv/"+prjName, "DownloadWin");
     },
     'click #btnUpdate': function () {
         console.log("Trying to update the WAPT Runner code from GIT...");
@@ -97,16 +107,6 @@ Template.home.events({
             if (err !== undefined)
                 console.log(err);
         });
-    },
-    'click #btnCsvReport': function () {
-        var prjName = $("#PrjName").val();
-        console.log("Generating CSV report for project " + prjName);
-        window.open("/report/csv/"+prjName, "DownloadWin");
-    },
-    'click #btnHtmlReport': function () {
-        var prjName = $("#PrjName").val();
-        console.log("Generating HTML report for project " + prjName);
-        window.open("/report/html/"+prjName, "DownloadWin");
     },
 });
 
