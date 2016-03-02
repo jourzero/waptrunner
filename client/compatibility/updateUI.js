@@ -1,4 +1,3 @@
-
 // Update all UI fields from the Test KB
 function updateUIFromTestKB() {
     var oid = $("#testSel option:selected" ).attr('oid');
@@ -38,17 +37,23 @@ function updateUIFromTestKB() {
     $("#TTop25").prop('checked', rec.TTop25);
     $("#TStdTest").prop('checked', rec.TStdTest);
     
-    // Update UI to ensure consistency
-    updateCweUI(rec.TCweID);
-    updateUIFromIssueColl();
-    refreshUI();
-
     $('#testNameTA').val("");
 }
 
 
 // Update all UI fields from the Issue Collection
 function updateUIFromIssueColl() {
+
+    // Clear the values before populating them
+    var empty= "";
+    $("#IURIs").val(empty);
+    $("#IURIs").attr("title", empty);
+    $("#IEvidence").val(empty);
+    $("#IEvidence").attr("title", empty);
+    $("#INotes").val(empty);
+    $("#INotes").attr("title", empty);
+    $("#IPriority").val(empty);       
+    
 
     // Get Test ID as search criteria
     tid = $( "#testSel option:selected" ).val();
@@ -79,13 +84,13 @@ function updateUIFromIssueColl() {
 
 
 // Refresh UI for consistency
-function refreshUI() {
+function refreshLastTIDLink() {
     // Update lastTID text in UI
     var lastTID = Session.get("lastTID");
     console.log("Updating lastTID text to " + lastTID);
     $("#lastTIDTxt").html("Continue from " + lastTID);
-    updateUIFromPrj();
 }
+
 
 
 // Update UI with CWE data
@@ -165,12 +170,13 @@ function updateUIFromPrj() {
         $("#CveRptLinks").html(swLinksHtml);
     }
 
+    // Get scope query and set the session variable
     scopeQry = p.scopeQry;
     console.log("Updating scope to '" + scopeQry + "'");
     $("#ScopeSel").val(scopeQry);
     Session.set("projectScope", scopeQry);
 
-    // Update test ID (position of test runner) when possible
+    // Update last test ID link and session variable if possible
     var lastTID = p.lastTID;
     if (lastTID !== undefined){
        console.log("Last TID: " + lastTID);
@@ -218,7 +224,4 @@ function clearUI() {
     $("#IEvidence").val("");
     $("#INotes").val("");
     $("#IPriority").prop("selectedIndex", 0);    
-
-    // Disable the New button
-    //$('#kbBtnNew').prop('disabled', true);
 }
