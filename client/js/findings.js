@@ -5,8 +5,17 @@ Template.findingsTmpl.helpers({
        console.log("Getting list of issues");
        prj = {};
        
-       // Get the project name from the UI
-       var prjName = $("#PrjName").val();
+       // Get the project name from the session variable
+       var prjName = Session.get("projectName");
+       if ((prjName === undefined) || (prjName=="")) 
+            return {};
+       
+       // Get the project name from the UI, return if empty to avoid showing the list when
+       // the app is updated (and the session variable is not empty).
+       var prjNameFromUI = $("#PrjName").val();
+       if ((prjNameFromUI === undefined)||(prjNameFromUI === ""))
+           return {};
+       
        prj["PrjName"] = prjName;
        console.log("Getting issue list for project " + prjName);
        return issueColl.find(prj,{sort: {IPriority: -1, TIssueName: 1}}).fetch().map(function (it) {
