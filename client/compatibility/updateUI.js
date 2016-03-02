@@ -160,7 +160,7 @@ function updateUIFromPrj() {
         var swList = p.software.split(",");
         var swLinksHtml="";
         for (i=0; i<swList.length; i++){
-            swLinksHtml += "<a href='" + gCveRptBase + swList[i].trim() + gCveRptSuffix +"' target='cveRptUI'>" + swList[i].trim() + "</a> ";
+            swLinksHtml += "<a class='smallLink' href='" + gCveRptBase + swList[i].trim() + gCveRptSuffix +"' target='cveRptUI'>" + swList[i].trim() + "</a> ";
         }
         $("#CveRptLinks").html(swLinksHtml);
     }
