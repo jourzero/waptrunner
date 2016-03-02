@@ -66,7 +66,6 @@ function updateUIFromIssueColl() {
     var prjName = Session.get("projectName");
 
     // Build search criteria
-    db.issues.find({$and: [{ "TID" : "OTG4-4.08.01"},{ "PrjName" : "20160222-TelusChat-PT" }]})
     var crit={}; var kvp1 = {}; var kvp2 = {};
     kvp1.TID = tid;
     kvp2.PrjName = prjName;
