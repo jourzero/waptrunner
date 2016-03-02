@@ -37,13 +37,7 @@ function updateUIFromTestKB() {
     $("#TTop10").prop('checked', rec.TTop10);
     $("#TTop25").prop('checked', rec.TTop25);
     $("#TStdTest").prop('checked', rec.TStdTest);
-    $("#IURIs").val("");
-    $("#IEvidence").val("");
-    $("#INotes").val("");
-    $("#IPriority").val("");
-    $('#cwename').typeahead('val', "");
-    //$('#testNameTA').typeahead('val', "");
-
+    
     // Update UI to ensure consistency
     updateCweUI(rec.TCweID);
     updateUIFromIssueColl();
@@ -75,8 +69,11 @@ function updateUIFromIssueColl() {
 
     // Update UI values
     $("#IURIs").val(i.IURIs);
+    $("#IURIs").attr("title", i.IURIs);
     $("#IEvidence").val(i.IEvidence);
+    $("#IEvidence").attr("title", i.IEvidence);
     $("#INotes").val(i.INotes);
+    $("#INotes").attr("title", i.INotes);
     $("#IPriority").val(i.IPriority);       
 }    
 
@@ -220,7 +217,7 @@ function clearUI() {
     $("#IURIs").val("");
     $("#IEvidence").val("");
     $("#INotes").val("");
-    $("#IPriority").prop("selectedIndex", 0);
+    $("#IPriority").prop("selectedIndex", 0);    
 
     // Disable the New button
     //$('#kbBtnNew').prop('disabled', true);
