@@ -1,19 +1,10 @@
-a {
-    font-family: sans-serif;
-    font-size: 14px;
-    text-decoration: none;
-    font-weight: bold;
-    color: blue;
-}
-
-.smallLink {
+a, .smallLink {
     font-family: sans-serif;
     font-size: 12px;
     text-decoration: none;
     font-weight: normal;
     color: blue;
 }
-
 
 p {
     margin:3px;
