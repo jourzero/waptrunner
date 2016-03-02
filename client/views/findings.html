@@ -33,14 +33,14 @@
 
 
 <template name="myIssueTmpl">
-    <tr class="{{IPriorityText}}Priority">
+    <tr class="{{IPriorityText}}Priority" tid='{{TID}}'>
         <td class="isTD" width="20px">
             <button class="delete" title="Delete this issue">&times;</button></td>
-        <td class="isTD">{{IPriority}}-{{IPriorityText}}</td>
+        <td class="isTD">{{IPriorityText}}</td>
         <td class="isTD">{{TIssueName}}</td>
         <td class="isTD">{{CweId}}</td>
         <td class="isTD">{{TID}}</td>
         <td class="isTD">{{ICount}}</td>
-        <td class="isTD">{{TSeverity}}-{{TSeverityText}}</td>
+        <td class="isTD">{{TSeverityText}}</td>
     </tr>
 </template>
