@@ -148,7 +148,7 @@ textarea {
 }
 
 .tinyTD, .tinyTH{
-    /* font-size: 12px; */
+    font-size: 12px;
     margin: 0px;
     padding: 0px;
     vertical-align: top;
