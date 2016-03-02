@@ -128,9 +128,9 @@ option {
 textarea {
     max-height:1000000px; /* Disable font boosting in Chrome for Android */
     box-sizing: border-box;
-    padding: 4px 0;
+    padding: 0px 0;
     background: transparent;
-    border: 2px;
+    border: 1px;
     width: 98%;
     padding-right: 20px;
     vertical-align: top;
