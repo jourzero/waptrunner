@@ -1,3 +1,6 @@
+Meteor.subscribe('CWEs');
+Meteor.subscribe('testKBs');
+
 Template.testingTmpl.helpers({
     // Get CWEs from cwe collection
     cwes: function () {

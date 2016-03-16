@@ -1,3 +1,4 @@
+Meteor.subscribe('issues');
 
 Template.findingsTmpl.helpers({
     // Get list of issues from issues collection

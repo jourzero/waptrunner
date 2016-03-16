@@ -1,3 +1,4 @@
+Meteor.subscribe('projects');
 
 Template.projectsTmpl.helpers({
     // Get Projects from project collection
