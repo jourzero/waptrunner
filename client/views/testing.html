@@ -102,23 +102,25 @@
             <tr class="iTR"><th class="issueTH">URIs</th>       <td class="issueDetails"><textarea id="IURIs"      class="issueTA" rows="1" placeholder="URI list, one per line"></textarea></td></tr>
             <tr class="iTR"><th class="issueTH">Evidence</th>   <td class="issueDetails"><textarea id="IEvidence"  class="issueTA" rows="1" placeholder="Output from commands or HTTP payloads. Screenshots can be added later to the 'HTML Report' (edits with SeaMonkey or other)."></textarea></td></tr>
             <tr class="iTR"><th class="issueTH">Notes</th>      <td class="issueDetails"><textarea id="INotes"     class="issueTA" rows="1" placeholder="Notes explaining the issue or testing done."></textarea></td></tr>
-            <!--
             <tr class="iTR"><th class="issueTH">Priority</th>   <td class="issueDetails">
-                </td></tr>
-            -->
+                <select id="IPriority" title="Priority" class="prioSelector" >
+                    <option disabled selected value="">Priority</option>
+                    <option class="prioOpt" value="0">Info</option>
+                    <option class="prioOpt" value="1">Low</option>
+                    <option class="prioOpt" value="2">Medium</option>
+                    <option class="prioOpt" value="3">High</option>
+                </select>
+                </td>
+                <td>
+                        <button id="btnHtmlReport"  class="button black" title="Generate an issue report for this project in HTML and download it.">HTML Report</button>
+                        <button id="btnCsvReport"   class="button black" title="Generate an issue report for this project in CSV and download it.">CSV Report</button>
+                        <button id="btnCsvExport"   class="button"       title="Export all issue data from all projects as CSV and download." onclick="window.open('/issues.csv', 'DownloadWin')">Export all</button>
+                        <button id="btnUpdate"      class="button"       title="Üpdate code from GIT">Update App</button>
+                </td>
+            </tr>
         </table>
     </details>    
-    <b>Priority</b>
-    <select id="IPriority" title="Priority" class="prioSelector" >
-        <option disabled selected value="">Priority</option>
-        <option class="prioOpt" value="0">Info</option>
-        <option class="prioOpt" value="1">Low</option>
-        <option class="prioOpt" value="2">Medium</option>
-        <option class="prioOpt" value="3">High</option>
-    </select>
 </template>    
-
-
 
 <template name="myTestTmpl">
     <option class="testOpt" value="{{TID}}" oid="{{OID}}" tSource="{{TSource}}">{{TID}} {{TTestName}}</option>
