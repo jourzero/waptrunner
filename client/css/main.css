@@ -117,8 +117,8 @@ option {
 
 
 #cwename, #testNameTA{
-    //width: 600px;
-    width: 100%;
+    width: 500px;
+    //width: 100%;
 }
 
 .testSelector, .prioSelector, .sevSelector{    
