@@ -121,9 +121,12 @@ option {
     //width: 100%;
 }
 
-.testSelector, .prioSelector, .sevSelector{    
-    /* font-size: 12px; */
+.testSelector{    
     width: 168px;
+}
+
+.prioSelector, .sevSelector{    
+    width: 90px;
 }
 
 /* textarea, .issueTA, .testKbTA { */
