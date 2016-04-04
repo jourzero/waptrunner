@@ -7,10 +7,8 @@
             <button id="btnHtmlReport" class="button black" title="Generate an issue report for this project in HTML and download it.">HTML Report</button>
             <button id="btnCsvReport"  class="button black" title="Generate an issue report for this project in CSV and download it.">CSV Report</button>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button id="btnCsvExport" class="button black" title="Export all issue data as CSV and download." onclick="window.open('/issues.csv', 'DownloadWin')">Export all as CSV</button>
-            <button id="btnUpdate"    class="button black" title="Üpdate code from GIT">Update App</button>
+            <button id="btnCsvExport" class="button" title="Export all issue data as CSV and download." onclick="window.open('/issues.csv', 'DownloadWin')">Export all as CSV</button>
+            <button id="btnUpdate"    class="button" title="Üpdate code from GIT">Update App</button>
             {{> findingsTmpl}}
         </div>
     {{/if}}
