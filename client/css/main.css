@@ -67,7 +67,8 @@ input {
 }
 
 .prjIn{
-    width: 250px;
+    //width: 250px;
+    width: 100%;
     margin: 2px 0;
     padding: 2px 0;    
     border: 1px solid #ccc;
@@ -116,7 +117,8 @@ option {
 
 
 #cwename, #testNameTA{
-    width: 600px;
+    //width: 600px;
+    width: 100%;
 }
 
 .testSelector, .prioSelector, .sevSelector{    
