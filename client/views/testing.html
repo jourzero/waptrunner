@@ -111,14 +111,17 @@
                     <option class="prioOpt" value="3">High</option>
                 </select>
             </td></tr>
-            <tr class="iTR"><th class="issueTH"></th><td class="issueDetails">
-                        <button id="btnHtmlReport"  class="button black" title="Generate an issue report for this project in HTML and download it.">HTML Report</button>
-                        <button id="btnCsvReport"   class="button black" title="Generate an issue report for this project in CSV and download it.">CSV Report</button>
-                        <button id="btnCsvExport"   class="button"       title="Export all issue data from all projects as CSV and download." onclick="window.open('/issues.csv', 'DownloadWin')">Export all</button>
-                        <button id="btnUpdate"      class="button"       title="Üpdate code from GIT">Update App</button>
-            </td></tr>
         </table>
     </details>    
+            
+    <table class="issueTab">        
+        <tr class="iTR"><th class="issueTH"></th><td class="issueDetails">
+                    <button id="btnHtmlReport"  class="button black" title="Generate an issue report for this project in HTML and download it.">HTML Report</button>
+                    <button id="btnCsvReport"   class="button black" title="Generate an issue report for this project in CSV and download it.">CSV Report</button>
+                    <button id="btnCsvExport"   class="button"       title="Export all issue data from all projects as CSV and download." onclick="window.open('/issues.csv', 'DownloadWin')">Export all</button>
+                    <button id="btnUpdate"      class="button"       title="Üpdate code from GIT">Update App</button>
+        </td></tr>
+    </table>
 </template>    
 
 <template name="myTestTmpl">
