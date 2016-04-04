@@ -11,20 +11,24 @@
                             {{> projectTmpl}}
                         {{/each}}  
                    </datalist>
-                   <a id="lastTIDTxt"   class="tinyTD" title="Last Test ID" href="#"></a></td></tr>
+                   <a id="lastTIDTxt"   class="tinyTD" title="Last Test ID" href="#"></a></td>
+            </tr>
 
             <tr class="iTR">
                 <th class="issueTH">Components</th>
-                <td class="issueVals"><input id="PrjSoftware" class="testKbIn" type="text" placeholder="List of software components used by app (comma-separated)" /></td></tr>
+                <td class="issueVals"><input id="PrjSoftware" class="testKbIn" type="text" placeholder="List of software components used by app (comma-separated)" /></td>
+                <!-- </tr>
 
-            <tr class="iTR">
-                <th class="issueTH">CVE Search</th>
-                <td class="issueVals" id="CveRptLinks"> </td></tr>
+                <tr class="iTR">
+                <th class="issueTH">CVE Search</th> -->
+                <td class="issueVals" id="CveRptLinks"> </td>
+            </tr>
 
             <tr class="iTR"><th class="issueTH">Scope</th>
-                <td class="issueVals"><textarea id="PrjNotes" class="testKbTA" rows="2" placeholder="Scope Details"></textarea></td></tr>
-
-            <tr class="iTR"><th class="issueTH">Methodology</th><td class="issueVals">
+                <td class="issueVals"><textarea id="PrjNotes" class="testKbTA" rows="2" placeholder="Scope Details"></textarea></td>
+                <!-- </tr>
+                <tr class="iTR"><th class="issueTH">Methodology</th> -->
+                <td class="issueVals">
                     <select id="ScopeSel" title="Scope" class="scopeSelector">
                         <option disabled selected>Test Subset</option>
                         <option class="scopeOpt" title="ALL" value=""                       >All Tests</option>
@@ -38,7 +42,8 @@
                         <option class="scopeOpt" title="642" value="TSource: 'SEC642'"      >SEC642</option>
                         <option class="scopeOpt" title="WAH" value="TSource: 'WAHH2'"       >WAHH v2</option>
                         <option class="scopeOpt" title="WSV" value="TSource: 'WebSvc'"      >Web Services</option>
-                    </select></td></tr></table>
+                    </select></td>
+            </tr></table>
     </details>
 </template>
         
