@@ -91,6 +91,12 @@ Template.home.events({
     // When the Specific Issue Data changes, save it to the Issue collection
     'change #IURIs, change #IEvidence, change #INotes, change #IPriority': function (event) {
         saveIssueDataFromUI(event.target.id, event.target.value);
+        updateUIFromIssueColl();
+        
+        // Update titles so that mouse-over information matches the content
+        $("#IURIs").attr("title", $("#IURIs").val());
+        $("#IEvidence").attr("title", $("#IEvidence").val());
+        $("#INotes").attr("title", $("#INotes").val());
     },
     // Generate an HTML report when the 'HTML Report' button is pressed
     'click #btnHtmlReport': function () {
