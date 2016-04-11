@@ -13,6 +13,10 @@ p {
     color: #444444;
 }
 
+.tinyText {
+    font-size: x-small; 
+}
+
 body {
     background-color: #aaaaaa;
     /* background-image: linear-gradient(to bottom, #315481, #918e82 100%); */
