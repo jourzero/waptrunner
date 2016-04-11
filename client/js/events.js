@@ -53,7 +53,7 @@ Template.home.events({
         $("#testSel").prop("selectedIndex", selected);
         Session.set("lastTID", $("#testSel").val());
         updateUIFromTestKB();
-        $('#testNameTA').val("");
+        $('#testNameTA').typeahead('val', "");        
         refreshLastTIDLink();
         saveProjectDataFromUI();
         updateUIFromIssueColl()
@@ -67,7 +67,7 @@ Template.home.events({
         $("#testSel").prop("selectedIndex", selected);
         Session.set("lastTID", $("#testSel").val());
         updateUIFromTestKB();
-        $('#testNameTA').val("");
+        $('#testNameTA').typeahead('val', "");        
         refreshLastTIDLink();
         saveProjectDataFromUI();
         updateUIFromIssueColl()
@@ -76,7 +76,7 @@ Template.home.events({
     'click #testNameTA': function () {
         // Clear the input so that a new test name can be selected
         console.log("Test name text area clicked, clearing field so that another test can be chosen");
-        $("#testNameTA").val("");
+        $('#testNameTA').typeahead('val', "");        
     },        
     // When the New Test button is pressed, clear the UI and create another test
     'click #kbBtnNew': function () {
@@ -119,20 +119,18 @@ Template.home.events({
 
 // Event handlers for the issue list
 Template.myIssueTmpl.events({
-
     // Delete Issue
     "click .delete": function (event) {
         console.log('Delete clicked from myIssueTmpl! ID=' + this._id);
         issueColl.remove(this._id);
     },
-
     // Show the issue details when clicking in the list
     "click .isTD": function (event) {
         console.log('Clicked in myIssueTmpl ID=' + this._id + ". TID=" + this.TID);
         $("#testSel").val(this.TID);
         Session.set("lastTID", $("#testSel").val());
         updateUIFromTestKB();
-        $('#testNameTA').val("");
+        $('#testNameTA').typeahead('val', "");                
         refreshLastTIDLink();
         saveProjectDataFromUI(); // save last TID
         updateUIFromIssueColl()

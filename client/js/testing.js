@@ -60,5 +60,6 @@ Template.testingTmpl.helpers({
         console.log("Selected: Test " + suggestion.value);
         $("#testSel").val(suggestion.TID);
         updateUIFromTestKB();
+        updateUIFromIssueColl()        
     }
 });
