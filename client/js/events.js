@@ -27,6 +27,7 @@ Template.home.events({
     'change #PrjNotes, change #PrjSoftware': function (event) {
         console.log("Changed " + event.target.id);
         saveProjectDataFromUI();
+        updateUIFromPrj();
     },
     // When the scope/methodology selector is changed, persist the value
     'change #ScopeSel': function (event) {
