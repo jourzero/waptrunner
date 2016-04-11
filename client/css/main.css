@@ -1,7 +1,6 @@
 a, .smallLink {
     font-family: sans-serif;
-    /* font-size: 12px; */
-    font-size: small;
+    font-size: x-small; 
     text-decoration: none;
     font-weight: normal;
     color: blue;
