@@ -1,6 +1,7 @@
 a, .smallLink {
     font-family: sans-serif;
-    font-size: 12px;
+    /* font-size: 12px; */
+    font-size: small;
     text-decoration: none;
     font-weight: normal;
     color: blue;
@@ -9,7 +10,7 @@ a, .smallLink {
 p {
     margin:3px;
     font-family: sans-serif;
-    font-size: 14px;
+    /* font-size: 14px; */
     color: #444444;
 }
 
@@ -25,7 +26,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: sans-serif;
-    font-size: 14px;
+    /* font-size: 14px; */
     width: 100%;
 }
 
@@ -46,7 +47,7 @@ header {
 }
 
 h1 {
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin: 0;
     margin-bottom: 10px;
     display: inline-block;
@@ -63,7 +64,7 @@ input {
     border: 2px;
     vertical-align: middle;
     font-family: sans-serif;
-    font-size: 14px;
+    /* font-size: 14px; */
 }
 
 .prjIn{
@@ -140,7 +141,7 @@ textarea {
     padding-right: 20px;
     vertical-align: top;
     font-family: sans-serif;
-    font-size: 14px;
+    /* font-size: 14px; */
 }
 
 .issueVals{
@@ -153,7 +154,7 @@ textarea {
 }
 
 .tinyTD, .tinyTH{
-    font-size: 12px;
+    /* font-size: 12px; */
     margin: 0px;
     padding: 0px;
     vertical-align: top;
@@ -213,14 +214,14 @@ td, th {
     height: 15px;
     text-align: left;
     font-family: sans-serif;
-    font-size: 14px;
+    /* font-size: 14px; */
 }
 
 th {
     /*background: #DFDFDF;  Darken header a bit */
     font-weight: bold;
     font-family: sans-serif;
-    font-size: 14px;
+    /* font-size: 14px; */
 }
 
 tr .HighPriority{
