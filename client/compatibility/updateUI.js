@@ -114,7 +114,7 @@ function addIssueTemplateTextToUI(){
 
     // Fill Notes field with template text if empty
     if (iNotes.length === 0){
-        iNotes = "Description: \n\nRisk:\n  Likelihood=[L,M,H]\n  Impact=[L,M,H]\n  DREAD Score: (DamagePotential=0,5,10 x Reproducibility=0,5,10 x Exploitability=0,5,10 x AffectedUsers=0,5,10 x Discoverability=10) / 5\n\nSteps To Reproduce: \n* Browse to URI \n* ACTION\n\nRecommendations: ";
+        iNotes = "Description: \n\nRisk: Likelihood=[L,M,H]; Impact=[L,M,H]; DREAD = (DamagePot.=10 x Reprod.=10 x Expl.=10 x Aff.Users=10 x Discov.=10) / 5 = 10\n\nSteps To Reproduce: \n1. Browse to URI \n2. ACTION\n\nRecommendations: ";
         $("#INotes").val(iNotes);
         $("#INotes").attr("title", iNotes);
     }
