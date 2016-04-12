@@ -106,14 +106,14 @@ function addIssueTemplateTextToUI(){
     var iNotes    = $("#INotes").val();
     
     // Fill Evidence field with template text if empty
-    if ((iEvidence !== undefined) && (iEvidence.length != 0)){
-        iEvidence = "=== REQUEST ===\nPLACEHOLDER\n\n===RESPONSE\nPLACEHOLDER";
+    if (iEvidence.length === 0){
+        iEvidence = "=== REQUEST ===\nPLACEHOLDER\n\n=== RESPONSE ===\nPLACEHOLDER";
         $("#IEvidence").val(iEvidence);
         $("#IEvidence").attr("title", iEvidence);
     }
 
     // Fill Notes field with template text if empty
-    if ((iNotes !== undefined) && (iNotes.length != 0)){
+    if (iNotes.length === 0){
         iNotes = "Description: \n\nRisk:\n  Likelihood=[L,M,H]\n  Impact=[L,M,H]\n  DREAD Score: (DamagePotential=0,5,10 x Reproducibility=0,5,10 x Exploitability=0,5,10 x AffectedUsers=0,5,10 x Discoverability=10) / 5\n\nSteps To Reproduce: \n* Browse to URI \n* ACTION\n\nRecommendations: ";
         $("#INotes").val(iNotes);
         $("#INotes").attr("title", iNotes);
