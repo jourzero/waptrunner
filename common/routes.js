@@ -229,9 +229,9 @@ function toHtml(objArray, prjName) {
             
             // Print each issue with the issue as the header and the details as part of a table.
             if ((priority !== undefined)&&(priority !== "")&&(priority !== prevPrio))
-                output += "<tr><th class='" + priority + "P'>" + priority + "</th>";
+                output += "<tr class='" + priority + "P'><th>" + priority + "</th>";
             else
-                output += "<tr><th class='" + priority + "P'></th>";
+                output += "<tr class='" + priority + "P'><th></th>";
             output += "<td><a href='#" + htmlEncode(obj.TID, true, 4) + "'>" + obj.TIssueName + "</a></td>";
             output += "<td>" + count + "</td>";
             output += "</tr>\n";
