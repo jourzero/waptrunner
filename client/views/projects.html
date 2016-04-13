@@ -4,31 +4,25 @@
         <summary id="prjSummary">Project Summary</summary>
         <table class="issueTab">
             <tr class="iTR"><th class="issueTH">Project</th>
-                <td class="issueVals">
+                <td class="prjLeft">
                     <input list="prjs" id="PrjName" class="prjIn" placeholder="YYYYMMDD-ENV-APP" />
                     <datalist id="prjs">
                         {{#each projects}}
                             {{> projectTmpl}}
                         {{/each}}  
                     </datalist></td>
-                <td><a id="lastTIDTxt"   class="tinyTD" title="Last Test ID" href="#"></a></td>
+                <td class="prjRight"><a id="lastTIDTxt"   class="tinyTD" title="Last Test ID" href="#"></a></td>
             </tr>
 
             <tr class="iTR">
                 <th class="issueTH">Components</th>
-                <td class="issueVals"><input id="PrjSoftware" class="testKbIn" type="text" placeholder="List of software components used by app (comma-separated)" /></td>
-                <!-- </tr>
-
-                <tr class="iTR">
-                <th class="issueTH">CVE Search</th> -->
-                <td class="issueVals" id="CveRptLinks"> </td>
+                <td class="prjLeft"><input id="PrjSoftware" class="testKbIn" type="text" placeholder="List of software components used by app (comma-separated)" /></td>
+                <td class="prjRight" id="CveRptLinks"> </td>
             </tr>
 
             <tr class="iTR"><th class="issueTH">Scope</th>
-                <td class="issueVals"><textarea id="PrjNotes" class="testKbTA" rows="3" placeholder="Scope Details"></textarea></td>
-                <!-- </tr>
-                <tr class="iTR"><th class="issueTH">Methodology</th> -->
-                <td class="issueVals">
+                <td class="prjLeft"><textarea id="PrjNotes" class="testKbTA" rows="4" placeholder="Scope Details"></textarea></td>
+                <td class="prjRight">
                     <select id="ScopeSel" title="Scope" class="scopeSelector">
                         <option disabled selected>Test Subset</option>
                         <option class="scopeOpt" title="ALL" value=""                       >All Tests</option>
