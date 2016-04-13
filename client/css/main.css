@@ -152,15 +152,15 @@ textarea {
     border: 0px;
 }
 
-td .prjLeft{
+.prjLeft{
     padding: 3px 1px;
     border: 0px;
 }
 
-td .prjRight{
+.prjRight{
     padding: 3px 1px;
     border: 0px;
-    width: 150px;
+    width: 200px;
 }
 
 .tinyTH{
