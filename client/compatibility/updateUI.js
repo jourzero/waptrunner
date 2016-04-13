@@ -114,7 +114,7 @@ function addIssueTemplateTextToUI(){
 
     // Fill Notes field with template text if empty
     if (iNotes.length === 0){
-        iNotes  = "Details: \n\n";
+        iNotes  = "ISSUE_DETAILS. CIA_IMPACT. HOW_TO_EXPLOIT.\n\n";
         iNotes += "Perceived Risk: Likelihood=High (Easy to Reproduce, Easy to Discover), Impact=Medium (Partial Damage, Easy to Exploit, Some Users Affected)\n\n"
         iNotes += "To Replicate:\n  1. Browse to URI\n  2. ACTION1\n  3. ACTION2\n\n";
         iNotes += "To Mitigate: See CWE link for more details.";
