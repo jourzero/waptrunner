@@ -152,6 +152,17 @@ textarea {
     border: 0px;
 }
 
+td .prjLeft{
+    padding: 3px 1px;
+    border: 0px;
+}
+
+td .prjRight{
+    padding: 3px 1px;
+    border: 0px;
+    width: 150px;
+}
+
 .tinyTH{
     text-align: right;
 }
