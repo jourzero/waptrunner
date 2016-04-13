@@ -201,7 +201,8 @@ function toHtml(objArray, prjName) {
         var output = "<html><head>\n";
         var priority = "N/A", prevPrio = "";
         var cweUriBase   = "https://cwe.mitre.org/data/definitions/";
-        output += "<style>\nbody{width:1200px;}\na{text-decoration:none;}\n.tdID{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\n.thID{text-align:right;vertical-align:top;width:80px;}\nth{vertical-align:top;}\ntr:nth-child(even){background:#EAEAEA;}\ntr:nth-child(odd){background:#F0F0F0;}\nol{padding-left:25px;}\n.HighP{background-color:red;}\n.MediumP{background-color:orange;}\n.LowP{background-color:cyan;}\n</style>\n";
+        output += "<style>\nbody{width:1200px;}\na{text-decoration:none;}\n.tdID{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\n.thID{text-align:right;vertical-align:top;width:80px;}\nth{vertical-align:top;}\nol{padding-left:25px;}\n.HighP{background-color:red;}\n.MediumP{background-color:orange;}\n.LowP{background-color:cyan;}\n</style>\n";
+        //tr:nth-child(even){background:#EAEAEA;}\ntr:nth-child(odd){background:#F0F0F0;}\n
         
         // Traverse the array of issue objects
         output += "</head>\n<body>\n";
