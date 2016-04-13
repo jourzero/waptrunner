@@ -106,14 +106,14 @@ function addIssueTemplateTextToUI(){
     var iNotes    = $("#INotes").val();
     
     // Fill Evidence field with template text if empty
-    if (iEvidence.length === 0){
+    if (iEvidence.length === 1){
         iEvidence = "=== REQUEST ===\nPLACEHOLDER\n\n=== RESPONSE ===\nPLACEHOLDER";
         $("#IEvidence").val(iEvidence);
         $("#IEvidence").attr("title", iEvidence);
     }
 
     // Fill Notes field with template text if empty
-    if (iNotes.length === 0){
+    if (iNotes.length === 1){
         iNotes  = "ISSUE_DETAILS. CIA_IMPACT. HOW_TO_EXPLOIT.\n\n";
         iNotes += "Perceived Risk: Likelihood=High (Easy to Reproduce, Easy to Discover), Impact=Medium (Partial Damage, Easy to Exploit, Some Users Affected)\n\n"
         iNotes += "To Replicate:\n  1. Browse to URI\n  2. ACTION1\n  3. ACTION2\n\n";
