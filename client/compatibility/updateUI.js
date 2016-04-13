@@ -114,7 +114,10 @@ function addIssueTemplateTextToUI(){
 
     // Fill Notes field with template text if empty
     if (iNotes.length === 0){
-        iNotes = "Description: \n\nRisk: Likelihood=High (Easy to Reproduce, Easy to Discover), Impact=High (Partial Damage, Easy to Exploit, All Users Affected)\n\nSteps To Reproduce: \n1. Browse to URI \n2. ACTION\n\nRecommendations: ";
+        iNotes  = "Description: \n\n";
+        iNotes += "Perceived Risk: Likelihood=High (Easy to Reproduce, Easy to Discover), Impact=High (Partial Damage, Easy to Exploit, All Users Affected)\n\n"
+        iNotes += "Replication Steps:\n  1. Browse to URI (see URIs)\n  2. ACTION\n\n";
+        iNotes += "To Mitigate  : ";
         $("#INotes").val(iNotes);
         $("#INotes").attr("title", iNotes);
     }
