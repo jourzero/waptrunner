@@ -90,7 +90,6 @@ Template.home.events({
     },
     // When the Specific Issue Data changes, save it to the Issue collection
     'change #IURIs, change #IEvidence, change #INotes, change #IPriority': function (event) {
-        addIssueTemplateTextToUI();
         saveIssueDataFromUI(event.target.id, event.target.value);
         
         // Update titles so that mouse-over information matches the content
@@ -103,6 +102,10 @@ Template.home.events({
         console.log("Increasing the height for " + event.target.id);
         $("#" + event.target.id).height(400);
     },    
+    // When Evidence and Notes fields are double-clicked and they're empty, prefill them with template text
+    'doubleclick #IEvidence, doubleclick #INotes': function (event) {
+        addIssueTemplateTextToUI();
+    },
     // When the Specific Issue Data changes, save it to the Issue collection
     'blur #IURIs, blur #IEvidence, blur #INotes, blur #PrjNotes': function (event) {
         console.log("Decreasing the height for " + event.target.id);
