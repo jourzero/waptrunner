@@ -99,14 +99,14 @@ Template.home.events({
         $("#INotes").attr("title", $("#INotes").val());
     },
     // When the Specific Issue Data changes, save it to the Issue collection
-    'click #IEvidence, click #INotes, click #PrjNotes': function (event) {
+    'click #IURIs, click #IEvidence, click #INotes, click #PrjNotes': function (event) {
         console.log("Increasing the height for " + event.target.id);
         $("#" + event.target.id).height(400);
     },    
     // When the Specific Issue Data changes, save it to the Issue collection
-    'blur #IEvidence, blur #INotes, blur #PrjNotes': function (event) {
+    'blur #IURIs, blur #IEvidence, blur #INotes, blur #PrjNotes': function (event) {
         console.log("Decreasing the height for " + event.target.id);
-        $("#" + event.target.id).height(50);
+        $("#" + event.target.id).height(40);
     },    
     // Generate an HTML report when the 'HTML Report' button is pressed
     'click #btnHtmlReport': function () {
