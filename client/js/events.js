@@ -98,6 +98,14 @@ Template.home.events({
         $("#IEvidence").attr("title", $("#IEvidence").val());
         $("#INotes").attr("title", $("#INotes").val());
     },
+    // When the Specific Issue Data changes, save it to the Issue collection
+    'click #IEvidence, change #INotes': function (event) {
+        console.log("Just clicked in " + event.target.id);
+    },    
+    // When the Specific Issue Data changes, save it to the Issue collection
+    'blur #IEvidence, change #INotes': function (event) {
+        console.log("Just clicked out of " + event.target.id);
+    },    
     // Generate an HTML report when the 'HTML Report' button is pressed
     'click #btnHtmlReport': function () {
         var prjName = $("#PrjName").val();
