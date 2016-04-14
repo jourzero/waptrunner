@@ -99,12 +99,14 @@ Template.home.events({
         $("#INotes").attr("title", $("#INotes").val());
     },
     // When the Specific Issue Data changes, save it to the Issue collection
-    'click #IEvidence, change #INotes': function (event) {
-        console.log("Just clicked in " + event.target.id);
+    'click #IEvidence, click #INotes, click #PrjNotes': function (event) {
+        console.log("Increasing the height for " + event.target.id);
+        $("#" + event.target.id).height(400);
     },    
     // When the Specific Issue Data changes, save it to the Issue collection
-    'blur #IEvidence, change #INotes': function (event) {
-        console.log("Just clicked out of " + event.target.id);
+    'blur #IEvidence, blur #INotes, blur #PrjNotes': function (event) {
+        console.log("Decreasing the height for " + event.target.id);
+        $("#" + event.target.id).height(50);
     },    
     // Generate an HTML report when the 'HTML Report' button is pressed
     'click #btnHtmlReport': function () {
