@@ -99,16 +99,13 @@ Template.home.events({
     },
     // When the Specific Issue Data changes, save it to the Issue collection
     'click #IURIs, click #IEvidence, click #INotes, click #PrjNotes': function (event) {
-        console.log("Increasing the height for " + event.target.id);
+        //console.log("Increasing the height for " + event.target.id);
         $("#" + event.target.id).height(400);
-    },    
-    // When Evidence and Notes fields are double-clicked and they're empty, prefill them with template text
-    'doubleclick #IEvidence, doubleclick #INotes': function (event) {
         addIssueTemplateTextToUI();
-    },
+    },    
     // When the Specific Issue Data changes, save it to the Issue collection
     'blur #IURIs, blur #IEvidence, blur #INotes, blur #PrjNotes': function (event) {
-        console.log("Decreasing the height for " + event.target.id);
+        //console.log("Decreasing the height for " + event.target.id);
         $("#" + event.target.id).height(40);
     },    
     // Generate an HTML report when the 'HTML Report' button is pressed
