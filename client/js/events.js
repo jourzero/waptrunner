@@ -108,7 +108,7 @@ Template.home.events({
         $("#" + event.target.id).height(40);
     },    
     // When Evidence and Notes fields are double-clicked, prefill them with template text.
-    'dbclick #IEvidence, dbclick #INotes': function () {
+    'dblclick #IEvidence, dblclick #INotes': function () {
         addIssueTemplateTextToUI();
     },    
     // Generate an HTML report when the 'HTML Report' button is pressed
