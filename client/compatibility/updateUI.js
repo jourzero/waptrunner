@@ -100,12 +100,9 @@ function refreshLastTIDLink() {
 // Create template text into finding sections
 function addIssueTemplateTextToUI(){
     
-    // Get UI values
-    var iEvidence = $("#IEvidence").val();
-    var iNotes    = $("#INotes").val();
-    
     // Fill Evidence field with template text if empty
-    if (iEvidence.length === 0){
+    var iEvidence = $("#IEvidence").val();
+    if ((iEvidence === undefined)||(iEvidence.length === 0)){
         console.log("Adding template text to Evidence field");
         iEvidence = "=== REQUEST ===\nPLACEHOLDER\n\n=== RESPONSE ===\nPLACEHOLDER";
         $("#IEvidence").val(iEvidence);
@@ -113,7 +110,8 @@ function addIssueTemplateTextToUI(){
     }
 
     // Fill Notes field with template text if empty
-    if (iNotes.length === 0){
+    var iNotes    = $("#INotes").val();
+    if ((iNotes === undefined)||(iNotes.length === 0)){
         console.log("Adding template text to Notes field");
         iNotes  = "ISSUE_DETAILS. CIA_IMPACT. HOW_TO_EXPLOIT.\n\n";
         iNotes += "Perceived Risk: Likelihood=High (Easy to Reproduce, Easy to Discover), Impact=Medium (Partial Damage, Easy to Exploit, Some Users Affected)\n\n"
