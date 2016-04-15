@@ -6,7 +6,7 @@ Template.home.events({
         // Get the project name and update UI
         Session.set("projectName", event.target.value);
         updateUIFromPrj();
-    },    
+    },
     // When the project name is clicked, clear-up the UI
     'click #PrjName': function () {
         // Clear the input so that a new project can be selected
