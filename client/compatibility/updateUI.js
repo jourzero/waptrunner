@@ -217,21 +217,32 @@ function updateUIFromPrj() {
    }
 }    
 
-
-// Clear all UI values when changing project
-function clearUI() {
-    $("#PrjNotes").val("");
-    $("#PrjNotes").attr('title', "");
+// Clear Project Information
+function clearProjectFields() {
     $("#PrjSoftware").val("");
     $("#CveRptLinks").html("");        
-    $("#testSel").prop("selectedIndex", 0);
+    $("#PrjNotes").val("");
+    $("#PrjNotes").attr('title', "");
     $("#ScopeSel").prop("selectedIndex", 0);
-    $("#TPhase").html("");
-    $("#TSection").html("");
-    $('#testNameTA').typeahead('val', "");
+}
+
+// Clear Issue Information
+function clearIssueFields() {
     $('#cwename').typeahead('val', "");
     $('#cweref').attr('href', "");
     $('#cweref').html("");
+    $("#IURIs").val("");
+    $("#IEvidence").val("");
+    $("#INotes").val("");
+    $("#IPriority").prop("selectedIndex", 0);        
+}
+
+// Clear Testing Information
+function clearTestingFields() {
+    $("#testSel").prop("selectedIndex", 0);
+    $("#TPhase").html("");
+    $("#TSection").html("");
+    $('#testNameTA').typeahead('val', "");
     $("#TTestName").val("");
     $("#TType").val("");
     $("#TTesterSupport").val("");""
@@ -252,8 +263,11 @@ function clearUI() {
     $("#TTop10").prop('checked', false);
     $("#TTop25").prop('checked', false);
     $("#TStdTest").prop('checked', false);
-    $("#IURIs").val("");
-    $("#IEvidence").val("");
-    $("#INotes").val("");
-    $("#IPriority").prop("selectedIndex", 0);    
+}
+
+// Clear all UI values when changing project
+function clearUI() {
+    clearProjectFields();
+    clearTestingFields();
+    clearIssueFields();
 }
