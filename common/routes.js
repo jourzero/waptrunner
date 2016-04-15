@@ -201,7 +201,7 @@ function toHtml(objArray, prjName) {
         var output = "<html><head>\n";
         var priority = "N/A", prevPrio = "";
         var cweUriBase   = "https://cwe.mitre.org/data/definitions/";
-        output += "<style>\nbody{width:1200px;}\na{text-decoration:none;}\n.tdID{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\n.thID{text-align:right;vertical-align:top;width:80px;}\nth{vertical-align:top;}\nol{padding-left:25px;}\n.HighP{background-color:red;}\n.MediumP{background-color:orange;}\n.LowP{background-color:cyan;}\ntr:nth-child(even){background:#EAEAEA;}\ntr:nth-child(odd){background:#F0F0F0;}\n</style>\n";
+        output += "<style>\nbody{width:1200px;}\na{text-decoration:none;}\n.tdID{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\n.thID{text-align:right;vertical-align:top;width:80px;}\nth{vertical-align:top;}\nol{padding-left:25px;}\n.HighP{background-color:red;}\n.MediumP{background-color:orange;}\n.LowP{background-color:cyan;}\n.Skip{background-color:#FFFFFF;}\ntr:nth-child(even){background:#EAEAEA;}\ntr:nth-child(odd){background:#F0F0F0;}\n</style>\n";
         
         // Traverse the array of issue objects
         output += "</head>\n<body>\n";
@@ -269,7 +269,7 @@ function toHtml(objArray, prjName) {
                 output += "<tr><th class='thID'>Notes: </th><td class='tdID'>" + htmlEncode(obj.INotes, true, 4) + "</td></tr>\n";
             if ((obj.IEvidence !== undefined)&&(obj.IEvidence !== ""))
                 output += "<tr><th class='thID'>Evidence: </th><td class='tdID'>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
-            output += "<tr><td>&nbsp; </td></tr>\n";
+            output += "<tr><td class='Skip'>&nbsp;</td><td class='Skip'>&nbsp;</td></tr>\n";
 	}
         output += "</table>\n";
         output += "</body>\n</html>\n";
