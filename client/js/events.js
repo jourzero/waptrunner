@@ -99,14 +99,14 @@ Template.home.events({
         $("#INotes").attr("title", $("#INotes").val());
     },
     // When some fields are clicked, increase the text box size
-    'click #IURIs, click #IEvidence, click #INotes, click #PrjNotes': function (event) {
+    'click #IURIs, click #IEvidence, click #INotes, click #PrjNotes, click #TTesterSupport': function (event) {
         //console.log("Increasing the height for " + event.target.id);
         $("#" + event.target.id).height(400);
     },    
     // When some fields are unselected, decrease the text box size to a default height
-    'blur #IURIs, blur #IEvidence, blur #INotes, blur #PrjNotes': function (event) {
+    'blur #IURIs, blur #IEvidence, blur #INotes, blur #PrjNotes, blur #TTesterSupport': function (event) {
         //console.log("Decreasing the height for " + event.target.id);
-        $("#" + event.target.id).height(40);
+        $("#" + event.target.id).height(20);
     },    
     // When Evidence and Notes fields are double-clicked, prefill them with template text.
     'dblclick #IEvidence, dblclick #INotes': function () {
