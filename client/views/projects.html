@@ -5,7 +5,7 @@
         <table class="issueTab">
             <tr class="iTR"><th class="issueTH">Project</th>
                 <td class="prjLeft">
-                    <input list="prjs" id="PrjName" class="prjIn" placeholder="YYYYMMDD-ENV-APP" />
+                    <input list="prjs" id="PrjName" class="prjIn" placeholder="YYYYMM-APP-ENV" />
                     <datalist id="prjs">
                         {{#each projects}}
                             {{> projectTmpl}}
@@ -21,19 +21,19 @@
             </tr>
 
             <tr class="iTR"><th class="issueTH">Scope</th>
-                <td class="prjLeft"><textarea id="PrjNotes" class="testKbTA" rows="4" placeholder="Scope Details"></textarea></td>
+                <td class="prjLeft"><textarea id="PrjNotes" rows="4" placeholder="Scope Details"></textarea></td>
                 <td class="prjRight">
                     <select id="ScopeSel" title="Scope" class="scopeSelector">
                         <option disabled selected>Test Subset</option>
                         <option class="scopeOpt" title="ALL" value=""                       >All Tests</option>
+                        <option class="scopeOpt" title="642" value="TSource: 'TBHM2015'"    >Bug Hunter</option>
                         <option class="scopeOpt" title="EXT" value="TPhase: 'Extras'"       >Extras</option>
                         <option class="scopeOpt" title="TG4" value="TSource: 'OWASP-TG4'"   >OWASP TG4</option>
                         <option class="scopeOpt" title="PCI" value="TPCI: true"             >PCI</option>
-                        <option class="scopeOpt" title="STD" value="TStdTest: true"         >Standard</option>
-                        <option class="scopeOpt" title="T10" value="TTop10: true"           >Top 10</option>
-                        <!-- EP/removed: Top25 is too developer-oriented. <option class="scopeOpt" title="T25" value="TTop25: true">Top 25</option> -->
                         <option class="scopeOpt" title="542" value="TSource: 'SEC542'"      >SEC542</option>
                         <option class="scopeOpt" title="642" value="TSource: 'SEC642'"      >SEC642</option>
+                        <option class="scopeOpt" title="STD" value="TStdTest: true"         >Standard</option>
+                        <option class="scopeOpt" title="T10" value="TTop10: true"           >Top 10</option>
                         <option class="scopeOpt" title="WAH" value="TSource: 'WAHH2'"       >WAHH v2</option>
                         <option class="scopeOpt" title="WSV" value="TSource: 'WebSvc'"      >Web Services</option>
                     </select></td>
