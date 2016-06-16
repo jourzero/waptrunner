@@ -35,6 +35,7 @@ $ meteor create waptrunner
 
 * Add Meteor packages
 ```
+$ cd waptrunner
 $ meteor add sergeyt:typeahead              # Typeahead for CWE Name and Test Name lookups
 $ meteor add accounts-ui accounts-google    # Google OAuth (or the below)
 $ meteor add accounts-ui accounts-password  # Plain password

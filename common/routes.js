@@ -270,7 +270,7 @@ function toHtml(objArray, prjName) {
             if ((obj.IEvidence !== undefined)&&(obj.IEvidence !== ""))
                 output += "<tr><th class='thID'>Evidence: </th><td class='tdID'>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
             output += "<tr><td class='Skip'>&nbsp;</td><td class='Skip'>&nbsp;</td></tr>\n";
-	} 
+	}
         output += "</table>\n";
         output += "</body>\n</html>\n";
 	return output;
