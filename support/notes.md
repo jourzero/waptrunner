@@ -49,7 +49,9 @@ $ meteor add dburles:eslint                 # Javascript static analysis
 ```
 
 * Remove Autopublish
+```
 $ meteor remove autopublish
+```
 
 * Restore BD from Dev
 ```
