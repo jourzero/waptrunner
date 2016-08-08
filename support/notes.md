@@ -41,6 +41,7 @@ $ meteor add accounts-ui accounts-google    # Google OAuth (or the below)
 $ meteor add accounts-ui accounts-password  # Plain password
 $ meteor add jaredmartin:future             # For remote exec of git-update.sh
 $ meteor add iron:router                    # Enable routing to server different pages (registration, CSV output...)
+$ meteor add session
 
 Optionally:
 $ meteor add appcache                       # Enable browser caching 
