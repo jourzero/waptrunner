@@ -48,6 +48,9 @@ $ meteor add meteorhacks:npm                # Enable use of NPM from within Mete
 $ meteor add dburles:eslint                 # Javascript static analysis
 ```
 
+* Remove Autopublish
+$ meteor remove autopublish
+
 * Restore BD from Dev
 ```
 $ cd ...
