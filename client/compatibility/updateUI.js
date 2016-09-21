@@ -1,5 +1,8 @@
 // Update all UI fields from the Test KB
 function updateUIFromTestKB() {
+    // Clear testDB fields before updating them because some UI updates fail due to missing value in DB.
+    clearTestingFields();
+
     var oid = $("#testSel option:selected" ).attr('oid');
     console.log("Updating UI from TestKB doc " + oid);
     rec = testkbColl.findOne(new Mongo.ObjectID(oid));
