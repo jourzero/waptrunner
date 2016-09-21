@@ -81,6 +81,7 @@ Template.home.events({
     // When the New Test button is pressed, clear the UI and create another test
     'click #kbBtnNew': function () {
         console.log('Creating new test: ' + $('#TTestName').val());
+        $("#testSel").prop("selectedIndex", 0);
         clearTestingFields();
         clearIssueFields();
         newTest();

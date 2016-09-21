@@ -242,7 +242,6 @@ function clearIssueFields() {
 
 // Clear Testing Information
 function clearTestingFields() {
-    $("#testSel").prop("selectedIndex", 0);
     $("#TPhase").html("");
     $("#TSection").html("");
     $('#testNameTA').typeahead('val', "");
