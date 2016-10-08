@@ -113,6 +113,10 @@ Template.home.events({
     'dblclick #IEvidence, dblclick #INotes': function () {
         addIssueTemplateTextToUI();
     },    
+    // When pasting images in Evidence, add a Base64 representation
+    'paste #IEvidence': function (event) {
+        pasteEvidenceBase64ImageToUI(event);
+    },    
     // Generate an HTML report when the 'HTML Report' button is pressed
     'click #btnHtmlReport': function () {
         var prjName = $("#PrjName").val();
