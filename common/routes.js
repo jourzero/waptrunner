@@ -268,7 +268,8 @@ function toHtml(objArray, prjName) {
             if ((obj.INotes !== undefined)&&(obj.INotes !== ""))
                 output += "<tr><th class='thID'>Notes: </th><td class='tdID'>" + htmlEncode(obj.INotes, true, 4) + "</td></tr>\n";
             if ((obj.IEvidence !== undefined)&&(obj.IEvidence !== ""))
-                output += "<tr><th class='thID'>Evidence: </th><td class='tdID'>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
+                //output += "<tr><th class='thID'>Evidence: </th><td class='tdID'>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
+                output += "<tr><th class='thID'>Evidence: </th><td class='tdID'>" + obj.IEvidence + "</td></tr>\n";
             output += "<tr><td class='Skip'>&nbsp;</td><td class='Skip'>&nbsp;</td></tr>\n";
 	}
         output += "</table>\n";
