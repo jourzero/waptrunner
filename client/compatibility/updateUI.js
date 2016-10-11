@@ -161,7 +161,8 @@ function pasteScreenshotToUI(event){
 
 // Update screenshots from the Images field
 function updateScreenshots(){
-    var imgTags = $("#IImages").val();
+    console.log("Updating screenshots area");
+    var imgTags = $("#IScreenshots").val();
     $("#ScreenshotArea").html(imgTags);
 }
 
