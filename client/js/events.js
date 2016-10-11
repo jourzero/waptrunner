@@ -100,7 +100,7 @@ Template.home.events({
         $("#INotes").attr("title", $("#INotes").val());
     },
     // When some fields are clicked, increase the text box size
-    'click #IURIs, click #IEvidence, click #INotes, click #PrjNotes, click #TTesterSupport': function (event) {
+    'click #IURIs, click #IEvidence, click #IScreenshots, click #INotes, click #PrjNotes, click #TTesterSupport': function (event) {
         //console.log("Increasing the height for " + event.target.id);
         $("#" + event.target.id).height(400);
     },    
