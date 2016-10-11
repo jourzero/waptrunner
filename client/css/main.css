@@ -250,6 +250,7 @@ tr .LowPriority{
 
 img {
     border: 1;
+    border-color: black;
 }
 
 /* Cells in even rows (2,4,6...) are one color */ 
