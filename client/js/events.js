@@ -91,7 +91,7 @@ Template.home.events({
         updateTestKBFromUI(event.target.id, event.target.value);
     },
     // When the Specific Issue Data changes, save it to the Issue collection
-    'change #IURIs, change #IEvidence, change #INotes, change #IPriority': function (event) {
+    'change #IURIs, change #IEvidence, hange #IScreenshots, change #INotes, change #IPriority': function (event) {
         saveIssueDataFromUI(event.target.id, event.target.value);
         
         // Update titles so that mouse-over information matches the content
