@@ -85,6 +85,7 @@ function saveIssueDataFromUI(tgtId, tgtVal) {
     issue.TSeverityText = $("#TSeverity option:selected").text();
     issue.IURIs      = $('#IURIs').val();
     issue.IEvidence  = $('#IEvidence').val();
+    issue.IScreenshots = $('#IScreenshots').val();
     issue.IPriority  = $('#IPriority').val();
     issue.IPriorityText  = $("#IPriority option:selected").text();
     issue.INotes     = $('#INotes').val();

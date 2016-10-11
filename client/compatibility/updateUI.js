@@ -53,6 +53,7 @@ function updateUIFromIssueColl() {
     $("#IURIs").attr("title", empty);
     $("#IEvidence").val(empty);
     $("#IEvidence").attr("title", empty);
+    $("#IScreenshots").val(empty);
     $("#INotes").val(empty);
     $("#INotes").attr("title", empty);
     $("#IPriority").val(empty);       
@@ -84,9 +85,11 @@ function updateUIFromIssueColl() {
     $("#IURIs").attr("title", i.IURIs);
     $("#IEvidence").val(i.IEvidence);
     $("#IEvidence").attr("title", i.IEvidence);
+    $("#IScreenshots").val(i.IScreenshots);
     $("#INotes").val(i.INotes);
     $("#INotes").attr("title", i.INotes);
-    $("#IPriority").val(i.IPriority);  
+    $("#IPriority").val(i.IPriority); 
+    updateScreenshots();
     updateCweUI(i.CweId);
 }    
 
@@ -127,7 +130,7 @@ function addIssueTemplateTextToUI(){
 
 
 // When pasting images in Evidence, add a Base64 representation
-function pasteImageToUI(event){
+function pasteScreenshotToUI(event){
     
   // Get clipboard entries and search for images 
   var items = (event.clipboardData || event.originalEvent.clipboardData).items;
@@ -140,15 +143,15 @@ function pasteImageToUI(event){
         var dataUrl = event.target.result;
         var imgTag = "<p><img src='" + dataUrl + "' /></p>";
         // Append the data URL to the Evidence field
-        var iImages = $("#IImages").val();
-        if ((iImages === undefined)||(iImages.length === 0)){
-            iImages = imgTag;
+        var iScreenshots = $("#IScreenshots").val();
+        if ((iScreenshots === undefined)||(iScreenshots.length === 0)){
+            iScreenshots = imgTag;
         }
         else{
-            iImages += "\n" + imgTag;            
+            iScreenshots += "\n" + imgTag;            
         }
-        $("#IImages").val(iImages);
-        $("#IImages").attr("title", iImages);
+        $("#IScreenshots").val(iScreenshots);
+        $("#IScreenshots").attr("title", iScreenshots);
       };    
       reader.readAsDataURL(blob);
     }
@@ -272,6 +275,7 @@ function clearIssueFields() {
     $('#cweref').html("");
     $("#IURIs").val("");
     $("#IEvidence").val("");
+    $("#IScreenshots").val("");
     $("#INotes").val("");
     $("#IPriority").prop("selectedIndex", 0);        
 }
