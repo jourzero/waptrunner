@@ -249,8 +249,9 @@ tr .LowPriority{
 }
 
 img {
-    border: 1;
-    border-color: black;
+   padding:1px;
+   border:1px solid #021a40;
+   background-color:#ff0;
 }
 
 /* Cells in even rows (2,4,6...) are one color */ 
