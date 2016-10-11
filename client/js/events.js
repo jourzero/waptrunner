@@ -105,7 +105,7 @@ Template.home.events({
         $("#" + event.target.id).height(400);
     },    
     // When some fields are unselected, decrease the text box size to a default height
-    'blur #IURIs, blur #IEvidence, blur #INotes, blur #PrjNotes, blur #TTesterSupport': function (event) {
+    'blur #IURIs, blur #IEvidence, blur #Screenshots, blur #INotes, blur #PrjNotes, blur #TTesterSupport': function (event) {
         //console.log("Decreasing the height for " + event.target.id);
         $("#" + event.target.id).height(20);
     },    
