@@ -115,7 +115,7 @@ Template.home.events({
     },    
     // When pasting images in Evidence, add a Base64 representation
     'paste #IImages': function (event) {
-        pasteEvidenceBase64ImageToUI(event);
+        pasteImageToUI(event);
     },    
     // Generate an HTML report when the 'HTML Report' button is pressed
     'click #btnHtmlReport': function () {

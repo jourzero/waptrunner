@@ -127,7 +127,7 @@ function addIssueTemplateTextToUI(){
 
 
 // When pasting images in Evidence, add a Base64 representation
-function pasteEvidenceBase64ImageToUI(event){
+function pasteImageToUI(event){
     
   // Get clipboard entries and search for images 
   var items = (event.clipboardData || event.originalEvent.clipboardData).items;
@@ -137,13 +137,15 @@ function pasteEvidenceBase64ImageToUI(event){
       var blob = item.getAsFile();
       var reader = new FileReader();
       reader.onload = function(event){
+        var dataUrl = event.target.result;
+        var imgTag = "<img src='" + dataUrl + "' />";
         // Append the data URL to the Evidence field
         var iImages = $("#IImages").val();
         if ((iImages === undefined)||(iImages.length === 0)){
-            iImages = event.target.result;
+            iImages = imgTag;
         }
         else{
-            iImages += "\n" + event.target.result;            
+            iImages += "\n" + imgTag;            
         }
         $("#IImages").val(iImages);
         $("#IImages").attr("title", iImages);
