@@ -138,7 +138,7 @@ function pasteImageToUI(event){
       var reader = new FileReader();
       reader.onload = function(event){
         var dataUrl = event.target.result;
-        var imgTag = "<img src='" + dataUrl + "' />";
+        var imgTag = "<p><img src='" + dataUrl + "' /></p>";
         // Append the data URL to the Evidence field
         var iImages = $("#IImages").val();
         if ((iImages === undefined)||(iImages.length === 0)){
@@ -153,8 +153,14 @@ function pasteImageToUI(event){
       reader.readAsDataURL(blob);
     }
   }
+  updateScreenshots();
 }
 
+// Update screenshots from the Images field
+function updateScreenshots(){
+    var imgTags = $("#IImages").val();
+    $("#ScreenshotArea").html(imgTags);
+}
 
 // Update UI with CWE data
 //function updateCweUI(cweId, cweName, cweDescr) {
