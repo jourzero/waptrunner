@@ -138,15 +138,15 @@ function pasteEvidenceBase64ImageToUI(event){
       var reader = new FileReader();
       reader.onload = function(event){
         // Append the data URL to the Evidence field
-        var iEvidence = $("#IEvidence").val();
-        if ((iEvidence === undefined)||(iEvidence.length === 0)){
-            iEvidence = event.target.result;
+        var iImages = $("#IImages").val();
+        if ((iImages === undefined)||(iImages.length === 0)){
+            iImages = event.target.result;
         }
         else{
-            iEvidence += "\n" + event.target.result;            
+            iImages += "\n" + event.target.result;            
         }
-        $("#IEvidence").val(iEvidence);
-        $("#IEvidence").attr("title", iEvidence);
+        $("#IImages").val(iImages);
+        $("#IImages").attr("title", iImages);
       };    
       reader.readAsDataURL(blob);
     }
