@@ -163,7 +163,7 @@ function pasteScreenshotToUI(event){
 function updateScreenshots(){
     console.log("Updating screenshots area");
     var imgTags = $("#IScreenshots").val();
-    $("#ScreenshotArea").html(imgTags);
+    $("#IScreenshotsArea").html(imgTags);
 }
 
 // Update UI with CWE data
@@ -277,6 +277,7 @@ function clearIssueFields() {
     $("#IURIs").val("");
     $("#IEvidence").val("");
     $("#IScreenshots").val("");
+    $("#IScreenshotsArea").html("");
     $("#INotes").val("");
     $("#IPriority").prop("selectedIndex", 0);        
 }
