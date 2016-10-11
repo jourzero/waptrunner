@@ -144,6 +144,12 @@ textarea {
     /* font-size: 14px; */
 }
 
+textarea, .screenshotTA {
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+
 .issueVals{
     padding: 3px 1px;
     border: 0px;
