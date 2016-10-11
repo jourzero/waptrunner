@@ -248,6 +248,10 @@ tr .LowPriority{
     background-color: cyan;
 }
 
+img {
+    border: 1;
+}
+
 /* Cells in even rows (2,4,6...) are one color */ 
 .iTR:nth-child(even) { background: #F0F0F0; }   
 
