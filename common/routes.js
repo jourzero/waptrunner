@@ -139,7 +139,7 @@ function toCsv(objArray, sDelimiter, cDelimiter) {
                 // Loop through the names
                 for (name in obj) {
                     if (obj.hasOwnProperty(name)) {
-                        if ((name !== 'IEvidence') && (name !== 'INotes')){
+                        if ((name !== 'IEvidence') && (name !== 'IScreenshots') && (name !== 'INotes')){
                             names.push(name);
                             row += [sDelimiter, name, sDelimiter, cDelimiter].join("");
                         }
@@ -153,7 +153,7 @@ function toCsv(objArray, sDelimiter, cDelimiter) {
             row = "";
             for (n = 0, nl = names.length; n < nl; n += 1) {
                 name = names[n];
-                if ((name !== 'IEvidence') && (name !== 'INotes')){
+                if ((name !== 'IEvidence') && (name !== 'IScreenshots') && (name !== 'INotes')){
                     value = obj[name];
                     if (n > 0) {
                         row += cDelimiter;
@@ -270,6 +270,7 @@ function toHtml(objArray, prjName) {
             if ((obj.IEvidence !== undefined)&&(obj.IEvidence !== ""))
                 //output += "<tr><th class='thID'>Evidence: </th><td class='tdID'>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
                 output += "<tr><th class='thID'>Evidence: </th><td class='tdID'>" + obj.IEvidence + "</td></tr>\n";
+                output += "<tr><th class='thID'>Screenshot(s): </th><td class='tdID'>" + obj.IScreenshots + "</td></tr>\n";
             output += "<tr><td class='Skip'>&nbsp;</td><td class='Skip'>&nbsp;</td></tr>\n";
 	}
         output += "</table>\n";
