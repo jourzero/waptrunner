@@ -146,8 +146,8 @@ Template.home.events({
             saveIssueDataFromUI("#IEvidence", evidence);
         }
         if ((urls !== undefined) && (urls.length > 0)){ 
-            $("#IURLs").val(urls);
-            saveIssueDataFromUI("#IURLs", urls);
+            $("#IURIs").val(urls);
+            saveIssueDataFromUI("#IURIs", urls);
         }
         
         // Update titles so that mouse-over information matches the content
