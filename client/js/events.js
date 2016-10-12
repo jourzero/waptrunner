@@ -121,10 +121,11 @@ Template.home.events({
                 urlSection = true;
             }
             if (urlSection){
-                urlSection = true;
-                var url = t[1].trim();
-                if (url.length > 0)
-                    urls += url;
+                var url = lines[i];
+                if ((url !== undefined) && (url.length > 0)){
+                    url = url.replace("^ - ", "");
+                    urls += url + "\n";
+                }
                 else
                     urlSection = false;
             }
@@ -136,15 +137,15 @@ Template.home.events({
         }
         
         // Push the captured data to the UI and DB
-        if ((issue !== undefined)&&(issue.length>0)){ 
+        if ((issue !== undefined) && (issue.length > 0)){ 
             $("#TIssueName").val(issue);
             saveIssueDataFromUI("#TIssueName", issue);
         }
-        if ((evidence !== undefined)&&(evidence.length>0)){
+        if ((evidence !== undefined) && (evidence.length > 0)){
             $("#IEvidence").val(evidence);
             saveIssueDataFromUI("#IEvidence", evidence);
         }
-        if ((urls !== undefined)&&(urls.length>0)){ 
+        if ((urls !== undefined) && (urls.length > 0)){ 
             $("#IURLs").val(urls);
             saveIssueDataFromUI("#IURLs", urls);
         }
