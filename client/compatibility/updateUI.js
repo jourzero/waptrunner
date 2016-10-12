@@ -151,6 +151,9 @@ function pasteScreenshotToUI(event){
                 iScreenshots += "\n" + imgTag;            
             }
             $("#IScreenshots").val(iScreenshots);
+            saveIssueDataFromUI(event.target.id, event.target.value);
+            updateScreenshots();        
+
       };    
       reader.readAsDataURL(blob);
     }
