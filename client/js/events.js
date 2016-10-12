@@ -109,18 +109,21 @@ Template.home.events({
         var lines = notes.split('\n');
         var issue, evidence, urls;
         var urlSection=false;
+        var newNotes="";
         for (var i in lines){
             var t = lines[i].split(':');
             
             // Capture the Issue Name
-            if (lines[i].startsWith('Issue:'))
+            if (lines[i].startsWith('Issue:')){
                 issue       = t[1].trim();
+            }
             
             // Capture the URL list
-            if (lines[i].startsWith('URL(s):')){
+            else if (lines[i].startsWith('URL(s):')){
                 urlSection = true;
             }
-            if (urlSection){
+            
+            else if (urlSection){
                 var url = lines[i];
                 if ((url !== undefined) && (url.length > 0)){
                     url = url.replace("^ - ", "");
@@ -131,27 +134,36 @@ Template.home.events({
             }
             
             // Capture the evidence
-            if (lines[i].startsWith('Evidence:')){
+            else if (lines[i].startsWith('Evidence:')){
                 evidence    = t[1].trim();
+            }
+            
+            // In the updated notes, prune what we've captured above
+            else{
+                newNotes = lines[i];
             }
         }
         
         // Push the captured data to the UI and DB
         if ((issue !== undefined) && (issue.length > 0)){ 
-            $("#TIssueName").val(issue);
             saveIssueDataFromUI("#TIssueName", issue);
+            $("#TIssueName").val(issue);
         }
         if ((evidence !== undefined) && (evidence.length > 0)){
             // Decode the Base64 value
             evidence = decodeURIComponent(Array.prototype.map.call(atob(evidence), function(c) {
                     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
                 }).join(''));
-            $("#IEvidence").val(evidence);
             saveIssueDataFromUI("#IEvidence", evidence);
+            $("#IEvidence").val(evidence);
         }
         if ((urls !== undefined) && (urls.length > 0)){ 
-            $("#IURIs").val(urls);
             saveIssueDataFromUI("#IURIs", urls);
+            $("#IURIs").val(urls);
+        }
+        if (newNotes.length > 0){ 
+            saveIssueDataFromUI("#INotes", newNotes);
+            $("#INotes").val(newNotes);
         }
         
         // Update titles so that mouse-over information matches the content
