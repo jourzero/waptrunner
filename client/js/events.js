@@ -140,7 +140,7 @@ Template.home.events({
             
             // In the updated notes, prune what we've captured above
             else{
-                newNotes += lines[i];
+                newNotes += lines[i] + "\n";
             }
         }
         
@@ -162,6 +162,7 @@ Template.home.events({
             $("#IURIs").val(urls);
         }
         if (newNotes.length > 0){ 
+            newNotes = stripHtmlTags(newNotes);
             saveIssueDataFromUI("#INotes", newNotes);
             $("#INotes").val(newNotes);
         }
