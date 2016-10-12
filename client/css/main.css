@@ -144,7 +144,7 @@ textarea {
     /* font-size: 14px; */
 }
 
-textarea, .screenshotTA {
+.screenshotTA {
     overflow:hidden;
     white-space:nowrap;
 }
