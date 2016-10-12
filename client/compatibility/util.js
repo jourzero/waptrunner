@@ -43,14 +43,10 @@ function parseBurpIssueAndSave(){
             evidence = t[1].trim();
         }
 
-        // Remove "~" from Burp Clipboarder extension
-        else if (lines[i].equals('~')){
-            newNotes += "\n";
-        }
-
-        // Keep the other lines without modification
+        // Remove "~" from Burp Clipboarder extension and
+        // keep the other lines without modification
         else{
-            newNotes += lines[i] + "\n";
+            newNotes += lines[i].replace(/^~$/, '') + "\n";
         }
     }
 
