@@ -142,6 +142,10 @@ Template.home.events({
             saveIssueDataFromUI("#TIssueName", issue);
         }
         if ((evidence !== undefined) && (evidence.length > 0)){
+            // Decode the Base64 value
+            evidence = decodeURIComponent(Array.prototype.map.call(atob(evidence), function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
             $("#IEvidence").val(evidence);
             saveIssueDataFromUI("#IEvidence", evidence);
         }
