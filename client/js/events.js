@@ -91,7 +91,7 @@ Template.home.events({
         updateTestKBFromUI(event.target.id, event.target.value);
     },
     // When the Specific Issue Data changes, save it to the Issue collection
-    'change #IURIs, change #IEvidence, change #IScreenshots, change #INotes, change #IPriority': function (event) {
+    'change #IURIs, change #IEvidence, change #IScreenshots, change #IPriority': function (event) {
         saveIssueDataFromUI(event.target.id, event.target.value);
         
         // Update titles so that mouse-over information matches the content
@@ -100,6 +100,45 @@ Template.home.events({
         $("#INotes").attr("title", $("#INotes").val());
         updateScreenshots();
     },
+    
+    // When the Specific Issue Data changes, parse it if it's formatted as a Burp issue. Then, save it to the Issue collection
+    'change #INotes': function (event) {
+
+        // If the note is Burp-formatted, parse it
+        var notes = $("#INotes").val();
+        var lines = notes.split('\n');
+        var issue, severity, confidence; //, issueBg, remedBg, issueDetails, remedDetails, evidence, urls;
+        for (var i in lines){
+            //console.log('line: ' + lines[i]);
+            var t = lines[i].split(':');
+            if (lines[i].startsWith('Issue:'))                      issue       = t[1].trim();
+            if (lines[i].startsWith('Severity:'))                   severity    = t[1].trim();
+            if (lines[i].startsWith('Confidence:'))                 confidence  = t[1].trim();
+            /*
+            if (lines[i].startsWith('Issue Background:'))           issueBg     = t[1].trim();
+            if (lines[i].startsWith('Remediation Background:'))     remedBg     = t[1].trim();
+            if (lines[i].startsWith('Issue Details:'))              issueDetails = t[1].trim();
+            if (lines[i].startsWith('Remediation Details:'))        remedDetails = t[1].trim();
+            if (lines[i].startsWith('Request/Response in Base64'))  evidence    = t[1].trim();
+            if (lines[i].startsWith('Affected URL(s):'))            urls        = t[1].trim();
+            */
+        }
+        //console.log("Issue =", issue);
+        //console.log("Sev.  =", severity);
+        //console.log("Conf. =", confidence);
+        if ((issue !== undefined)&&(issue.length>0)){ 
+            $("#TIssueName").val(issue);
+        }
+
+        saveIssueDataFromUI(event.target.id, event.target.value);
+        
+        // Update titles so that mouse-over information matches the content
+        $("#IURIs").attr("title", $("#IURIs").val());
+        $("#IEvidence").attr("title", $("#IEvidence").val());
+        $("#INotes").attr("title", $("#INotes").val());
+        updateScreenshots();
+    },
+    
     // When some fields are clicked, increase the text box size
     'click #IURIs, click #IEvidence, click #IScreenshots, click #INotes, click #PrjNotes, click #TTesterSupport': function (event) {
         //console.log("Increasing the height for " + event.target.id);
