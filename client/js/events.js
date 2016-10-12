@@ -118,6 +118,7 @@ Template.home.events({
     'paste #IScreenshots': function (event) {
         pasteScreenshotToUI(event);
         saveIssueDataFromUI(event.target.id, event.target.value);
+        updateScreenshots();        
     },    
     // Generate an HTML report when the 'HTML Report' button is pressed
     'click #btnHtmlReport': function () {

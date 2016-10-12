@@ -139,7 +139,8 @@ function pasteScreenshotToUI(event){
     if (item.kind === 'file') {
       var blob = item.getAsFile();
       var reader = new FileReader();
-      reader.onload = function(event){
+      reader.readAsDataURL(blob);
+      //reader.onload = function(event){
         var dataUrl = event.target.result;
         var imgTag = "<p><img src='" + dataUrl + "' /></p>";
         // Append the data URL to the Evidence field
@@ -151,12 +152,10 @@ function pasteScreenshotToUI(event){
             iScreenshots += "\n" + imgTag;            
         }
         $("#IScreenshots").val(iScreenshots);
-        $("#IScreenshots").attr("title", iScreenshots);
-      };    
-      reader.readAsDataURL(blob);
+      //};    
+      //reader.readAsDataURL(blob);
     }
   }
-  updateScreenshots();
 }
 
 // Update screenshots from the Images field
