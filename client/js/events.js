@@ -98,6 +98,7 @@ Template.home.events({
         $("#IURIs").attr("title", $("#IURIs").val());
         $("#IEvidence").attr("title", $("#IEvidence").val());
         $("#INotes").attr("title", $("#INotes").val());
+        updateScreenshots();
     },
     // When some fields are clicked, increase the text box size
     'click #IURIs, click #IEvidence, click #IScreenshots, click #INotes, click #PrjNotes, click #TTesterSupport': function (event) {

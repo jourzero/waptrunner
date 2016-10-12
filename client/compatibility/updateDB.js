@@ -102,9 +102,9 @@ function saveIssueDataFromUI(tgtId, tgtVal) {
         console.log("Mongo _id for new record: " + mid);
     }
     else{
-        console.log("Updating issue data for object " + i._id.valueOf());
+        console.log("Updating issue data for object " + i._id);
         mid = issueColl.upsert(i._id, mod);
-        console.log("Mongo _id for record: " + mid.valueOf());        
+        //console.log("Mongo _id for new record: " + mid);        
     }    
 }
 
