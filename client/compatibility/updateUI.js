@@ -164,7 +164,7 @@ function pasteScreenshotToUI(event){
 function updateScreenshots(){
     console.log("Updating screenshots area");
     var imgTags = $("#IScreenshots").val();
-    $("#IScreenshotsArea").html(imgTags);
+    //$("#IScreenshotsArea").html(imgTags);
 }
 
 // Update UI with CWE data
