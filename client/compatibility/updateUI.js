@@ -139,21 +139,20 @@ function pasteScreenshotToUI(event){
     if (item.kind === 'file') {
       var blob = item.getAsFile();
       var reader = new FileReader();
+      reader.onload = function(event){
+            var dataUrl = event.target.result;
+            var imgTag = "<p><img src='" + dataUrl + "' /></p>";
+            // Append the data URL to the Evidence field
+            var iScreenshots = $("#IScreenshots").val();
+            if ((iScreenshots === undefined)||(iScreenshots.length === 0)){
+                iScreenshots = imgTag;
+            }
+            else{
+                iScreenshots += "\n" + imgTag;            
+            }
+            $("#IScreenshots").val(iScreenshots);
+      };    
       reader.readAsDataURL(blob);
-      //reader.onload = function(event){
-        var dataUrl = event.target.result;
-        var imgTag = "<p><img src='" + dataUrl + "' /></p>";
-        // Append the data URL to the Evidence field
-        var iScreenshots = $("#IScreenshots").val();
-        if ((iScreenshots === undefined)||(iScreenshots.length === 0)){
-            iScreenshots = imgTag;
-        }
-        else{
-            iScreenshots += "\n" + imgTag;            
-        }
-        $("#IScreenshots").val(iScreenshots);
-      //};    
-      //reader.readAsDataURL(blob);
     }
   }
 }
