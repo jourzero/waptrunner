@@ -107,36 +107,52 @@ Template.home.events({
         // If the note is Burp-formatted, parse it
         var notes = $("#INotes").val();
         var lines = notes.split('\n');
-        var issue, severity, confidence; //, issueBg, remedBg, issueDetails, remedDetails, evidence, urls;
+        var issue, evidence, urls;
+        var urlSection=false;
         for (var i in lines){
-            //console.log('line: ' + lines[i]);
             var t = lines[i].split(':');
-            if (lines[i].startsWith('Issue:'))                      issue       = t[1].trim();
-            if (lines[i].startsWith('Severity:'))                   severity    = t[1].trim();
-            if (lines[i].startsWith('Confidence:'))                 confidence  = t[1].trim();
-            /*
-            if (lines[i].startsWith('Issue Background:'))           issueBg     = t[1].trim();
-            if (lines[i].startsWith('Remediation Background:'))     remedBg     = t[1].trim();
-            if (lines[i].startsWith('Issue Details:'))              issueDetails = t[1].trim();
-            if (lines[i].startsWith('Remediation Details:'))        remedDetails = t[1].trim();
-            if (lines[i].startsWith('Request/Response in Base64'))  evidence    = t[1].trim();
-            if (lines[i].startsWith('Affected URL(s):'))            urls        = t[1].trim();
-            */
+            
+            // Capture the Issue Name
+            if (lines[i].startsWith('Issue:'))
+                issue       = t[1].trim();
+            
+            // Capture the URL list
+            if (lines[i].startsWith('URL(s):')){
+                urlSection = true;
+            }
+            if (urlSection){
+                urlSection = true;
+                var url = t[1].trim();
+                if (url.length > 0)
+                    urls += url;
+                else
+                    urlSection = false;
+            }
+            
+            // Capture the evidence
+            if (lines[i].startsWith('Evidence:')){
+                evidence    = t[1].trim();
+            }
         }
-        //console.log("Issue =", issue);
-        //console.log("Sev.  =", severity);
-        //console.log("Conf. =", confidence);
+        
+        // Push the captured data to the UI and DB
         if ((issue !== undefined)&&(issue.length>0)){ 
             $("#TIssueName").val(issue);
+            saveIssueDataFromUI("#TIssueName", issue);
         }
-
-        saveIssueDataFromUI(event.target.id, event.target.value);
+        if ((evidence !== undefined)&&(evidence.length>0)){
+            $("#IEvidence").val(evidence);
+            saveIssueDataFromUI("#IEvidence", evidence);
+        }
+        if ((urls !== undefined)&&(urls.length>0)){ 
+            $("#IURLs").val(urls);
+            saveIssueDataFromUI("#IURLs", urls);
+        }
         
         // Update titles so that mouse-over information matches the content
         $("#IURIs").attr("title", $("#IURIs").val());
         $("#IEvidence").attr("title", $("#IEvidence").val());
         $("#INotes").attr("title", $("#INotes").val());
-        updateScreenshots();
     },
     
     // When some fields are clicked, increase the text box size

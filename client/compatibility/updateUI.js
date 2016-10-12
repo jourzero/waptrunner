@@ -141,7 +141,7 @@ function pasteScreenshotToUI(event){
       var reader = new FileReader();
       reader.onload = function(event){
             var dataUrl = event.target.result;
-            var imgTag = "<p><img src='" + dataUrl + "' /></p>";
+            var imgTag = "<p>CAPTION:<br/><img src='" + dataUrl + "' /></p>";
             // Append the data URL to the Evidence field
             var iScreenshots = $("#IScreenshots").val();
             if ((iScreenshots === undefined)||(iScreenshots.length === 0)){
