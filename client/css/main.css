@@ -144,7 +144,7 @@ textarea {
     /* font-size: 14px; */
 }
 
-/*
+/* Adding the below makes Chrome slow down considerably!
 .screenshotTA {
     overflow:hidden;
     white-space:nowrap;
