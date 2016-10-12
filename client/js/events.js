@@ -140,7 +140,7 @@ Template.home.events({
             
             // In the updated notes, prune what we've captured above
             else{
-                newNotes = lines[i];
+                newNotes += lines[i];
             }
         }
         
