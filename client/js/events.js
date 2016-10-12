@@ -101,21 +101,21 @@ Template.home.events({
         updateScreenshots();
     },
     
-    // When the Specific Issue Data changes, parse it if it's formatted as a Burp issue. Then, save it to the Issue collection
+    // When the Specific Issue Data changes, parse it if it's formatted as a Burp issue. 
+    // Then, save it to the Issue collection.
     'change #INotes': function (event) {
 
         // If the note is Burp-formatted, parse it
         var notes = $("#INotes").val();
         var lines = notes.split('\n');
-        var issue, evidence, urls;
+        var issue="", evidence="", urls="", newNotes="";
         var urlSection=false;
-        var newNotes="";
         for (var i in lines){
             var t = lines[i].split(':');
             
             // Capture the Issue Name
             if (lines[i].startsWith('Issue:')){
-                issue       = t[1].trim();
+                issue = t[1].trim();
             }
             
             // Capture the URL list
@@ -135,7 +135,7 @@ Template.home.events({
             
             // Capture the evidence
             else if (lines[i].startsWith('Evidence:')){
-                evidence    = t[1].trim();
+                evidence = t[1].trim();
             }
             
             // In the updated notes, prune what we've captured above
