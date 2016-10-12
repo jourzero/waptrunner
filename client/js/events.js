@@ -103,7 +103,7 @@ Template.home.events({
     // When some fields are clicked, increase the text box size
     'click #IURIs, click #IEvidence, click #IScreenshots, click #INotes, click #PrjNotes, click #TTesterSupport': function (event) {
         //console.log("Increasing the height for " + event.target.id);
-        $("#" + event.target.id).height(300);
+        $("#" + event.target.id).height(200);
     },    
     // When some fields are unselected, decrease the text box size to a default height
     'blur #IURIs, blur #IEvidence, blur #IScreenshots, blur #INotes, blur #PrjNotes, blur #TTesterSupport': function (event) {
