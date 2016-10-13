@@ -43,10 +43,9 @@ function parseBurpIssueAndSave(){
             evidence = t[1].trim();
         }
 
-        // Remove "~" and collapse multiple spaces (from Burp Clipboarder extension)
-        // and keep the other lines without modification.
+        // Keep the other lines without modification
         else{
-            newNotes += lines[i].replace(/^~$/, '').replace(/\s+/g, " ") + "\n";            
+            newNotes += lines[i] + "\n";            
         }
     }
 
@@ -67,8 +66,11 @@ function parseBurpIssueAndSave(){
         saveIssueDataFromUI("#IURIs", urls);
         $("#IURIs").val(urls);
     }
+    
+    // Save the note after removing "~", stripping HTML tags and collapsing 
+    // multiple spaces (from Burp Clipboarder extension).
     if (newNotes.length > 0){ 
-        newNotes = stripHtmlTags(newNotes).trim();
+        newNotes = stripHtmlTags(newNotes).replace(/^~$/, '').replace(/\s+/g, " ").trim();
         saveIssueDataFromUI("#INotes", newNotes);
         $("#INotes").val(newNotes);
     }
