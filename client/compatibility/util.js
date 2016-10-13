@@ -31,7 +31,7 @@ function parseBurpIssueAndSave(){
         else if (urlSection){
             var url = lines[i];
             if ((url !== undefined) && (url.length > 0)){
-                url = url.replace("^ - ", "");
+                url = url.replace("^ . ", "");
                 urls += url + "\n";
             }
             else
