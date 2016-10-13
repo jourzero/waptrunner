@@ -219,8 +219,7 @@ function toHtml(objArray, prjName) {
             priority = obj.IPriorityText;
             
             // Don't print the informational findings (for the tester)
-            if (priority === 'Info')
-                continue;
+            //if (priority === 'Info') continue;
             
             // Count the number of URIs
             var count=0;
