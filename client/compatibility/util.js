@@ -43,9 +43,10 @@ function parseBurpIssueAndSave(){
             evidence = t[1].trim();
         }
 
-        // Keep the other lines without modification
+        // Remove the empty lines with "~" from Burp Clipboarder and 
+        // keep other unmodified lines.
         else{
-            newNotes += lines[i] + "\n";            
+            newNotes += lines[i].replace(/^~$/, "") + "\n";            
         }
     }
 
@@ -70,7 +71,7 @@ function parseBurpIssueAndSave(){
     // Save the note after removing "~", stripping HTML tags and collapsing 
     // multiple spaces (from Burp Clipboarder extension).
     if (newNotes.length > 0){ 
-        newNotes = stripHtmlTags(newNotes).replace(/^~/, "").replace(/ +/g, " ").trim();
+        newNotes = stripHtmlTags(newNotes).replace(/ +/g, " ").trim();
         saveIssueDataFromUI("#INotes", newNotes);
         $("#INotes").val(newNotes);
     }
