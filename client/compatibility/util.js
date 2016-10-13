@@ -77,6 +77,8 @@ function parseBurpIssueAndSave(){
     if (sev >= 0){ 
         saveIssueDataFromUI("#IPriority", sev);
         $("#IPriority").val(sev);
+        saveIssueDataFromUI("#TSeverity", sev);
+        $("#TSeverity").val(sev);
     }
     
     // Save the note after removing "~", stripping HTML tags and collapsing 
