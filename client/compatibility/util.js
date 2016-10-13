@@ -70,7 +70,7 @@ function parseBurpIssueAndSave(){
     // Save the note after removing "~", stripping HTML tags and collapsing 
     // multiple spaces (from Burp Clipboarder extension).
     if (newNotes.length > 0){ 
-        newNotes = stripHtmlTags(newNotes).replace(/^~$/, '').replace(/ +/g, " ").trim();
+        newNotes = stripHtmlTags(newNotes).replace(/^~/, '').replace(/ +/g, " ").trim();
         saveIssueDataFromUI("#INotes", newNotes);
         $("#INotes").val(newNotes);
     }
