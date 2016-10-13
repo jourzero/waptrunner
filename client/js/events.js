@@ -102,8 +102,9 @@ Template.home.events({
     },
     
     // When the notes field changes, try to parse it as an issue that comes from Burp Clipboarder. 
-    'change #INotes': function (event) {
+    'change #INotes, blur #INotes': function (event) {
         parseBurpIssueAndSave();
+        $("#" + event.target.id).height(20);
     },
     
     // When some fields are clicked, increase the text box size
@@ -112,7 +113,7 @@ Template.home.events({
         $("#" + event.target.id).height(200);
     },    
     // When some fields are unselected, decrease the text box size to a default height
-    'blur #IURIs, blur #IEvidence, blur #IScreenshots, blur #INotes, blur #PrjNotes, blur #TTesterSupport': function (event) {
+    'blur #IURIs, blur #IEvidence, blur #IScreenshots, blur #PrjNotes, blur #TTesterSupport': function (event) {
         //console.log("Decreasing the height for " + event.target.id);
         $("#" + event.target.id).height(20);
     },    
