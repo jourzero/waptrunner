@@ -263,6 +263,10 @@ function toHtml(objArray, prjName) {
             }
             if ((obj.TSeverityText !== undefined)&&(obj.TSeverityText !== ""))
                 output += "<tr><th class='thID'>Severity: </th><td class='tdID'>" + obj.TSeverityText + "</td></tr>\n";
+            if ((obj.TRef1 !== undefined)&&(obj.TRef1 !== ""))
+                output += "<tr><th class='thID'>Ref. 1: </th><td class='tdID'>" + obj.TRef1 + "</td></tr>\n";
+            if ((obj.TRef2 !== undefined)&&(obj.TRef2 !== ""))
+                output += "<tr><th class='thID'>Ref. 2: </th><td class='tdID'>" + obj.TRef2 + "</td></tr>\n";
             if ((obj.IPriorityText !== undefined)&&(obj.IPriorityText !== ""))
                 output += "<tr><th class='thID'>Priority: </th><td class='tdID'>" + obj.IPriorityText + "</td></tr>\n";
             if ((obj.INotes !== undefined)&&(obj.INotes !== ""))
