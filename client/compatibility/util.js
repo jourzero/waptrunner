@@ -13,7 +13,7 @@ function parseBurpIssueAndSave(){
     // If the note is Burp-formatted, parse it
     var notes = $("#INotes").val();
     var lines = notes.split('\n');
-    var issue="", evidence="", urls="", newNotes="";
+    var issue="", evidence="", urls="", newNotes="", sev=-1, sevText="";
     var urlSection=false;
     for (var i in lines){
         var t = lines[i].split(':');
@@ -22,6 +22,13 @@ function parseBurpIssueAndSave(){
         if (lines[i].startsWith('Issue:')){
             issue = t[1].trim();
         }
+
+        // Capture the Issue Name
+        if (lines[i].startsWith('Severity:')){
+            sevText = t[1].trim();
+            sev = getSevVal(sevText);
+        }
+
 
         // Capture the URL list
         else if (lines[i].startsWith('URL(s):')){
@@ -67,6 +74,10 @@ function parseBurpIssueAndSave(){
         saveIssueDataFromUI("#IURIs", urls);
         $("#IURIs").val(urls);
     }
+    if (sev >= 0){ 
+        saveIssueDataFromUI("#IPriority", sev);
+        $("#IPriority").val(sev);
+    }
     
     // Save the note after removing "~", stripping HTML tags and collapsing 
     // multiple spaces (from Burp Clipboarder extension).
@@ -80,4 +91,25 @@ function parseBurpIssueAndSave(){
     $("#IURIs").attr("title", $("#IURIs").val());
     $("#IEvidence").attr("title", $("#IEvidence").val());
     $("#INotes").attr("title", $("#INotes").val());
+}
+
+function getSevVal(sevStr) {
+    var sev = -1;
+    switch (sevStr) {
+        case 'Information'    :
+            sev = 0;
+            break;
+        case 'Low'      :
+            sev = 1;
+            break;
+        case 'Medium'     :
+            sev = 2;
+            break;
+        case 'High'     :
+            sev = 3;
+            break;
+        default         :
+            sev = -1;
+    }
+    return sev;
 }
