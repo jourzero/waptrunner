@@ -46,8 +46,7 @@ function parseBurpIssueAndSave(){
         // Remove "~" and collapse multiple spaces (from Burp Clipboarder extension)
         // and keep the other lines without modification.
         else{
-            newNotes += lines[i].replace(/^~$/, '').replace(" *", " ") + "\n";
-            
+            newNotes += lines[i].replace(/^~$/, '').replace(" *", " ") + "\n";            
         }
     }
 
