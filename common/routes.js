@@ -253,7 +253,7 @@ function toHtml(objArray, prjName) {
             // Print each issue with the issue as the header and the details as part of a table.
             output += "<tr><th class='" + priority + "P'></th><th class='" + priority + "P' id='" + htmlEncode(obj.TID, true, 4) + "'>" + obj.TIssueName + "</th></tr>\n";
             if ((obj.CweId !== undefined)&&(obj.CweId !== ""))
-                output += "<tr><th class='thID'>CWE ID: </th><td class='tdID'><a href='" + cweUriBase + obj.CweId + ".html'>" + obj.CweId + "</td></tr>\n";
+                output += "<tr><th class='thID'>CWE ID: </th><td class='tdID'><a href='" + cweUriBase + obj.CweId + ".html'>" + obj.CweId + "</a></td></tr>\n";
             if ((obj.IURIs !== undefined)&&(obj.IURIs !== "")){
                 output += "<tr><th class='thID'>URI(s): </th><td class='tdID'><ol>";
                 var uri = obj.IURIs.split("\n");
@@ -264,9 +264,9 @@ function toHtml(objArray, prjName) {
             if ((obj.TSeverityText !== undefined)&&(obj.TSeverityText !== ""))
                 output += "<tr><th class='thID'>Severity: </th><td class='tdID'>" + obj.TSeverityText + "</td></tr>\n";
             if ((obj.TRef1 !== undefined)&&(obj.TRef1 !== ""))
-                output += "<tr><th class='thID'>Ref. 1: </th><td class='tdID'>" + obj.TRef1 + "</td></tr>\n";
+                output += "<tr><th class='thID'>Ref. 1: </th><td class='tdID'><a href='" + obj.TRef1 + "'>" + obj.TRef1 + "</a></td></tr>\n";
             if ((obj.TRef2 !== undefined)&&(obj.TRef2 !== ""))
-                output += "<tr><th class='thID'>Ref. 2: </th><td class='tdID'>" + obj.TRef2 + "</td></tr>\n";
+                output += "<tr><th class='thID'>Ref. 2: </th><td class='tdID'><a href='" + obj.TRef2 + "'>" + obj.TRef2 + "</a></td></tr>\n";
             if ((obj.IPriorityText !== undefined)&&(obj.IPriorityText !== ""))
                 output += "<tr><th class='thID'>Priority: </th><td class='tdID'>" + obj.IPriorityText + "</td></tr>\n";
             if ((obj.INotes !== undefined)&&(obj.INotes !== ""))
