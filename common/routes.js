@@ -247,8 +247,7 @@ function toHtml(objArray, prjName) {
             priority = obj.IPriorityText;
             
             // Don't print the informational findings (for the tester)
-            if (priority === 'Info')
-                continue;
+            //if (priority === 'Info') continue;
             
             // Print each issue with the issue as the header and the details as part of a table.
             output += "<tr><th class='" + priority + "P'></th><th class='" + priority + "P' id='" + htmlEncode(obj.TID, true, 4) + "'>" + obj.TIssueName + "</th></tr>\n";
