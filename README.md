@@ -14,7 +14,13 @@ This is a tool that helps me run through web app pen tests by stepping through v
 * Update app using Update button that triggers download of updated code on github (from the server side).
 * Forms-based auth.
 * Export to CSV and HTML from UI
-* Import issues from my Clipboarder Burp App (paste into Notes field and other fields will be populated)
+* Import Burp issues from my Clipboarder Burp App. To use it:
+> * Download my Clipboarder extension from https://github.com/jourzero/clipboarder/blob/master/dist/Clipboarder.jar
+> * Add Clipboarder extension to Burp 
+> * Select one issue from Target/Issues
+> * Use context menu "Copy as free text to clipboard"
+> * Paste clipboard content into WAPT Runner's Notes field 
+> * Result: Issue text will be parsed and data from Burp like Issue Name, Evidence, Severity, Priority will be adjusted accordingly.
 * Import screenshots from clipboard and paste them into the Paste Area as HTML5 Base64 images.
 
 ## TODOs
