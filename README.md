@@ -20,7 +20,7 @@ This is a tool that helps me run through web app pen tests by stepping through v
  * Select one issue from Target/Issues
  * Use context menu "Copy as free text to clipboard"
  * Paste clipboard content into WAPT Runner's Notes field 
- * Result: Issue text will be parsed and data from Burp like Issue Name, Evidence, Severity, Priority will be adjusted accordingly.
+ * Result: Burp issue text will be parsed and UI fields like Issue Name, Evidence, Severity, Priority will be adjusted accordingly.
 * Import screenshots from clipboard and paste them into the Paste Area as HTML5 Base64 images.
 
 ## TODOs
