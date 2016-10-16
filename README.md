@@ -14,6 +14,8 @@ This is a tool that helps me run through web app pen tests by stepping through v
 * Update app using Update button that triggers download of updated code on github (from the server side).
 * Forms-based auth.
 * Export to CSV and HTML from UI
+* Import issues from my Clipboarder Burp App (paste into Notes field and other fields will be populated)
+* Import screenshots from clipboard and paste them into the Paste Area as HTML5 Base64 images.
 
 ## TODOs
 * Add prep scripts to GIT repo
