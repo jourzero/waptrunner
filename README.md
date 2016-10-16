@@ -15,7 +15,7 @@ This is a tool that helps me run through web app pen tests by stepping through v
 * Forms-based auth.
 * Export to CSV and HTML from UI
 * Import Burp issues from my Clipboarder Burp App. To use it:
-> * Download my Clipboarder extension from https://github.com/jourzero/clipboarder/blob/master/dist/Clipboarder.jar
+> * Download my [Clipboarder extension](https://github.com/jourzero/clipboarder/blob/master/dist/Clipboarder.jar)
 > * Add Clipboarder extension to Burp 
 > * Select one issue from Target/Issues
 > * Use context menu "Copy as free text to clipboard"
