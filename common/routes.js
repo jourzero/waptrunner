@@ -271,7 +271,7 @@ function toHtml(objArray, prjName) {
                 output += "<tr><th class='thID'>Notes: </th><td class='tdID'>" + htmlEncode(obj.INotes, true, 4) + "</td></tr>\n";
             if ((obj.IEvidence !== undefined)&&(obj.IEvidence !== ""))
                 //output += "<tr><th class='thID'>Evidence: </th><td class='tdID'>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
-                output += "<tr><th class='thID'>Evidence: </th><td class='tdID'><pre>" + obj.IEvidence + "</pre></td></tr>\n";
+                output += "<tr><th class='thID'>Evidence: </th><td class='tdID'><pre>" + htmlEncode(obj.IEvidence, true, 4) + "</pre></td></tr>\n";
                 output += "<tr><th class='thID'>Screenshot(s): </th><td class='tdID'>" + obj.IScreenshots + "</td></tr>\n";
             output += "<tr><td class='Skip'>&nbsp;</td><td class='Skip'>&nbsp;</td></tr>\n";
 	}
