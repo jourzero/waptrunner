@@ -1,8 +1,7 @@
 // Base URI and suffix part (to append after the query) for searching CVEs based on a partial software name
-//gCveRptBase   = "http://www.cvedetails.com/google-search-results.php?q=";
+gCveRptBase   = "http://www.cvedetails.com/google-search-results.php?q=";
+//gCveRptBase   = "https://web.nvd.nist.gov/view/vuln/search-results?query=";
 //gCveRptSuffix = "";
-gCveRptBase   = "https://web.nvd.nist.gov/view/vuln/search-results?query=";
-gCveRptSuffix = "";
 
 // Base URI for getting CWE details
 gCweUriBase   = "https://cwe.mitre.org/data/definitions/";
