@@ -165,7 +165,7 @@ textarea {
 .prjRight{
     padding: 3px 1px;
     border: 0px;
-    width: 200px;
+    /* width: 200px; */
 }
 
 .tinyTH{
