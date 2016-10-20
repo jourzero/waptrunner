@@ -90,11 +90,13 @@ function parseBurpIssueAndSave(){
         $("#TIssueName").val(issue);
     }
     if ((issueBG !== undefined) && (issueBG.length > 0)){ 
+        issueBG = stripHtmlTags(issueBG).replace(/ +/g, " ").trim();
         saveIssueDataFromUI("#TIssueBackground", issueBG);
         $("#TIssueBackground").val(issueBG);
         $("#TIssueBackground").attr("title", issueBG);
     }
     if ((remedBG !== undefined) && (remedBG.length > 0)){ 
+        remedBG = stripHtmlTags(remedBG).replace(/ +/g, " ").trim();
         saveIssueDataFromUI("#TRemediationBackground", remedBG);
         $("#TRemediationBackground").val(remedBG);
         $("#TRemediationBackground").attr("title", remedBG);
