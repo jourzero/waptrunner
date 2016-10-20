@@ -220,7 +220,7 @@ function toHtml(objArray, prjName) {
             prio = parseInt(obj.IPriority);
             
             // Don't print the informational findings (for the tester)
-            if ((prio !== undefined) && (prio >= 0)) continue;
+            if ((prio !== undefined) && (prio < 0)) continue;
             
             // Count the number of URIs
             var count=0;
@@ -248,7 +248,7 @@ function toHtml(objArray, prjName) {
             prio = parseInt(obj.IPriority);
             
             // Don't print the informational findings (for the tester)
-            if ((prio !== undefined) && (prio >= 0)) continue;
+            if ((prio !== undefined) && (prio < 0)) continue;
             
             // Print each issue with the issue as the header and the details as part of a table.
             output += "<tr><th class='" + priority + "P'></th><th class='" + priority + "P' id='" + htmlEncode(obj.TID, true, 4) + "'>" + obj.TIssueName + "</th></tr>\n";
