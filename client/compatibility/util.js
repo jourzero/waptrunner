@@ -89,6 +89,16 @@ function parseBurpIssueAndSave(){
         saveIssueDataFromUI("#TIssueName", issue);
         $("#TIssueName").val(issue);
     }
+    if ((issueBG !== undefined) && (issueBG.length > 0)){ 
+        saveIssueDataFromUI("#TIssueBackground", issueBG);
+        $("#TIssueBackground").val(issueBG);
+        $("#TIssueBackground").attr("title", issueBG);
+    }
+    if ((remedBG !== undefined) && (remedBG.length > 0)){ 
+        saveIssueDataFromUI("#TRemediationBackground", remedBG);
+        $("#TRemediationBackground").val(remedBG);
+        $("#TRemediationBackground").attr("title", remedBG);
+    }
     if ((evidence !== undefined) && (evidence.length > 0)){
         // Decode the Base64 value
         evidence = decodeURIComponent(Array.prototype.map.call(atob(evidence), function(c) {
@@ -96,10 +106,12 @@ function parseBurpIssueAndSave(){
             }).join('')).trim();
         saveIssueDataFromUI("#IEvidence", evidence);
         $("#IEvidence").val(evidence);
+        $("#IEvidence").attr("title", evidence);
     }
     if ((urls !== undefined) && (urls.length > 0)){ 
         saveIssueDataFromUI("#IURIs", urls);
         $("#IURIs").val(urls);
+        $("#IURIs").attr("title", urls);
     }
     if (sev >= 0){ 
         saveIssueDataFromUI("#IPriority", sev);
@@ -114,12 +126,8 @@ function parseBurpIssueAndSave(){
         newNotes = stripHtmlTags(newNotes).replace(/ +/g, " ").trim();
         saveIssueDataFromUI("#INotes", newNotes);
         $("#INotes").val(newNotes);
+        $("#INotes").attr("title", newNotes);
     }
-
-    // Update titles so that mouse-over information matches the content
-    $("#IURIs").attr("title", $("#IURIs").val());
-    $("#IEvidence").attr("title", $("#IEvidence").val());
-    $("#INotes").attr("title", $("#INotes").val());
 }
 
 function getSevVal(sevStr) {
