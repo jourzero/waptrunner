@@ -199,7 +199,7 @@ function serverHello(){
 function toHtml(objArray, prjName) {
 	var obj = {};
         var output = "<html><head>\n";
-        var priority = "N/A", prevPrio = "";
+        var priority = "N/A", prevPrio = "", prio = -1;
         var cweUriBase   = "https://cwe.mitre.org/data/definitions/";
         output += "<style>\nbody{width:1200px;}\na{text-decoration:none;}\n.tdID{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\n.thID{text-align:right;vertical-align:top;width:80px;}\nth{vertical-align:top;}\nol{padding-left:25px;}\n.HighP{background-color:red;}\n.MediumP{background-color:orange;}\n.LowP{background-color:cyan;}\n.Skip{background-color:#FFFFFF;}\ntr:nth-child(even){background:#EAEAEA;}\ntr:nth-child(odd){background:#F0F0F0;}\n</style>\n";
         
@@ -217,9 +217,10 @@ function toHtml(objArray, prjName) {
             obj = objArray[i];
             prevPrio = priority;
             priority = obj.IPriorityText;
+            prio = parseInt(obj.IPriority);
             
             // Don't print the informational findings (for the tester)
-            if (priority === 'Done') continue;
+            if ((prio !== undefined) && (prio >= 0)) continue;
             
             // Count the number of URIs
             var count=0;
@@ -244,9 +245,10 @@ function toHtml(objArray, prjName) {
             obj = objArray[i];
             prevPrio = priority;
             priority = obj.IPriorityText;
+            prio = parseInt(obj.IPriority);
             
             // Don't print the informational findings (for the tester)
-            if (priority === 'Done') continue;
+            if ((prio !== undefined) && (prio >= 0)) continue;
             
             // Print each issue with the issue as the header and the details as part of a table.
             output += "<tr><th class='" + priority + "P'></th><th class='" + priority + "P' id='" + htmlEncode(obj.TID, true, 4) + "'>" + obj.TIssueName + "</th></tr>\n";
