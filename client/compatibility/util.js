@@ -13,8 +13,10 @@ function parseBurpIssueAndSave(){
     // If the note is Burp-formatted, parse it
     var notes = $("#INotes").val();
     var lines = notes.split('\n');
-    var issue="", evidence="", urls="", newNotes="", sev=-1, sevText="";
+    var issue="", evidence="", urls="", newNotes="", sev=-1, sevText="", issueBG="", remedBG="";
     var urlSection=false;
+    var remedBGSection=false;
+    var issueBGSection=false;
     for (var i in lines){
         var t = lines[i].split(':');
 
@@ -34,7 +36,6 @@ function parseBurpIssueAndSave(){
         else if (lines[i].startsWith('URL(s):')){
             urlSection = true;
         }
-
         else if (urlSection){
             var url = lines[i];
             if ((url !== undefined) && (url.length > 0)){
@@ -43,6 +44,32 @@ function parseBurpIssueAndSave(){
             }
             else
                 urlSection = false;
+        }
+
+        // Capture the Issue Background
+        else if (lines[i].startsWith('Issue Background:')){
+            issueBGSection = true;
+        }
+        else if (issueBGSection){
+            var ibg = lines[i];
+            if ((ibg !== undefined) && (ibg !== '~')){
+                issueBG += ibg + "\n";
+            }
+            else
+                issueBGSection = false;
+        }
+
+        // Capture the Remediation Background
+        else if (lines[i].startsWith('Remediation Background:')){
+            remedBGSection = true;
+        }
+        else if (remedBGSection){
+            var rbg = lines[i];
+            if ((rbg !== undefined) && (rbg !== '~')){
+                remedBG += rbg + "\n";
+            }
+            else
+                remedBGSection = false;
         }
 
         // Capture the evidence
