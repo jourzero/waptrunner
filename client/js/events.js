@@ -85,11 +85,13 @@ Template.home.events({
         clearTestingFields();
         clearIssueFields();
         newTest();
-    },       
+    },    
+    
     // When the test fields values change, update the Test KB
-    'change #TTestName, change #TTesterSupport, change #TTRef, change #cwename, change #cweid, change #TIssueName, change .testKbCB, change #TSeverity, change #TRef1, change #TRef2': function (event) {
+    'change #TTestName, change #TTesterSupport, change #TTRef, change #cwename, change #cweid, change #TIssueName, change #TIssueBackground, change #TRemediationBackground, change .testKbCB, change #TSeverity, change #TRef1, change #TRef2': function (event) {
         updateTestKBFromUI(event.target.id, event.target.value);
     },
+    
     // When the Specific Issue Data changes, save it to the Issue collection
     'change #IURIs, change #IEvidence, change #IScreenshots, change #IPriority': function (event) {
         saveIssueDataFromUI(event.target.id, event.target.value);
@@ -108,15 +110,17 @@ Template.home.events({
     },
     
     // When some fields are clicked, increase the text box size
-    'click #IURIs, click #IEvidence, click #IScreenshots, click #INotes, click #PrjNotes, click #TTesterSupport': function (event) {
+    'click #IURIs, click #IEvidence, click #IScreenshots, click #INotes, click #PrjNotes, click #TTesterSupport, click #TIssueBackground, click #TRemediationBackground': function (event) {
         //console.log("Increasing the height for " + event.target.id);
         $("#" + event.target.id).height(200);
     },    
+    
     // When some fields are unselected, decrease the text box size to a default height
-    'blur #IURIs, blur #IEvidence, blur #IScreenshots, blur #PrjNotes, blur #TTesterSupport': function (event) {
+    'blur #IURIs, blur #IEvidence, blur #IScreenshots, blur #PrjNotes, blur #TTesterSupport, blur #TIssueBackground, blur #TRemediationBackground': function (event) {
         //console.log("Decreasing the height for " + event.target.id);
-        $("#" + event.target.id).height(20);
+        $("#" + event.target.id).height(15);
     },    
+    
     // When Evidence and Notes fields are double-clicked, prefill them with template text.
     'dblclick #IEvidence, dblclick #INotes': function () {
         addIssueTemplateTextToUI();

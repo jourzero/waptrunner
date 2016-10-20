@@ -15,8 +15,11 @@ function updateUIFromTestKB() {
     $("#TTestName").val(rec.TTestName);
     $("#TTestName").attr('title', rec.TTesterSupport);
     $("#TIssueName").val(rec.TIssueName);
+    $("#TIssueName").attr('title', rec.TIssueName);
     $("#TIssueBackground").val(rec.TIssueBackground);
+    $("#TIssueBackground").attr('title', rec.TIssueBackground);
     $("#TRemediationBackground").val(rec.TRemediationBackground);
+    $("#TRemediationBackground").attr('title', rec.TRemediationBackground);
     $("#TIssueType").val(rec.TIssueType);
     $("#TType").val(rec.TType);
     $("#TDescr").val(rec.TDescr);
