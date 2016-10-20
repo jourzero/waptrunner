@@ -265,6 +265,10 @@ function toHtml(objArray, prjName) {
                 output += "<tr><th class='thID'>Severity: </th><td class='tdID'>" + obj.TSeverityText + "</td></tr>\n";
             if ((obj.IPriorityText !== undefined)&&(obj.IPriorityText !== ""))
                 output += "<tr><th class='thID'>Priority: </th><td class='tdID'>" + obj.IPriorityText + "</td></tr>\n";
+            if ((obj.TIssueBackground !== undefined)&&(obj.TIssueBackground !== ""))
+                output += "<tr><th class='thID'>Background: </th><td class='tdID'>" + htmlEncode(obj.TIssueBackground, true, 4) + "</td></tr>\n";
+            if ((obj.TRemediationBackground !== undefined)&&(obj.TRemediationBackground !== ""))
+                output += "<tr><th class='thID'>Mitigation: </th><td class='tdID'>" + htmlEncode(obj.TRemediationBackground, true, 4) + "</td></tr>\n";
             if ((obj.TRef1 !== undefined)&&(obj.TRef1 !== ""))
                 output += "<tr><th class='thID'>Ref. 1: </th><td class='tdID'><a href='" + obj.TRef1 + "'>" + obj.TRef1 + "</a></td></tr>\n";
             if ((obj.TRef2 !== undefined)&&(obj.TRef2 !== ""))
