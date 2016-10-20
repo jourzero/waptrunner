@@ -63,6 +63,8 @@ function saveIssueDataFromUI(tgtId, tgtVal) {
     cid         = $('#cweref').html();
     issueName   = $('#TIssueName').val();
     prjName     = $('#PrjName').val();
+    issueBG     = $('#TIssueBackground').val();
+    remedBG     = $('#TRemediationBackground').val();
 
     // Check that the UI has the mandatory data we need
     if ((tid === undefined) || (tid === "")){
@@ -80,7 +82,9 @@ function saveIssueDataFromUI(tgtId, tgtVal) {
     oid.TID     = tid;
     issue.CweId = cid;
     issue.TID   = tid;
-    issue.TIssueName = issueName;    
+    issue.TIssueName = issueName;
+    issue.TIssueBackground = issueBG;    
+    issue.TRemediationBackground = remedBG;    
     issue.TSeverity  = $('#TSeverity').val();
     issue.TRef1      = $('#TRef1').val();
     issue.TRef2      = $('#TRef2').val();

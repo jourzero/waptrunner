@@ -69,6 +69,20 @@
                 <td class="issueVals"><input id="TIssueName" class="testKbIn" type="text" placeholder="Short issue name" /></td></tr>
         </table>
 
+        <!-- Issue Background -->
+        <table class="issueTab">
+            <tr class="iTR">
+                <th class="issueTH" title="Issue Background">Background</th>  
+                <td class="issueVals"><input id="TIssueBackground" class="testKbIn" type="text" placeholder="Issue Background" /></td></tr>
+        </table>
+
+        <!-- Remediation Background -->
+        <table class="issueTab">
+            <tr class="iTR">
+                <th class="issueTH" title="Remediation Background">Remediation</th>  
+                <td class="issueVals"><input id="TRemediationBackground" class="testKbIn" type="text" placeholder="Remediation Background" /></td></tr>
+        </table>
+        
         <!-- Issue attributes: Severity, Refs... -->
         <table class="issueTab">
             <tr class="iTR">                        
@@ -81,24 +95,23 @@
                         <option class="selOpt" value="2">Medium</option>
                         <option class="selOpt" value="3">High</option>
                     </select></td>
-
-                <!--
                 <th class="issueTH">Issue Type</th>  
                 <td class="issueVals"><input id="TIssueType" class="testKbIn" type="text" placeholder="Issue Type" /></td>                
-                -->
 
-                <th class="issueTH">Issue Ref1</th> 
-                <td class="issueVals"><a href="#" id="TRef1A" target="TRWin">&gt;</a> <input id="TRef1" class="testKbInShort" type="text" placeholder="Ref 1" /></td></tr> 
 
-            <tr class="iTR">
                 <th class="issueTH">Standards</th>
                 <td class="issueVals"> 
                     <input type="checkbox" id="TPCI"     class="testKbCB" value="PCI" title="PCI-DSS Compliance Test">PCI
                     <input type="checkbox" id="TTop10"   class="testKbCB" value="Top10" title="OWASP Top 10 Test">T10
                     <input type="checkbox" id="TTop25"   class="testKbCB" value="Top25" title="SANS Top 25 Most Dangerous Software Errors Tests">T25
-                    <input type="checkbox" id="TStdTest" class="testKbCB" value="StdTest" title="My own list of Standard Tests">Std</td>
+                    <input type="checkbox" id="TStdTest" class="testKbCB" value="StdTest" title="My own list of Standard Tests">Std</td></tr>
 
-                <th class="issueTH">Issue Ref2</th> <td class="issueVals"><a href="#" id="TRef2A" target="TRWin">&gt;</a> <input id="TRef2" class="testKbInShort" type="text" placeholder="Ref 2" /></td></tr>
+            <tr class="iTR">
+                <th class="issueTH">Issue Ref1</th> 
+                <td class="issueVals"><a href="#" id="TRef1A" target="TRWin">&gt;</a> <input id="TRef1" class="testKbInShort" type="text" placeholder="Ref 1" /></td> 
+
+                <th class="issueTH">Issue Ref2</th>
+                <td class="issueVals"><a href="#" id="TRef2A" target="TRWin">&gt;</a> <input id="TRef2" class="testKbInShort" type="text" placeholder="Ref 2" /></td></tr>
         </table>
     </details>    
 
@@ -117,6 +130,7 @@
                     <option class="prioOpt" value="1">Low</option>
                     <option class="prioOpt" value="2">Medium</option>
                     <option class="prioOpt" value="3">High</option>
+                    <option class="prioOpt" value="-1">Done</option>
                 </select>
             </td></tr>
         </table>
