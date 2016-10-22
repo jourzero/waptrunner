@@ -253,7 +253,7 @@ function toHtml(objArray, prjName) {
             // Print each issue with the issue as the header and the details as part of a table.
             output += "<tr><th class='" + priority + "P'></th><th class='" + priority + "P' id='" + htmlEncode(obj.TID, true, 4, false) + "'>" + obj.TIssueName + "</th></tr>\n";
             if ((obj.CweId !== undefined)&&(obj.CweId !== ""))
-                output += "<tr><th class='thID'>CWE ID: </th><td class='tdID'><a href='" + cweUriBase + obj.CweId + ".html'>" + obj.CweId + "</a></td></tr>\n";
+                output += "<tr><th class='thID'>CWE ID: </th><td class='tdID'><a href='" + cweUriBase + obj.CweId + ".html' target='refWin'>" + obj.CweId + "</a></td></tr>\n";
             if ((obj.IURIs !== undefined)&&(obj.IURIs !== "")){
                 output += "<tr><th class='thID'>URI(s): </th><td class='tdID'><ol>";
                 var uri = obj.IURIs.split("\n");
@@ -270,9 +270,9 @@ function toHtml(objArray, prjName) {
             if ((obj.TRemediationBackground !== undefined)&&(obj.TRemediationBackground !== ""))
                 output += "<tr><th class='thID'>Mitigation: </th><td class='tdID'>" + htmlEncode(obj.TRemediationBackground, true, 4, false) + "</td></tr>\n";
             if ((obj.TRef1 !== undefined)&&(obj.TRef1 !== ""))
-                output += "<tr><th class='thID'>Ref. 1: </th><td class='tdID'><a href='" + obj.TRef1 + "'>" + obj.TRef1 + "</a></td></tr>\n";
+                output += "<tr><th class='thID'>Ref. 1: </th><td class='tdID'><a href='" + obj.TRef1 + "' target='refWin'>" + obj.TRef1 + "</a></td></tr>\n";
             if ((obj.TRef2 !== undefined)&&(obj.TRef2 !== ""))
-                output += "<tr><th class='thID'>Ref. 2: </th><td class='tdID'><a href='" + obj.TRef2 + "'>" + obj.TRef2 + "</a></td></tr>\n";
+                output += "<tr><th class='thID'>Ref. 2: </th><td class='tdID'><a href='" + obj.TRef2 + "' target='refWin'>" + obj.TRef2 + "</a></td></tr>\n";
             if ((obj.INotes !== undefined)&&(obj.INotes !== ""))
                 output += "<tr><th class='thID'>Notes: </th><td class='tdID'>" + htmlEncode(obj.INotes, true, 4, true) + "</td></tr>\n";
             if ((obj.IEvidence !== undefined)&&(obj.IEvidence !== ""))
