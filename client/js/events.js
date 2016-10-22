@@ -122,8 +122,8 @@ Template.home.events({
     },    
     
     // When Evidence and Notes fields are double-clicked, prefill them with template text.
-    'dblclick #IEvidence, dblclick #INotes': function () {
-        addIssueTemplateTextToUI();
+    'dblclick #IEvidence, dblclick #INotes': function (event) {
+        addIssueTemplateTextToUI(event);
     },    
     // When pasting images in Evidence, add a Base64 representation
     'paste #IScreenshots': function (event) {

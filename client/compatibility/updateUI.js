@@ -109,27 +109,33 @@ function refreshLastTIDLink() {
 
 
 // Create template text into finding sections
-function addIssueTemplateTextToUI(){
+function addIssueTemplateTextToUI(event){
     
     // Fill Evidence field with template text if empty
-    var iEvidence = $("#IEvidence").val();
-    if ((iEvidence === undefined)||(iEvidence.length === 0)){
-        console.log("Adding template text to Evidence field");
-        iEvidence = "=== REQUEST ===\nPLACEHOLDER\n\n=== RESPONSE ===\nPLACEHOLDER";
-        $("#IEvidence").val(iEvidence);
-        $("#IEvidence").attr("title", iEvidence);
+    //var iEvidence = $("#IEvidence").val();
+    if (event.target.id === "IEvidence"){
+        var iEvidence = event.target.value;
+        if ((iEvidence === undefined)||(iEvidence.length === 0)){
+            console.log("Adding template text to Evidence field");
+            iEvidence = "=== REQUEST ===\nPLACEHOLDER\n\n=== RESPONSE ===\nPLACEHOLDER";
+            $("#IEvidence").val(iEvidence);
+            $("#IEvidence").attr("title", iEvidence);
+        }
     }
 
     // Fill Notes field with template text if empty
-    var iNotes    = $("#INotes").val();
-    if ((iNotes === undefined)||(iNotes.length === 0)){
-        console.log("Adding template text to Notes field");
-        iNotes  = "ISSUE_DETAILS. CIA_IMPACT. HOW_TO_EXPLOIT.\n\n";
-        iNotes += "Perceived Risk: Likelihood=High (Easy to Reproduce, Easy to Discover), Impact=Medium (Partial Damage, Easy to Exploit, Some Users Affected)\n\n"
-        iNotes += "To Replicate:\n  1. Browse to URI\n  2. ACTION1\n  3. ACTION2\n\n";
-        iNotes += "To Mitigate: See CWE link for more details.";
-        $("#INotes").val(iNotes);
-        $("#INotes").attr("title", iNotes);
+    //var iNotes = $("#INotes").val();
+    if (event.target.id === "INotes"){
+        var iNotes = event.target.value;
+        if ((iNotes === undefined)||(iNotes.length === 0)){
+            console.log("Adding template text to Notes field");
+            iNotes  = "ISSUE_DETAILS. CIA_IMPACT. HOW_TO_EXPLOIT.\n\n";
+            iNotes += "Perceived Risk: Likelihood=High (Easy to Reproduce, Easy to Discover), Impact=Medium (Partial Damage, Easy to Exploit, Some Users Affected)\n\n"
+            iNotes += "To Replicate:\n  1. Browse to URI\n  2. ACTION1\n  3. ACTION2\n\n";
+            iNotes += "To Mitigate: See CWE link for more details.";
+            $("#INotes").val(iNotes);
+            $("#INotes").attr("title", iNotes);
+        }
     }
 }
 
