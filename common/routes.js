@@ -354,7 +354,7 @@ var htmlEncode = function (source, display, tabs, linkify) {
 		}
 	};
         
-        toLink == function() {
+        toLink = function() {
             var replacePattern = replacePattern = /^- (\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
             source = source.replace(replacePattern, '- <a href="$1" target="refWin">$1</a>');
         }
