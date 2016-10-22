@@ -201,7 +201,7 @@ function toHtml(objArray, prjName) {
         var output = "<html><head>\n";
         var priority = "N/A", prevPrio = "", prio = -1;
         var cweUriBase   = "https://cwe.mitre.org/data/definitions/";
-        output += "<style>\nbody{width:1200px;}\na{text-decoration:none;}\n.tdID{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\n.thID{text-align:right;vertical-align:top;width:80px;}\nth{vertical-align:top;}\nol{padding-left:25px;}\n.HighP{background-color:red;}\n.MediumP{background-color:orange;}\n.LowP{background-color:cyan;}\n.Skip{background-color:#FFFFFF;}\ntr:nth-child(even){background:#EAEAEA;}\ntr:nth-child(odd){background:#F0F0F0;}\n</style>\n";
+        output += "<style>\nbody{width:1200px;}\na{text-decoration:none;}\na:hover{color:orange;}\n.tdID{width:1100px;max-width:1100px;vertical-align:top;word-wrap:break-word;}\n.thID{text-align:right;vertical-align:top;width:80px;}\nth{vertical-align:top;}\nol{padding-left:25px;}\n.HighP{background-color:red;}\n.MediumP{background-color:orange;}\n.LowP{background-color:cyan;}\n.Skip{background-color:#FFFFFF;}\ntr:nth-child(even){background:#EAEAEA;}\ntr:nth-child(odd){background:#F0F0F0;}\n</style>\n";
         
         // Traverse the array of issue objects
         output += "</head>\n<body>\n";
@@ -212,7 +212,7 @@ function toHtml(objArray, prjName) {
         output += "<p>Project ID: " + prjName + "</p>\n";
         output += "<p>The below table contains a summary of issues. You may click the links in the Issue column to jump to the specific issue details.</p>"
         output += "<table>\n";
-        output += "<tr><th>Priority</th><th>Issue</th><th>Count</th></tr>";
+        output += "<tr><th>Priority</th><th>Issue</th></tr>"; //<th>Count</th></tr>";
 	for (var i = 0; i < objArray.length; i++) {
             obj = objArray[i];
             prevPrio = priority;
@@ -233,7 +233,7 @@ function toHtml(objArray, prjName) {
             else
                 output += "<tr><th class='" + priority + "P'></th>";
             output += "<td class='" + priority + "P'><a href='#" + htmlEncode(obj.TID, true, 4) + "'>" + obj.TIssueName + "</a></td>";
-            output += "<td class='" + priority + "P'>" + count + "</td>";
+            //output += "<td class='" + priority + "P'>" + count + "</td>";
             output += "</tr>\n";
 	}
         output += "</table>\n";        
@@ -278,6 +278,7 @@ function toHtml(objArray, prjName) {
             if ((obj.IEvidence !== undefined)&&(obj.IEvidence !== ""))
                 //output += "<tr><th class='thID'>Evidence: </th><td class='tdID'>" + htmlEncode(obj.IEvidence, true, 4) + "</td></tr>\n";
                 output += "<tr><th class='thID'>Evidence: </th><td class='tdID'><pre>" + htmlEncode(obj.IEvidence, true, 4) + "</pre></td></tr>\n";
+            if ((obj.IScreenshots !== undefined)&&(obj.IScreenshots !== ""))
                 output += "<tr><th class='thID'>Screenshot(s): </th><td class='tdID'>" + obj.IScreenshots + "</td></tr>\n";
             output += "<tr><td class='Skip'>&nbsp;</td><td class='Skip'>&nbsp;</td></tr>\n";
 	}
