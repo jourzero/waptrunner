@@ -377,19 +377,19 @@ var htmlEncode = function (source, display, tabs, linkify) {
 		// HTML special chars.
 		switch (ch) {
 		case '<':
-			if (!linkify) line.push('&lt;');
+			(linkify) ? push(ch) : line.push('&lt;');
 			break;
 		case '>':
-			if (!linkify) line.push('&gt;');
+			(linkify) ? push(ch) : line.push('&gt;');
 			break;
 		case '&':
-                        if (!linkify) line.push('&amp;');
+                        (linkify) ? push(ch) : line.push('&amp;');
 			break;
 		case '"':
-			if (!linkify) line.push('&quot;');
+			(linkify) ? push(ch) : line.push('&quot;');
 			break;
 		case "'":
-			if (!linkify) line.push('&#39;');
+			(linkify) ? push(ch) : line.push('&#39;');
 			break;
 		default:
 			// If the output is intended for display,
