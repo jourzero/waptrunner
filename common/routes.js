@@ -354,15 +354,13 @@ var htmlEncode = function (source, display, tabs, linkify) {
 		}
 	};
         
-        toLink == function(inputText) {
-            var replacedText, replacePattern;
-            replacePattern = /^- (\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-            replacedText = inputText.replace(replacePattern, '- <a href="$1" target="refWin">$1</a>');
-            return replacedText;
+        toLink == function() {
+            var replacePattern = replacePattern = /^- (\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+            source = source.replace(replacePattern, '- <a href="$1" target="refWin">$1</a>');
         }
         
         // If linkify is true, change URLs to links
-        result = toLink(source);	
+        if (linkify) toLink();	
         
 	// Use only integer part of tabs, and default to 4
 	tabs = (tabs >= 0) ? Math.floor(tabs) : 4;
