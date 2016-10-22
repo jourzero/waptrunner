@@ -232,7 +232,7 @@ function toHtml(objArray, prjName) {
                 output += "<tr><th class='" + priority + "P'>" + priority + "</th>";
             else
                 output += "<tr><th class='" + priority + "P'></th>";
-            output += "<td class='" + priority + "P'><a href='#" + htmlEncode(obj.TID, true, 4) + "'>" + obj.TIssueName + "</a></td>";
+            output += "<td class='" + priority + "P'><a href='#" + htmlEncode(obj.TID, true, 4, false) + "'>" + obj.TIssueName + "</a></td>";
             //output += "<td class='" + priority + "P'>" + count + "</td>";
             output += "</tr>\n";
 	}
@@ -251,14 +251,14 @@ function toHtml(objArray, prjName) {
             if ((prio !== undefined) && (prio < 0)) continue;
             
             // Print each issue with the issue as the header and the details as part of a table.
-            output += "<tr><th class='" + priority + "P'></th><th class='" + priority + "P' id='" + htmlEncode(obj.TID, true, 4) + "'>" + obj.TIssueName + "</th></tr>\n";
+            output += "<tr><th class='" + priority + "P'></th><th class='" + priority + "P' id='" + htmlEncode(obj.TID, true, 4, false) + "'>" + obj.TIssueName + "</th></tr>\n";
             if ((obj.CweId !== undefined)&&(obj.CweId !== ""))
                 output += "<tr><th class='thID'>CWE ID: </th><td class='tdID'><a href='" + cweUriBase + obj.CweId + ".html'>" + obj.CweId + "</a></td></tr>\n";
             if ((obj.IURIs !== undefined)&&(obj.IURIs !== "")){
                 output += "<tr><th class='thID'>URI(s): </th><td class='tdID'><ol>";
                 var uri = obj.IURIs.split("\n");
                 for (var j=0; j<uri.length; j++)
-                    output += "<li>" + htmlEncode(uri[j], true, 4) + "</li>\n";
+                    output += "<li>" + htmlEncode(uri[j], true, 4, false) + "</li>\n";
                 output += "</ol></td></tr>\n";
             }
             if ((obj.TSeverityText !== undefined)&&(obj.TSeverityText !== ""))
@@ -266,17 +266,17 @@ function toHtml(objArray, prjName) {
             if ((obj.IPriorityText !== undefined)&&(obj.IPriorityText !== ""))
                 output += "<tr><th class='thID'>Priority: </th><td class='tdID'>" + obj.IPriorityText + "</td></tr>\n";
             if ((obj.TIssueBackground !== undefined)&&(obj.TIssueBackground !== ""))
-                output += "<tr><th class='thID'>Background: </th><td class='tdID'>" + htmlEncode(obj.TIssueBackground, true, 4) + "</td></tr>\n";
+                output += "<tr><th class='thID'>Background: </th><td class='tdID'>" + htmlEncode(obj.TIssueBackground, true, 4, false) + "</td></tr>\n";
             if ((obj.TRemediationBackground !== undefined)&&(obj.TRemediationBackground !== ""))
-                output += "<tr><th class='thID'>Mitigation: </th><td class='tdID'>" + htmlEncode(obj.TRemediationBackground, true, 4) + "</td></tr>\n";
+                output += "<tr><th class='thID'>Mitigation: </th><td class='tdID'>" + htmlEncode(obj.TRemediationBackground, true, 4, false) + "</td></tr>\n";
             if ((obj.TRef1 !== undefined)&&(obj.TRef1 !== ""))
                 output += "<tr><th class='thID'>Ref. 1: </th><td class='tdID'><a href='" + obj.TRef1 + "'>" + obj.TRef1 + "</a></td></tr>\n";
             if ((obj.TRef2 !== undefined)&&(obj.TRef2 !== ""))
                 output += "<tr><th class='thID'>Ref. 2: </th><td class='tdID'><a href='" + obj.TRef2 + "'>" + obj.TRef2 + "</a></td></tr>\n";
             if ((obj.INotes !== undefined)&&(obj.INotes !== ""))
-                output += "<tr><th class='thID'>Notes: </th><td class='tdID'>" + htmlEncode(obj.INotes, true, 4) + "</td></tr>\n";
+                output += "<tr><th class='thID'>Notes: </th><td class='tdID'>" + htmlEncode(obj.INotes, true, 4, true) + "</td></tr>\n";
             if ((obj.IEvidence !== undefined)&&(obj.IEvidence !== ""))
-                output += "<tr><th class='thID'>Evidence: </th><td class='tdID'><pre>" + htmlEncode(obj.IEvidence, true, 4) + "</pre></td></tr>\n";
+                output += "<tr><th class='thID'>Evidence: </th><td class='tdID'><pre>" + htmlEncode(obj.IEvidence, true, 4, false) + "</pre></td></tr>\n";
             if ((obj.IScreenshots !== undefined)&&(obj.IScreenshots !== ""))
                 output += "<tr><th class='thID'>Screenshot(s): </th><td class='tdID'>" + obj.IScreenshots + "</td></tr>\n";
             output += "<tr><td class='Skip'>&nbsp;</td><td class='Skip'>&nbsp;</td></tr>\n";
@@ -285,14 +285,6 @@ function toHtml(objArray, prjName) {
         output += "</body>\n</html>\n";
 	return output;
 }        
-
-
-function linkify(inputText) {
-    var replacedText, replacePattern;
-    replacePattern = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-    replacedText = inputText.replace(replacePattern, '<a href="$1" target="refWin">$1</a>');
-    return replacedText;
-}
 
 
 /*
@@ -327,7 +319,7 @@ MIT License
  *
  * version 2010-11-08
  */
-var htmlEncode = function (source, display, tabs) {
+var htmlEncode = function (source, display, tabs, linkify) {
 	var i, s, ch, peek, line, result,
 		next, endline, push,
 		spaces;
@@ -361,7 +353,17 @@ var htmlEncode = function (source, display, tabs) {
 			line.push(ch);
 		}
 	};
-	
+        
+        toLink == function(inputText) {
+            var replacedText, replacePattern;
+            replacePattern = /^(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])$/gim;
+            replacedText = inputText.replace(replacePattern, '<a href="$1" target="refWin">$1</a>');
+            return replacedText;
+        }
+        
+        // If linkify is true, change URLs to links
+        result = toLink(source);	
+        
 	// Use only integer part of tabs, and default to 4
 	tabs = (tabs >= 0) ? Math.floor(tabs) : 4;
 	
@@ -383,7 +385,7 @@ var htmlEncode = function (source, display, tabs) {
 			line.push('&gt;');
 			break;
 		case '&':
-			line.push('&amp;');
+                        if (!linkify) line.push('&amp;');
 			break;
 		case '"':
 			line.push('&quot;');
@@ -425,8 +427,8 @@ var htmlEncode = function (source, display, tabs) {
 		}
 	}
 	endline();
-	
-	// If you can't beat 'em, join 'em.
+        	
+	// Add line breaks 
 	result = result.join('<br />');
 
 	if (display) {
