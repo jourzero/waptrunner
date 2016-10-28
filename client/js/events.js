@@ -135,6 +135,11 @@ Template.home.events({
         console.log("Generating HTML report for project " + prjName);
         window.open("/report/html/"+prjName, "DownloadWin");
     },
+    // Popup the methodology checklist
+    'click #btnChecklist': function () {
+        console.log("Opening the methodology checklist window");
+        window.open("/WAPT/checklist/owasp4.html");
+    },
     // Generate a CSV report when the 'CSV Report' button is pressed
     'click #btnCsvReport': function () {
         var prjName = $("#PrjName").val();
