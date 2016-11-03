@@ -193,7 +193,8 @@ function serverHello(){
 
 /**
 * Converts an array of objects (with identical schemas) into HTML
-* @param {Array} objArray An array of objects.  Each object in the array must have the same property list.
+* @param {Array}  objArray  An array of objects.  Each object in the array must have the same property list.
+* @param {String} prjName   Name of project
 * @return {string} The CSV equivalent of objArray.
 */
 function toHtml(objArray, prjName) {
@@ -208,9 +209,11 @@ function toHtml(objArray, prjName) {
         
         
         // Generate issue summary
-        output += "<h2>Issue Summary</h2>"
-        output += "<p>Project ID: " + prjName + "</p>\n";
-        output += "<p>The below table contains a summary of issues. You may click the links in the Issue column to jump to the specific issue details.</p>"
+        output += "<h2>Issue Summary</h2>";
+        output += "<p>Project: " + prjName + "</p>\n";
+        output += "<p>The below table contains a summary of issues that were discovered during manual testing. ";
+        output += "   Those results are meant to augment the findings obtained from automated host and/or app scanning.</p>";
+        output += "<p>You may click the links in the Issue column to jump to the specific issue details.</p>";
         output += "<table>\n";
         output += "<tr><th>Priority</th><th>Issue</th></tr>"; //<th>Count</th></tr>";
 	for (var i = 0; i < objArray.length; i++) {
@@ -239,8 +242,8 @@ function toHtml(objArray, prjName) {
         output += "</table>\n";        
         
         // Generate detailed issue report
-        output += "<h2>Issue Details</h2>"
-        output += "<table>\n"
+        output += "<h2>Issue Details</h2>";
+        output += "<table>\n";
 	for (var i = 0; i < objArray.length; i++) {
             obj = objArray[i];
             prevPrio = priority;
@@ -291,33 +294,19 @@ function toHtml(objArray, prjName) {
 HTMLEncode - Encode HTML special characters.
 Copyright (c) 2006-2010 Thomas Peri, http://www.tumuski.com/
 MIT License
-*/
 
-/*jslint white: true, onevar: true, undef: true, nomen: true, eqeqeq: true,
-	plusplus: true, bitwise: true, regexp: true, newcap: true, immed: true */
-
+jslint white: true, onevar: true, undef: true, nomen: true, eqeqeq: true, plusplus: true, bitwise: true, regexp: true, newcap: true, immed: true 
+ */
+ 
 /**
  * HTML-Encode the supplied input
  * 
- * Parameters:
- *
- * (String)  source    The text to be encoded.
- * 
- * (boolean) display   The output is intended for display.
- *
- *                     If true:
- *                     * Tabs will be expanded to the number of spaces 
- *                       indicated by the 'tabs' argument.
- *                     * Line breaks will be converted to <br />.
- *
- *                     If false:
- *                     * Tabs and linebreaks get turned into &#____;
- *                       entities just like all other control characters.
- *
- * (integer) tabs      The number of spaces to expand tabs to.  (Ignored 
- *                     when the 'display' parameter evaluates to false.)
- *
- * version 2010-11-08
+ * @param {text}    source     The text to be encoded.
+ * @param {boolean} display    The output is intended for display. If true, tabs will be expanded to the number of spaces
+ *                             indicated by the 'tabs' argument. Also, line breaks will be converted to <br />.
+ * @param {integer} tabs       The number of spaces to expand tabs to.  (Ignored when the 'display' parameter evaluates to false.)
+ * @param {boolean} linkify    Linkify URLs when possible
+ * @returns {Array|htmlEncode.result|String}
  */
 var htmlEncode = function (source, display, tabs, linkify) {
 	var i, s, ch, peek, line, result,
@@ -357,7 +346,7 @@ var htmlEncode = function (source, display, tabs, linkify) {
         toLink = function() {
             var replacePattern = replacePattern = /^- (\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
             source = source.replace(replacePattern, '- <a href="$1" target="refWin">$1</a>');
-        }
+        };
         
         // If linkify is true, change URLs to links
         if (linkify) toLink();	
