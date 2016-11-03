@@ -211,8 +211,9 @@ function toHtml(objArray, prjName) {
         // Generate issue summary
         output += "<h2>Issue Summary</h2>";
         output += "<p>Project: " + prjName + "</p>\n";
-        output += "<p>The below table contains a summary of issues that were discovered during manual testing. ";
-        output += "   Those results are meant to augment the findings obtained from automated host and/or app scanning.</p>";
+        output += "<p>The below table contains a summary of the findings that were captured during manual security testing. ";
+        output += "   Those results are meant to augment the results obtained from automated scanning.";
+        output += "   Please also refer to the scanner report(s) to get the full list of findings.</p>";
         output += "<p>You may click the links in the Issue column to jump to the specific issue details.</p>";
         output += "<table>\n";
         output += "<tr><th>Priority</th><th>Issue</th></tr>"; //<th>Count</th></tr>";
