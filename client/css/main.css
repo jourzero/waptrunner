@@ -141,6 +141,7 @@ textarea {
     padding-right: 20px;
     vertical-align: top;
     font-family: sans-serif;
+    height: 100%;
     /* font-size: 14px; */
 }
 
@@ -161,7 +162,6 @@ textarea {
     padding: 3px 1px;
     border: 0px;
     width: 50%;
-    height: 100%;
 }
 
 .prjRight{
