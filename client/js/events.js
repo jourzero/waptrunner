@@ -140,6 +140,11 @@ Template.home.events({
         console.log("Opening the methodology checklist window");
         window.open("/WAPT/checklist/owasp4.html");
     },
+    // Popup the methodology checklist
+    'click #btnTestApp': function () {
+        console.log("Opening the Test App window");
+        window.open("/m/index.php");
+    },
     // Generate a CSV report when the 'CSV Report' button is pressed
     'click #btnCsvReport': function () {
         var prjName = $("#PrjName").val();
